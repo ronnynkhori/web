@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
@@ -65,16 +66,28 @@ export default async function SportPage({ params, searchParams }: Props) {
           { href: `/${locale}/sports/${sport.id}`, label: name },
         ]}
       >
-        <MediaFrame
-          ratio="3/2"
-          image={sport.image}
-          alt={sport.image ? pick(sport.image.alt, locale) : ""}
-          tone={sport.tone}
-          placeholderLabel={dict.sports.photoRequired}
-          priority
-          sizes="(min-width: 64rem) 40vw, 100vw"
-          className="rounded-sm"
-        />
+        <div className="relative">
+          <MediaFrame
+            ratio="3/2"
+            image={sport.image}
+            alt={sport.image ? pick(sport.image.alt, locale) : ""}
+            tone={sport.tone}
+            placeholderLabel={dict.sports.photoRequired}
+            priority
+            sizes="(min-width: 64rem) 40vw, 100vw"
+            className="rounded-sm"
+          />
+          {sport.mascot && (
+            <Image
+              src={sport.mascot.src}
+              alt={fill(dict.mascot.poseAlt, { sport: name })}
+              width={sport.mascot.width}
+              height={sport.mascot.height}
+              sizes="(min-width: 64rem) 16rem, 40vw"
+              className="hero-mascot absolute -right-2 -bottom-4 h-[85%] w-auto drop-shadow-[0_16px_28px_rgb(0_0_0/0.5)]"
+            />
+          )}
+        </div>
       </PageHeader>
 
       <div className="container-page flex flex-col gap-9 py-9">

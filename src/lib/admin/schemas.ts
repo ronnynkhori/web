@@ -397,7 +397,7 @@ export function getCollectionDef(id: string): CollectionDef | undefined {
   return collectionDefs.find((c) => c.id === id);
 }
 
-/** Localised fields whose PT or FR text is still empty. */
+/** Localised fields whose PT or EN text is still empty. */
 export function missingTranslations(def: CollectionDef, doc: Doc): string[] {
   const missing = new Set<string>();
   for (const field of def.fields) {

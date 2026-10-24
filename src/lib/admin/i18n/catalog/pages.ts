@@ -1,4 +1,4 @@
-﻿import type { CatalogPart } from ".";
+import type { CatalogPart } from ".";
 
 /** Dashboard, site settings, users and activity log pages, plus the admin actions. */
 const part: CatalogPart = {
@@ -40,7 +40,7 @@ const part: CatalogPart = {
     "{n} expiring in 3 days": "{n} expiram dentro de 3 dias",
     "1 draft": "1 rascunho",
     "{n} drafts": "{n} rascunhos",
-    "Items missing PT or FR": "Itens sem PT ou FR",
+    "Items missing PT or EN": "Itens sem PT ou EN",
     "Across 1 section": "Numa secção",
     "Across {n} sections": "Em {n} secções",
     "Every section translated": "Todas as secções traduzidas",
@@ -54,7 +54,7 @@ const part: CatalogPart = {
     "Score desk": "Mesa de resultados",
     "No live or upcoming matches.": "Nenhum jogo ao vivo ou por disputar.",
     "Content health": "Estado do conteúdo",
-    "{n} missing PT/FR": "{n} sem PT/FR",
+    "{n} missing PT/EN": "{n} sem PT/EN",
     "Guide topics still to come": "Temas do guia ainda por publicar",
     "Hides {date}": "Oculto a partir de {date}",
     "Quick actions": "Ações rápidas",

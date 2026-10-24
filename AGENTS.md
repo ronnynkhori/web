@@ -10,6 +10,12 @@ Read this first. It explains what this repo is, who it is for, what is done and 
 - **Deadline:** Sunday 25 October 2026 (the proposal presentation).
 - **Origin:** This repo started as a selective copy of the owner's Maputo 2026 site (AUSC Region 5 Youth Games), rebranded. It is NOT linked to that repo or its Vercel project.
 
+## Live
+
+- **Site:** https://cplp-2027-proposta.vercel.app (Portuguese at `/pt`, English at `/en`).
+- **Control Room:** https://cplp-2027-proposta.vercel.app/admin/login. Sign in with `admin@cplp2027.demo` / `CPLP-Angola-2027`. It is read-only because no database is connected.
+- **Repo:** https://github.com/ronnynkhori/web (branch `master`; every push redeploys production).
+
 ## Stack
 
 - Next.js 16.4 (App Router, Turbopack), React 19.3, Tailwind CSS v4, GSAP and motion for animation.
