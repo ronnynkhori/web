@@ -1,6 +1,6 @@
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { fill, pick, type Locale } from "@/lib/i18n/config";
-import { mascotPoses, sportPoses } from "@/data/mascot";
+import { mascotClips, mascotPoses, sportPoses } from "@/data/mascot";
 import { reveal } from "@/lib/animation/reveal";
 import { Button } from "@/components/ui/button";
 import { ContentFlag } from "@/components/ui/content-flag";
@@ -28,6 +28,7 @@ export function MascotSection({
         height: p.height,
         label,
         alt: fill(m.poseAlt, { sport: label }),
+        clip: mascotClips[p.id],
       };
     },
   );
