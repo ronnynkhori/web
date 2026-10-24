@@ -13,11 +13,11 @@ interface NavigationProps {
 }
 
 const linkClass =
-  "u-wipe flex min-h-touch items-center type-label text-fg transition-colors duration-micro hover:text-accent";
+  "u-wipe flex min-h-touch items-center whitespace-nowrap type-label text-fg transition-colors duration-micro hover:text-accent";
 
 /**
- * Desktop navigation. 1024-1439: primary items inline + "More" menu.
- * 1440+: all items inline. Active item: 4px gold underline (scaleX wipe).
+ * Desktop navigation: primary items inline + "More" menu at every width.
+ * Active item: 4px underline (scaleX wipe).
  */
 export function Navigation({ items, active, label, moreLabel }: NavigationProps) {
   const [moreOpen, setMoreOpen] = useState(false);
@@ -48,14 +48,14 @@ export function Navigation({ items, active, label, moreLabel }: NavigationProps)
     <nav aria-label={label} className="hidden desktop:block">
       <ul className="m-0 flex list-none items-center gap-5 p-0 large:gap-6">
         {items.map((item) => (
-          <li key={item.id} className={cn(!item.primary && "hidden large:block")}>
+          <li key={item.id} className={cn(!item.primary && "hidden")}>
             <a href={item.href} className={linkClass} aria-current={active === item.id ? "location" : undefined}>
               {item.label}
             </a>
           </li>
         ))}
         {overflow.length > 0 && (
-          <li className="relative large:hidden">
+          <li className="relative">
             <div ref={moreRef}>
               <button
                 type="button"

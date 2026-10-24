@@ -51,7 +51,7 @@ export function SportCard({
             width={sport.mascot.width}
             height={sport.mascot.height}
             sizes="(min-width: 64rem) 14rem, 45vw"
-            className="mascot-pop pointer-events-none absolute -right-3 bottom-16 z-raised h-[62%] w-auto drop-shadow-[0_10px_18px_rgb(0_0_0/0.45)] transition-transform duration-ui ease-emphasized group-hover:-translate-y-2 group-hover:rotate-2"
+            className="mascot-pop pointer-events-none absolute -right-3 bottom-[5.5rem] z-raised h-[58%] w-auto drop-shadow-[0_10px_18px_rgb(0_0_0/0.45)] transition-transform duration-ui ease-emphasized group-hover:-translate-y-2 group-hover:rotate-2"
           />
         )}
         <span

@@ -4,10 +4,11 @@ import { cn } from "@/lib/cn";
 const WIDTH = 1200;
 const HEIGHT = 373;
 
+/** Heights on the spacing scale (5 = 24px, 6 = 32px, 7 = 48px, 8 = 64px). */
 const heightClass = {
-  header: "h-9 desktop:h-11",
-  footer: "h-14",
-  hero: "h-12 desktop:h-14",
+  header: "h-[2.25rem] desktop:h-7",
+  footer: "h-8",
+  hero: "h-7 desktop:h-8",
 };
 
 /**

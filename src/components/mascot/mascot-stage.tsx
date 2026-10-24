@@ -52,8 +52,8 @@ export function MascotStage({ poses, label }: { poses: MascotPoseView[]; label: 
                 : "border-line-strong text-fg hover:border-line-accent hover:text-accent",
             )}
           >
-            <span className="grid size-9 place-items-center overflow-hidden rounded-pill bg-surface-inverse">
-              <Image src={p.src} alt="" width={p.width} height={p.height} sizes="36px" className="h-8 w-auto" />
+            <span className="grid size-[2.25rem] place-items-center overflow-hidden rounded-pill bg-surface-inverse">
+              <Image src={p.src} alt="" width={p.width} height={p.height} sizes="36px" className="h-[2rem] w-auto" />
             </span>
             {p.label}
           </button>

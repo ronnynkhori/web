@@ -33,7 +33,7 @@ export function MascotSection({ dict, locale }: { dict: Dictionary; locale: Loca
             intro={m.intro}
             className="mb-6! desktop:mb-7!"
           />
-          <ul className="m-0 grid list-none gap-4 p-0 tablet:grid-cols-3 desktop:grid-cols-1 large:grid-cols-3">
+          <ul className="m-0 grid list-none gap-4 p-0 tablet:grid-cols-3 desktop:grid-cols-1">
             {m.traits.map((trait, i) => (
               <li key={trait.title} className="border-l-4 border-line-accent pl-4" {...reveal("fade-up", i + 2)}>
                 <p className="m-0 type-heading-s">{trait.title}</p>
