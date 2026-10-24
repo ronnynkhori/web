@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
@@ -114,7 +115,11 @@ export function AssistantWidget({
           overCountdown && !open && "invisible opacity-0",
         )}
       >
-        <Icon name={open ? "close" : "chat"} />
+        {open ? (
+          <Icon name="close" />
+        ) : (
+          <Image src="/images/mascot/mascote-2.png" alt="" width={634} height={800} sizes="40px" className="-my-3 -ml-2 h-[3.25rem] w-auto" />
+        )}
         <span className="type-label max-tablet:sr-only">{open ? labels.close : labels.open}</span>
       </button>
 
@@ -133,8 +138,8 @@ export function AssistantWidget({
             className="assistant-panel fixed inset-x-3 z-overlay flex flex-col overflow-hidden rounded-sm border border-line bg-surface text-fg shadow-lg tablet:inset-x-auto tablet:right-4 tablet:w-[24rem]"
           >
             <header className="flex items-start gap-3 border-b border-line p-4">
-              <span className="grid size-touch shrink-0 place-items-center rounded-pill bg-action-primary text-on-action-primary">
-                <Icon name="chat" />
+              <span className="grid size-touch shrink-0 place-items-center overflow-hidden rounded-pill bg-surface-inverse">
+                <Image src="/images/mascot/mascote-1.png" alt="" width={634} height={800} sizes="44px" className="h-[2.5rem] w-auto" />
               </span>
               <div className="min-w-0 flex-1">
                 <h2 id="assistant-title" className="m-0 type-heading-s">
