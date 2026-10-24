@@ -25,7 +25,7 @@ export function HeroStageScene({ children, className }: { children: ReactNode; c
   });
 
   return (
-    <div ref={ref} data-mascot-track="" className={cn("hero-stage relative aspect-square", className)}>
+    <div ref={ref} data-mascot-track="" suppressHydrationWarning className={cn("hero-stage relative aspect-square", className)}>
       {children}
     </div>
   );

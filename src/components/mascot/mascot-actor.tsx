@@ -50,6 +50,7 @@ export function MascotActor({
       className={cn("mascot-actor", className)}
       data-mascot={enter ? "enter" : "static"}
       data-mascot-tap={tap ? "" : undefined}
+      suppressHydrationWarning
       style={{ "--mascot-delay": `${delay}ms`, "--mascot-depth": depth } as CSSProperties}
     >
       <span className={cn("mascot-body", idle && "mascot-idle", bodyClassName)}>

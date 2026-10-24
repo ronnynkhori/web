@@ -11,9 +11,11 @@ export function reveal(
   kind: RevealKind = "fade-up",
   index = 0,
   staggerKey: "text-line" | "list-item" | "grid-item" = "grid-item",
-): { "data-reveal": RevealKind; style: CSSProperties } {
+): { "data-reveal": RevealKind; style: CSSProperties; suppressHydrationWarning: true } {
   return {
     "data-reveal": kind,
     style: { "--reveal-delay": `${staggerDelay(index, staggerKey)}ms` } as CSSProperties,
+    // Streamed sections can be revealed (data-revealed set) before React hydrates them.
+    suppressHydrationWarning: true,
   };
 }

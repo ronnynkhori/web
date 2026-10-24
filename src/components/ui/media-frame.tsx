@@ -31,7 +31,8 @@ interface MediaFrameProps {
   /** Shown on placeholder art until photography is supplied. */
   placeholderLabel?: string;
   tone?: Tone;
-  scrim?: "none" | "card" | "hero";
+  /** "brand": navy duotone fade with the tricolour ribbon along the bottom edge. */
+  scrim?: "none" | "card" | "hero" | "brand";
   priority?: boolean;
   sizes?: string;
   className?: string;
@@ -79,6 +80,11 @@ export function MediaFrame({
       </div>
       {scrim === "card" && <div className="absolute inset-0 scrim-card" aria-hidden="true" />}
       {scrim === "hero" && <div className="absolute inset-0 scrim-hero" aria-hidden="true" />}
+      {scrim === "brand" && (
+        <div className="scrim-brand absolute inset-0" aria-hidden="true">
+          <span className="scrim-brand-ribbon torch-stripe absolute inset-x-0 bottom-0 h-1.5" />
+        </div>
+      )}
       {!image && placeholderLabel && (
         <span className="content-flag absolute top-3 left-3 z-raised rounded-xs bg-surface px-2 py-1 type-caption text-fg-muted">
           {placeholderLabel}

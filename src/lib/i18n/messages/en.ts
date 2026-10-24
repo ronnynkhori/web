@@ -355,6 +355,17 @@ const en = {
       { title: "Always in a team", body: "It never moves alone: the spirit of nine nations, one community." },
       { title: "Fast on its feet", body: "Built for sprinting, it is ready for every sport on the programme." },
     ],
+    poll: {
+      title: "Help name the mascot",
+      intro: "A fan vote, as part of the proposal. Pick your favourite.",
+      options: [
+        { name: "Kanda", meaning: "family, in Kikongo" },
+        { name: "Muxima", meaning: "heart, in Kimbundu" },
+        { name: "Kwanza", meaning: "Angola's great river" },
+      ],
+      thanks: "Thank you! Your vote is in.",
+      flag: "[CLIENT TO CONFIRM] demo poll; names are suggestions",
+    },
     posesLabel: "The mascot in every sport",
     poseAlt: "The XIII CPLP Games mascot, a guinea fowl, in {sport} kit",
     cta: "See the sports",
@@ -389,6 +400,7 @@ const en = {
     news: "Announcements",
   },
   footer: {
+    farewell: "See you in Angola!",
     identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nine nations, one community.",
     explore: "Explore",
     info: "Information",

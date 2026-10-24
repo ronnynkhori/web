@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { pad2 } from "@/lib/format";
 import { useMotionPreference } from "@/lib/animation/motion-preference";
+import { confetti } from "@/lib/animation/mascot-motion";
 
 export interface CountdownLabels {
   title: string;
@@ -78,8 +79,19 @@ export function Countdown({ target, end, labels, size = "hero", className }: Cou
 
   const targetMs = Date.parse(target);
   const endMs = Date.parse(end);
+  const started = now !== null && now >= targetMs;
+  const counting = useRef(false);
 
-  if (now !== null && now >= targetMs) {
+  useEffect(() => {
+    if (now === null) return;
+    if (!started) counting.current = true;
+    else if (counting.current && !reduced) {
+      counting.current = false;
+      for (let i = 0; i < 4; i++) window.setTimeout(() => confetti(window.innerWidth * (0.2 + i * 0.2), window.innerHeight * 0.4), i * 180);
+    }
+  }, [now, started, reduced]);
+
+  if (started) {
     return (
       <p className={cn("m-0 type-display-m", className)}>
         {now >= endMs ? labels.finished : labels.inProgress}

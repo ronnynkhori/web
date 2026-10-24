@@ -43,7 +43,7 @@ export function SportCard({
 }) {
   const Heading = headingLevel;
   const card = (
-    <article className="group lift @container relative isolate flex h-full flex-col overflow-hidden rounded-sm bg-surface-raised shadow-sm">
+    <article data-tilt="" suppressHydrationWarning className="group lift @container tilt-card relative isolate flex h-full flex-col overflow-hidden rounded-sm bg-surface-raised shadow-sm">
       <MediaFrame
         ratio="1/1"
         image={sport.image}

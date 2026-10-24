@@ -98,6 +98,19 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
   - Production env vars set: `ADMIN_SESSION_SECRET`, `ADMIN_EMAIL=admin@cplp2027.demo`, `ADMIN_PASSWORD=CPLP-Angola-2027`.
   - No Supabase, so the Control Room is read-only on Vercel. That is fine for the demo; add Supabase from the Vercel Marketplace to make it editable.
   - Vercel CLI on the owner's PC needs `$env:NODE_OPTIONS='--use-system-ca'` because of a TLS proxy.
+- [x] Hero rebuilt as a split stage: nine-flag arch over the mascot trio. Countdown fits the first screen at 360x640 to 1920x1080 (`lowphone`/`short`/`squat`/`tall` variants in `globals.css`).
+- [x] Visual pass (`src/styles/spice.css`):
+  - swoosh edges on the navy bands (`components/ui/swoosh-edge.tsx`, `Section swoosh`);
+  - nations map with arcs to Luanda (`components/countries/nations-map.tsx`);
+  - yellow count-up stats band;
+  - mascot cameos and the footer farewell;
+  - Sona texture (`sona-bg`, to validate with the client);
+  - venue photo brand scrim;
+  - confetti on mascot taps;
+  - sport-card tilt;
+  - name-the-mascot demo poll.
+- [x] The tricolour "ribbon" (`.torch-stripe`) is a solid wave band. The client rejected the block stripe, the gapped waves, animated ribbons and the kinetic marquee.
+- [x] Share card (`src/app/[locale]/opengraph-image.tsx`) uses Kanit/Montserrat TTFs from `src/assets/fonts/`.
 - [ ] Visual QA on mobile and desktop (`/pt`, `/en`, `/pt/sports/football`, `/pt/schedule`, `/admin/login`).
 - [ ] Still to get from the client: mascot name, host city and exact days in March.
 - [ ] Nice to have: a mascot-led 404 page, a mascot in the assistant button, and a short proposal summary page.

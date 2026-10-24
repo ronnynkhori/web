@@ -48,7 +48,7 @@ export async function VenuesSection({ dict, locale }: { dict: Dictionary; locale
                 tone={venue.tone}
                 sizes="(min-width: 64rem) 40vw, (min-width: 40rem) 50vw, 85vw"
                 mediaClassName="media-zoom"
-                scrim="card"
+                scrim="brand"
               >
                 <span data-theme="dark" className="absolute top-4 left-4 type-data-m text-accent tabular" aria-hidden="true">
                   {pad2(i + 1)}

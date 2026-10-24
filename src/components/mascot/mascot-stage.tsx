@@ -38,7 +38,7 @@ export function MascotStage({ poses, label }: { poses: MascotPoseView[]; label: 
 
   return (
     <div className="flex flex-col items-center gap-8">
-      <div ref={ref} data-mascot-track="" className="relative grid aspect-square w-full max-w-[30rem] place-items-center">
+      <div ref={ref} data-mascot-track="" suppressHydrationWarning className="relative grid aspect-square w-full max-w-[30rem] place-items-center">
         <span aria-hidden="true" className="mascot-halo absolute inset-[8%] rounded-pill" />
         <span aria-hidden="true" className="absolute inset-x-[22%] bottom-[3%] h-[5%] rounded-pill bg-[radial-gradient(closest-side,rgb(0_0_0/0.45),transparent)]" />
         <div data-parallax="" className="absolute inset-0">

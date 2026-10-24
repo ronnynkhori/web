@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
+import { MascotCameo } from "@/components/mascot/mascot-cameo";
+import { mascotPoses } from "@/data/mascot";
 
 type Labels = Dictionary["news"];
 
@@ -29,6 +31,7 @@ export async function NewsSection({ dict, locale }: { dict: Dictionary; locale: 
   const announcements = await getAnnouncements();
   return (
     <Section id="news" labelledBy="news-title">
+      <MascotCameo pose={mascotPoses.football2} className="right-[10%]" />
       <SectionHeader
         id="news-title"
         overline={n.overline}

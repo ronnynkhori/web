@@ -11,6 +11,8 @@ import { RichContent } from "@/components/ui/content-flag";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
+import { MascotCameo } from "@/components/mascot/mascot-cameo";
+import { mascotPoses } from "@/data/mascot";
 
 /** Topics already covered by the glance strip stay out of the accordion. */
 const glanceIds = new Set(["key-dates", "time-zone"]);
@@ -45,6 +47,7 @@ export async function GuideSection({ dict, locale }: { dict: Dictionary; locale:
 
   return (
     <Section id="guide" labelledBy="guide-title" band="alt">
+      <MascotCameo pose={mascotPoses.thumbsUp} className="right-[8%]" />
       <SectionHeader
         id="guide-title"
         overline={g.overline}

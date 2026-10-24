@@ -4,6 +4,8 @@ import type { Locale } from "@/lib/i18n/config";
 import { Disclosure } from "@/components/ui/disclosure";
 import { Logo } from "@/components/ui/logo";
 import { TorchStripe } from "@/components/ui/torch-stripe";
+import { MascotActor } from "@/components/mascot/mascot-actor";
+import { mascotPoses } from "@/data/mascot";
 import { LanguageSwitch } from "./language-switch";
 import { MotionToggle } from "./motion-toggle";
 import type { NavItem } from "./nav-items";
@@ -53,6 +55,21 @@ export function Footer({ locale, dict, items }: FooterProps) {
   return (
     <footer data-theme="dark" className="relative border-t border-line bg-surface text-fg">
       <TorchStripe />
+      <div aria-hidden="true" data-mascot-track="" suppressHydrationWarning className="container-wide flex items-end gap-4 overflow-hidden pt-8 tablet:gap-6 desktop:pt-9">
+        <MascotActor
+          {...mascotPoses.welcome}
+          sizes="(min-width: 64rem) 10rem, 6rem"
+          depth={0.6}
+          className="h-[clamp(6rem,4rem+8vw,11rem)] shrink-0"
+          imgClassName="h-full w-auto"
+        />
+        <div className="min-w-0 pb-2">
+          <p className="m-0 mb-2 type-overline text-accent">{f.farewell}</p>
+          <p className="footer-outline m-0 font-display text-[clamp(2.75rem,1rem+8.5vw,9.5rem)] font-extrabold whitespace-nowrap uppercase">
+            Angola <span>2027</span>
+          </p>
+        </div>
+      </div>
       <div className="container-wide grid gap-6 py-8 tablet:grid-cols-2 tablet:gap-7 desktop:grid-cols-[2fr_1fr_1fr] desktop:py-9">
         <div className="flex flex-col gap-4">
           {/* The logo's red flame vanishes on the red footer, so it sits on a white tile. */}

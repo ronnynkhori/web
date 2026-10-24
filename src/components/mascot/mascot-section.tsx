@@ -7,6 +7,7 @@ import { ContentFlag } from "@/components/ui/content-flag";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SwooshEdge } from "@/components/ui/swoosh-edge";
 import { MascotStage, type MascotPoseView } from "./mascot-stage";
+import { MascotNamePoll } from "./mascot-name-poll";
 
 /** The mascot: the guinea fowl's story on a navy band, with every sport pose. */
 export function MascotSection({
@@ -37,7 +38,7 @@ export function MascotSection({
         id="mascot"
         aria-labelledby="mascot-title"
         data-theme="dark"
-        className="section-anchor relative isolate overflow-hidden bg-surface text-fg"
+        className="section-anchor sona-bg relative isolate overflow-hidden bg-surface text-fg"
       >
         <span
           aria-hidden="true"
@@ -66,6 +67,7 @@ export function MascotSection({
                 </li>
               ))}
             </ul>
+            <MascotNamePoll labels={m.poll} flag={<ContentFlag>{m.poll.flag}</ContentFlag>} />
             <Button
               href={`/${locale}#sports`}
               variant="secondary"

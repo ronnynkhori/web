@@ -355,6 +355,17 @@ const pt: Dictionary = {
       { title: "Sempre em equipa", body: "Nunca anda sozinha: o espírito de nove nações, uma comunidade." },
       { title: "Rápida nas pernas", body: "Feita para correr, está pronta para todas as modalidades do programa." },
     ],
+    poll: {
+      title: "Ajude a dar nome à mascote",
+      intro: "Uma votação dos adeptos, como parte da proposta. Escolha o seu favorito.",
+      options: [
+        { name: "Kanda", meaning: "família, em kikongo" },
+        { name: "Muxima", meaning: "coração, em kimbundu" },
+        { name: "Kwanza", meaning: "o grande rio de Angola" },
+      ],
+      thanks: "Obrigado! O seu voto foi registado.",
+      flag: "[CLIENT TO CONFIRM] votação de demonstração; nomes sugeridos",
+    },
     posesLabel: "A mascote em todas as modalidades",
     poseAlt: "A mascote dos XIII Jogos da CPLP, uma galinha-d'angola, equipada para {sport}",
     cta: "Ver as modalidades",
@@ -389,6 +400,7 @@ const pt: Dictionary = {
     news: "Comunicados",
   },
   footer: {
+    farewell: "Até já, em Angola!",
     identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nove nações, uma comunidade.",
     explore: "Explorar",
     info: "Informação",

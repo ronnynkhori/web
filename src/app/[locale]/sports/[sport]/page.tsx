@@ -66,7 +66,7 @@ export default async function SportPage({ params, searchParams }: Props) {
           { href: `/${locale}/sports/${sport.id}`, label: name },
         ]}
       >
-        <div className="relative" data-mascot-track="">
+        <div className="relative" data-mascot-track="" suppressHydrationWarning>
           <MediaFrame
             ratio="4/3"
             image={sport.image}
