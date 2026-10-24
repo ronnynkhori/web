@@ -110,7 +110,7 @@ export function AssistantWidget({
         data-theme="dark"
         data-surface="black"
         className={cn(
-          "assistant-dock press fixed right-4 z-overlay inline-flex min-h-touch-lg items-center gap-2 rounded-pill border-2 border-action-secondary bg-surface px-4 text-fg shadow-lg transition-[opacity,visibility] duration-ui ease-standard",
+          "assistant-dock assistant-fab press fixed right-4 z-overlay inline-flex min-h-touch-lg items-center gap-2 rounded-pill border-2 border-action-secondary bg-surface px-4 text-fg shadow-lg transition-[opacity,visibility] duration-ui ease-standard",
           open && "max-tablet:hidden",
           overCountdown && !open && "invisible opacity-0",
         )}
@@ -118,7 +118,9 @@ export function AssistantWidget({
         {open ? (
           <Icon name="close" />
         ) : (
-          <Image src="/images/mascot/mascote-2.png" alt="" width={634} height={800} sizes="40px" className="-my-3 -ml-2 h-[3.25rem] w-auto" />
+          <span className="assistant-mascot -my-3 -ml-2">
+            <Image src="/images/mascot/mascote-2.png" alt="" width={634} height={800} sizes="40px" className="h-[3.25rem] w-auto" />
+          </span>
         )}
         <span className="type-label max-tablet:sr-only">{open ? labels.close : labels.open}</span>
       </button>

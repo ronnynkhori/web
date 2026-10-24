@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
@@ -7,6 +6,7 @@ import { getSport, sports } from "@/data/sports";
 import type { Sport, SportProgramme } from "@/data/types";
 import { getVenue } from "@/data/venues";
 import { LiveHub } from "@/components/hub/hub-section";
+import { MascotActor } from "@/components/mascot/mascot-actor";
 import { PageHeader } from "@/components/layout/page-header";
 import { PreGamesNote } from "@/components/layout/pre-games-note";
 import { ScheduleDays } from "@/components/schedule/schedule-days";
@@ -66,9 +66,9 @@ export default async function SportPage({ params, searchParams }: Props) {
           { href: `/${locale}/sports/${sport.id}`, label: name },
         ]}
       >
-        <div className="relative">
+        <div className="relative" data-mascot-track="">
           <MediaFrame
-            ratio="3/2"
+            ratio="4/3"
             image={sport.image}
             alt={sport.image ? pick(sport.image.alt, locale) : ""}
             tone={sport.tone}
@@ -78,13 +78,13 @@ export default async function SportPage({ params, searchParams }: Props) {
             className="rounded-sm"
           />
           {sport.mascot && (
-            <Image
-              src={sport.mascot.src}
+            <MascotActor
+              {...sport.mascot}
               alt={fill(dict.mascot.poseAlt, { sport: name })}
-              width={sport.mascot.width}
-              height={sport.mascot.height}
               sizes="(min-width: 64rem) 16rem, 40vw"
-              className="hero-mascot absolute -right-2 -bottom-4 h-[85%] w-auto drop-shadow-[0_16px_28px_rgb(0_0_0/0.5)]"
+              delay={250}
+              className="absolute -right-2 -bottom-4 h-[85%]"
+              imgClassName="h-full w-auto drop-shadow-[0_16px_28px_rgb(0_0_0/0.5)]"
             />
           )}
         </div>

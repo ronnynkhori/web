@@ -119,6 +119,7 @@ export function MediaGallery({
                         fill
                         sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 44vw, 72vw"
                         className="media-zoom object-cover"
+                        style={m.image.focus ? { objectPosition: m.image.focus } : undefined}
                       />
                     )}
                   </motion.div>

@@ -3,6 +3,7 @@
 @import "./typography.css";
 @import "./motion.css";
 @import "./hero.css";
+@import "./mascot-motion.css";
 
 /* ==========================================================================
    XIII CPLP Games - theme layer
@@ -16,10 +17,14 @@
    or the footer toggle (motion-specifications.md §4). */
 @custom-variant reduced (&:where(html[data-motion="reduce"] *));
 @custom-variant animated (&:where(html:not([data-motion="reduce"]) *));
+/* Phones under 800px tall (most Android phones): the hero tightens so the countdown stays in view. */
+@custom-variant lowphone (@media (max-height: 50rem) and (width < 40rem));
 /* Short phones (iPhone SE and similar), where the hero must still show the countdown. */
 @custom-variant short (@media (max-height: 44rem) and (width < 40rem));
 /* Laptops and landscape tablets: wide but too short for the full hero above the countdown. */
 @custom-variant squat (@media (max-height: 62rem) and (width >= 40rem));
+/* Tall tablets and desktops: room for the two-line hero title. */
+@custom-variant tall (@media (min-height: 62.0625rem) and (width >= 40rem));
 
 @theme inline {
   /* ---- colour: semantic only ---- */
@@ -70,7 +75,7 @@
   --color-on-band-energy: var(--tk-color-text-on-red);
   --color-on-band-region: var(--tk-color-text-on-blue);
   --color-on-band-highlight: var(--tk-color-text-on-yellow);
-  --color-on-band-premium: var(--tk-color-text-on-gold);
+  --color-on-band-premium: var(--tk-color-neutral-white);
 
   /* Medal colours: [DECISION REQUIRED] silver/bronze not in CI. Proposed values only. */
   --color-medal-gold: var(--sem-medal-gold);

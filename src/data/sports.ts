@@ -78,7 +78,7 @@ export const sports: Sport[] = [
     name: t("Football", "Futebol"),
     category: "team",
     status: "confirmed",
-    tone: "energy",
+    tone: "premium",
     image: img.football,
     mascot: mascotPoses.football,
     programme: {
@@ -95,7 +95,7 @@ export const sports: Sport[] = [
     name: t("Karate", "Karaté"),
     category: "combat",
     status: "confirmed",
-    tone: "premium",
+    tone: "energy",
     image: img.karate,
     mascot: mascotPoses.karate,
     programme: {
@@ -111,7 +111,7 @@ export const sports: Sport[] = [
     name: t("Taekwondo", "Taekwondo"),
     category: "combat",
     status: "confirmed",
-    tone: "highlight",
+    tone: "region",
     image: img.taekwondo,
     mascot: mascotPoses.taekwondo,
     programme: {
@@ -127,7 +127,7 @@ export const sports: Sport[] = [
     name: t("Tennis", "Ténis"),
     category: "racket",
     status: "confirmed",
-    tone: "region",
+    tone: "highlight",
     image: img.tennis,
     mascot: mascotPoses.tennis,
     programme: {
@@ -143,7 +143,7 @@ export const sports: Sport[] = [
     name: t("Beach volleyball", "Voleibol de praia"),
     category: "beach",
     status: "confirmed",
-    tone: "highlight",
+    tone: "premium",
     image: img.beachVolleyball,
     mascot: mascotPoses.beachVolleyball,
     programme: {
@@ -159,7 +159,7 @@ export const sports: Sport[] = [
     name: t("Chess", "Xadrez"),
     category: "mind",
     status: "confirmed",
-    tone: "premium",
+    tone: "energy",
     image: img.chess,
     mascot: mascotPoses.chess,
     programme: {

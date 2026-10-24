@@ -62,6 +62,12 @@ const pt: Dictionary = {
     tagline: "Talento, união e desporto em Angola.",
     dates: "Março de 2027",
     datesFlag: "[CLIENT TO CONFIRM] dias exatos em Março",
+    bubble: "Bem-vindos a Angola!",
+    stats: [
+      { value: "9", label: "Nações" },
+      { value: "9", label: "Modalidades" },
+      { value: "4", label: "Continentes" },
+    ],
     ctaPrimary: "Explorar as modalidades",
     ctaSecondary: "Guia dos Jogos",
     scroll: "Deslize para explorar",

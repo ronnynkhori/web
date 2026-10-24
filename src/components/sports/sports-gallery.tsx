@@ -19,12 +19,20 @@ export function SportsGallery({
   sports: SportView[];
   labels: { photo: string; hint: string };
 }) {
-  const ref = useScrollScene<HTMLDivElement>(({ gsap, root }) => {
+  const ref = useScrollScene<HTMLDivElement>(({ gsap, ScrollTrigger, root }) => {
     const viewport = root.querySelector<HTMLElement>("[data-viewport]");
     const track = root.querySelector<HTMLElement>("[data-track]");
     const bar = root.querySelector<HTMLElement>("[data-progress]");
     if (!viewport || !track) return;
     root.dataset.pinned = "true";
+
+    // Mascots lean into the direction of travel with scroll speed, then stand up again.
+    const leans = gsap.utils
+      .toArray<HTMLElement>(".mascot-actor", track)
+      .map((actor) => gsap.quickTo(actor, "rotation", { duration: 0.5, ease: "power3.out" }));
+    const lean = (deg: number) => leans.forEach((set) => set(deg));
+    const settle = () => lean(0);
+    ScrollTrigger.addEventListener("scrollEnd", settle);
 
     const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
     const travel = gsap.to(track, {
@@ -37,7 +45,10 @@ export function SportsGallery({
         pin: true,
         scrub: 0.6,
         invalidateOnRefresh: true,
-        onUpdate: (self) => bar && gsap.set(bar, { scaleX: self.progress }),
+        onUpdate: (self) => {
+          if (bar) gsap.set(bar, { scaleX: self.progress });
+          lean(gsap.utils.clamp(-14, 14, -self.getVelocity() / 120));
+        },
       },
     });
 
@@ -54,6 +65,7 @@ export function SportsGallery({
     });
 
     return () => {
+      ScrollTrigger.removeEventListener("scrollEnd", settle);
       delete root.dataset.pinned;
     };
   });

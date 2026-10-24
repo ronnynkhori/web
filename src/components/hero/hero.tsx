@@ -15,7 +15,7 @@ import { Flag } from "@/components/ui/flag";
 import { Countdown } from "./countdown";
 import { HeroParallax } from "./hero-parallax";
 import { HeroPicture } from "./hero-picture";
-import { HeroMascotInline, HeroMascots, HeroSwooshes } from "./hero-stage";
+import { HeroSpots, HeroStage, HeroSwooshes } from "./hero-stage";
 import { HeroVideo } from "./hero-video";
 
 const i = (name: string, n: number) => ({ [name]: n }) as CSSProperties;
@@ -47,6 +47,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           ];
   return (
     <div
+      data-hero=""
       data-theme="dark"
       data-surface="black"
       className={cn(
@@ -62,43 +63,47 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           {heroMedia.video && (
             <HeroVideo src={heroMedia.video} poster={heroMedia.poster?.src} labels={{ pause: dict.a11y.pause, play: dict.a11y.play }} />
           )}
+          <HeroSpots className="absolute inset-0" />
           <HeroSwooshes className="absolute inset-0 size-full" />
         </div>
       </HeroParallax>
       <div aria-hidden="true" className="hero-scrim absolute inset-0 -z-10">
-        <div className="absolute inset-0 scrim-side opacity-70" />
+        <div className="absolute inset-0 scrim-side opacity-60" />
       </div>
       <span aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-px bg-line-accent/40" />
-      <HeroMascots />
 
-      {/* Content */}
+      {/* Content: copy on the left, the mascot stage on the right (on top on phones) */}
       <section
         id="top"
         aria-labelledby="hero-title"
         className={cn(
-          "container-wide flex flex-1 flex-col justify-center desktop:pb-8",
+          "container-wide grid flex-1 content-center items-center gap-x-8 gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
           phase === "pre"
-            ? "pt-[calc(var(--header-h)+var(--tk-space-4))] pb-5 short:pt-[calc(var(--header-h)+var(--tk-space-2))] short:pb-4 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))] tablet:pb-7 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
-            : "pt-[calc(var(--header-h)+var(--tk-space-6))] pb-7 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))]",
+            ? "pt-[calc(var(--header-h)+var(--tk-space-2))] pb-5 lowphone:pb-3 short:pb-2 tablet:pt-[calc(var(--header-h)+var(--tk-space-6))] tablet:pb-7 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
+            : "pt-[calc(var(--header-h)+var(--tk-space-4))] pb-7 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))]",
         )}
       >
-        <div className="max-w-content">
-          <p className="hero-rise m-0 mb-4 type-overline short:mb-2 tablet:mb-6 squat:mb-3" style={i("--rise-i", -5)}>
+        <HeroStage
+          flags={countries.map((c) => ({ code: c.code, name: pick(c.name, locale), src: c.flag?.src }))}
+          bubble={h.bubble}
+          className="mx-auto w-[min(100%,26svh)] lowphone:w-[min(100%,21svh)] short:w-[min(100%,13svh)] tablet:order-2 tablet:w-[min(100%,60svh)]"
+        />
+        <div className="max-w-content tablet:order-1">
+          <p className="hero-rise m-0 mb-2 type-overline max-tablet:text-[min(0.75rem,2.6vw)] max-tablet:tracking-[0.03em] tablet:mb-5 squat:mb-3" style={i("--rise-i", -5)}>
             {phase === "post" ? h.postOverline : h.overline}
           </p>
-          <h1 id="hero-title" className="relative isolate m-0">
-            <HeroMascotInline />
-            <span className="hero-rise mb-3 block type-heading-m short:mb-1 font-medium text-fg-2 tablet:type-heading-l" style={i("--rise-i", -4)}>
+          <h1 id="hero-title" className="m-0">
+            <span className="hero-rise mb-1 block type-heading-m font-medium text-fg-2 max-tablet:text-[min(1.25rem,5.2vw)] tablet:mb-3 desktop:type-heading-l" style={i("--rise-i", -4)}>
               {h.leadLine}
             </span>
-            <span className="hero-line block type-display-xl squat:mr-[0.25em] squat:inline-block squat:text-[min(var(--tk-type-display-xl-size),17svh)]" style={i("--line-i", 0)}>
+            <span className="hero-line mr-[0.25em] inline-block type-display-xl tall:block tablet:text-[min(var(--tk-type-display-xl-size),12.5svh)] squat:text-[min(var(--tk-type-display-xl-size),9.5svh)]" style={i("--line-i", 0)}>
               {h.titleLine1}
-            </span>{" "}
-            <span className="hero-line hero-title-2026 block type-display-xl squat:inline-block squat:text-[min(var(--tk-type-display-xl-size),17svh)]" style={i("--line-i", 1)}>
+            </span>
+            <span className="hero-line hero-title-2026 inline-block type-display-xl tall:block tablet:text-[min(var(--tk-type-display-xl-size),12.5svh)] squat:text-[min(var(--tk-type-display-xl-size),9.5svh)]" style={i("--line-i", 1)}>
               {h.titleLine2}
             </span>
           </h1>
-          <p className="hero-rise m-0 mt-4 flex max-w-prose flex-wrap items-center gap-3 type-body-xl font-light text-fg-2 short:mt-2 tablet:mt-6 squat:mt-4" style={i("--rise-i", 0)}>
+          <p className="hero-rise m-0 mt-4 flex max-w-prose flex-wrap items-center gap-3 type-body-xl font-light text-fg-2 lowphone:hidden tablet:mt-6 squat:mt-4" style={i("--rise-i", 0)}>
             <span>{phase === "post" ? h.postLine : h.tagline}</span>
           </p>
           {phase !== "post" && (
@@ -107,7 +112,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
               <ContentFlag>{h.datesFlag}</ContentFlag>
             </p>
           )}
-          <div className="hero-cta mt-5 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex squat:mt-5">
+          <div className="hero-cta mt-5 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex tablet:flex-wrap tablet:*:whitespace-nowrap squat:mt-5">
             <Button href={cta[0].href} variant="secondary" icon="arrow-right">
               {cta[0].label}
             </Button>
@@ -116,19 +121,14 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
             </Button>
           </div>
 
-          {/* Phones and short screens: the nations row moves to the Countries section so the countdown stays in view. */}
-          <div className="hero-cta mt-8 hidden tablet:flex tablet:items-center tablet:gap-5 squat:hidden">
-            <p id="hero-nations" className="m-0 shrink-0 type-label text-fg-muted">
-              {h.nations}
-            </p>
-            <ul aria-labelledby="hero-nations" className="m-0 flex list-none flex-wrap gap-2 p-0">
-              {countries.map((c) => (
-                <li key={c.code}>
-                  <Flag code={c.code} name={pick(c.name, locale)} flag={c.flag} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          <dl className="hero-cta m-0 mt-5 hidden gap-5 tablet:mt-7 tablet:flex tablet:gap-7 squat:mt-5">
+            {h.stats.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse border-l-2 border-line-accent pl-3">
+                <dt className="type-caption text-fg-2 uppercase">{s.label}</dt>
+                <dd className="m-0 font-display text-[clamp(1.5rem,1.1rem+1.4vw,2.25rem)] leading-none font-extrabold text-accent tabular">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -140,12 +140,12 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         style={i("--rise-i", 2)}
       >
         {phase === "pre" && (
-          <div className="container-wide flex flex-col gap-3 py-4 short:gap-2 short:py-3 tablet:gap-4 tablet:py-5 desktop:flex-row desktop:items-end desktop:justify-end desktop:gap-9 desktop:py-6 squat:py-3">
+          <div className="container-wide flex flex-col gap-3 py-4 short:gap-2 short:py-3 tablet:gap-4 tablet:py-5 desktop:flex-row desktop:items-end desktop:justify-end desktop:gap-9 desktop:py-4 squat:py-3">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 tablet:flex-col tablet:items-start tablet:gap-2 desktop:items-end desktop:pb-5 desktop:text-right">
               <h2 id="countdown-title" className="m-0 type-overline">
                 {dict.countdown.title}
               </h2>
-              <p className="m-0 type-body-s text-fg-muted">
+              <p className="m-0 type-body-s text-fg-muted max-tablet:hidden">
                 <RichContent text={dict.countdown.timeNote} />
               </p>
             </div>
@@ -203,12 +203,6 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           </div>
         )}
       </section>
-
-      <a
-        href={`/${locale}#games`}
-        className="scroll-cue absolute bottom-0 left-1/2 hidden h-8 w-px -translate-x-1/2 overflow-hidden bg-line desktop:block"
-        aria-label={h.scroll}
-      />
     </div>
   );
 }

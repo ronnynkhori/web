@@ -1,5 +1,5 @@
-/* Hero composition: the emblem's swooshes on navy with the mascot trio running
-   in from the right (brand book campaign layout). */
+/* Hero composition: navy with the emblem's swooshes framing the bottom and
+   right edge, and a mascot stage where the nine flags arch over the trio. */
 .hero-title-2026 {
   color: var(--tk-color-text-accent);
 }
@@ -13,30 +13,145 @@
     opacity: 0;
     transform: translateX(6%);
   }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-html[data-motion="reduce"] .hero-swoosh {
-  animation: none;
 }
 
-.hero-mascot {
-  animation: hero-mascot-in var(--tk-duration-cinematic) var(--tk-ease-emphasized) both;
-  animation-delay: calc(400ms + var(--mascot-i, 0) * 140ms);
+/* Guinea-fowl spots: white dots on a staggered grid, fading out towards the copy. */
+.hero-spots {
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 0.5) 2px, transparent 2.5px),
+    radial-gradient(circle, rgb(255 255 255 / 0.5) 2px, transparent 2.5px);
+  background-size: 28px 28px;
+  background-position:
+    0 0,
+    14px 14px;
+  opacity: 0.12;
+  mask-image: radial-gradient(60% 75% at 78% 45%, #000 15%, transparent 72%);
 }
-@keyframes hero-mascot-in {
+
+/* ---------- Stage ---------- */
+.hero-sun {
+  background: radial-gradient(circle at 50% 60%, color-mix(in oklab, var(--tk-color-brand-blue) 75%, transparent), transparent 70%);
+  translate: calc(var(--mx, 0) * -6px) calc(var(--my, 0) * -6px);
+  transition: translate 600ms var(--tk-ease-standard);
+}
+.hero-ring {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  animation: hero-ring-in var(--tk-duration-cinematic) var(--tk-ease-emphasized) backwards;
+}
+.hero-ring--dashed {
+  border-style: dashed;
+  border-color: rgb(255 255 255 / 0.22);
+  animation:
+    hero-ring-in var(--tk-duration-cinematic) var(--tk-ease-emphasized) backwards,
+    hero-ring-spin 90s linear infinite;
+}
+@keyframes hero-ring-in {
   from {
     opacity: 0;
-    transform: translateY(8%) rotate(-3deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+    scale: 0.85;
   }
 }
-html[data-motion="reduce"] .hero-mascot {
+@keyframes hero-ring-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+/* Flags: pop in one by one along the arch, then bob gently, out of step. */
+.hero-flag {
+  width: 11%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+.hero-flag-chip {
+  width: 100%;
+  height: 100%;
+  background: var(--tk-color-neutral-white);
+  box-shadow:
+    0 0 0 3px var(--tk-color-neutral-white),
+    0 8px 18px rgb(0 0 0 / 0.35);
+  animation:
+    hero-flag-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards,
+    hero-flag-bob 3.2s ease-in-out infinite;
+  animation-delay:
+    calc(500ms + var(--flag-i, 0) * 70ms),
+    calc(1.4s + var(--flag-i, 0) * 0.3s);
+  translate: calc(var(--mx, 0) * 8px) calc(var(--my, 0) * 6px);
+  transition: translate 500ms var(--tk-ease-standard);
+}
+@keyframes hero-flag-in {
+  from {
+    opacity: 0;
+    scale: 0.2;
+  }
+}
+@keyframes hero-flag-bob {
+  50% {
+    transform: translateY(-12%);
+  }
+}
+
+/* Trio: run in from the right, staggered; the lead mascot lands last and biggest. */
+.hero-actor {
+  animation: hero-actor-in 900ms cubic-bezier(0.22, 1.2, 0.36, 1) backwards;
+  animation-delay: calc(350ms + var(--actor-i, 0) * 140ms);
+}
+.hero-actor:nth-child(2) {
+  --actor-i: 0;
+}
+.hero-actor:nth-child(3) {
+  --actor-i: 1;
+}
+.hero-actor:nth-child(4) {
+  --actor-i: 2;
+}
+@keyframes hero-actor-in {
+  from {
+    opacity: 0;
+    translate: 40% 6%;
+    scale: 0.85;
+  }
+}
+.hero-trio .mascot-idle {
+  animation-delay: calc(1.4s + var(--actor-i, 0) * 0.45s);
+}
+.hero-ground {
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.5), transparent);
+}
+
+/* Speech bubble from the lead mascot; it pops again whenever a mascot cheers. */
+.hero-bubble {
+  background: var(--tk-color-neutral-white);
+  color: var(--tk-color-brand-navy);
+  animation: hero-bubble-in 500ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: 1.3s;
+  transform-origin: 50% 100%;
+}
+.hero-trio:has([data-cheer]) .hero-bubble {
+  animation: hero-bubble-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hero-bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 0.5rem);
+  bottom: -0.5rem;
+  border: 0.5rem solid transparent;
+  border-top-color: var(--tk-color-neutral-white);
+  border-bottom: 0;
+}
+@keyframes hero-bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(20%);
+  }
+}
+@keyframes hero-bubble-pop {
+  40% {
+    transform: scale(1.15) rotate(-3deg);
+  }
+}
+
+html[data-motion="reduce"] :is(.hero-swoosh, .hero-ring, .hero-flag-chip, .hero-actor, .hero-bubble) {
   animation: none;
 }
 

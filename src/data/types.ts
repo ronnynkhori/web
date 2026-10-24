@@ -18,6 +18,8 @@ export interface ImageAsset {
   height: number;
   alt: Localized;
   credit?: string;
+  /** Focal point kept in view when the frame crops the photo (CSS object-position). */
+  focus?: string;
   /** Stand-in for the pitch (stock or AI-generated); never shown as event photography. */
   isDemo?: boolean;
 }

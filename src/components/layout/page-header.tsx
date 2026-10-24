@@ -54,7 +54,8 @@ export function PageHeader({
             alt={imageAlt ?? ""}
             fill
             sizes="100vw"
-            className="-z-20 object-cover object-[70%_50%]"
+            className="-z-20 object-cover"
+            style={{ objectPosition: image.focus ?? "70% 50%" }}
           />
           <span aria-hidden="true" className="absolute inset-0 -z-10 scrim-side" />
           <span aria-hidden="true" className="absolute inset-0 -z-10 scrim-hero opacity-60" />

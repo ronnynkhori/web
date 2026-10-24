@@ -64,6 +64,12 @@ const en = {
     tagline: "Talent, unity and sport in Angola.",
     dates: "March 2027",
     datesFlag: "[CLIENT TO CONFIRM] exact days in March",
+    bubble: "Welcome to Angola!",
+    stats: [
+      { value: "9", label: "Nations" },
+      { value: "9", label: "Sports" },
+      { value: "4", label: "Continents" },
+    ],
     ctaPrimary: "Explore the sports",
     ctaSecondary: "Games guide",
     scroll: "Scroll to explore",

@@ -135,7 +135,7 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
             className="tablet:max-desktop:hidden"
           />
           {/* Outlined over the hero so its yellow button stays the single main action. */}
-          <Button href={ctaHref} variant={condensed ? "primary" : "ghost"} className="max-tablet:hidden">
+          <Button href={ctaHref} variant={condensed ? "primary" : "ghost"} className="whitespace-nowrap max-tablet:hidden">
             {labels.cta}
           </Button>
           <MobileNav

@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/header";
 import { getNavItems } from "@/components/layout/nav-items";
 import { bootScript } from "@/lib/animation/boot-script";
 import { MotionPreferenceProvider } from "@/lib/animation/motion-preference";
+import { MascotMotion } from "@/lib/animation/mascot-motion";
 import { RevealObserver } from "@/lib/animation/reveal-observer";
 import { isLocale, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -111,6 +112,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <Footer locale={locale} dict={dict} items={items} />
         </MotionPreferenceProvider>
         <RevealObserver />
+        <MascotMotion />
         <SpeedInsights />
       </body>
     </html>

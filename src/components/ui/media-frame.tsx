@@ -3,11 +3,12 @@ import type { ReactNode } from "react";
 import type { ImageAsset, Tone } from "@/data/types";
 import { cn } from "@/lib/cn";
 
-export type Ratio = "16/9" | "16/10" | "4/5" | "3/2" | "1/1" | "21/9" | "fill";
+export type Ratio = "16/9" | "16/10" | "4/5" | "4/3" | "3/2" | "1/1" | "21/9" | "fill";
 
 const ratioClass: Record<Ratio, string> = {
   "16/9": "aspect-video",
   "16/10": "aspect-[16/10]",
+  "4/3": "aspect-[4/3]",
   "4/5": "aspect-[4/5]",
   "3/2": "aspect-[3/2]",
   "1/1": "aspect-square",
@@ -68,6 +69,7 @@ export function MediaFrame({
             preload={priority}
             fetchPriority={priority ? "high" : undefined}
             className="object-cover"
+            style={image.focus ? { objectPosition: image.focus } : undefined}
           />
         ) : (
           <div className={cn("placeholder-art absolute inset-0", toneClass[tone])} aria-hidden="true">

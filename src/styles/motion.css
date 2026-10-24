@@ -6,38 +6,32 @@
    complete static page.
    ========================================================================== */
 
-/* ---------- Torch stripe (pattern.torch-stripe) ---------- */
-/* Order from the logo's torch shaft: green, red, yellow (mirrored in the mark). */
+/* ---------- Brand ribbon (replaces the block stripe) ----------
+   The emblem's three swooshes as interlaced waves: red, yellow and blue, a
+   third of a period apart, so they braid like the ribbons around the mark. */
 .torch-stripe {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--stripe-1) 0 var(--tk-space-2),
-    var(--stripe-2) var(--tk-space-2) var(--tk-space-4),
-    var(--stripe-3) var(--tk-space-4) var(--tk-space-6)
-  );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='12' viewBox='0 0 96 12' fill='none' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath id='w' stroke='%23E21B1B' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%23EFC100' transform='translate(32 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%231065E0' transform='translate(64 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3C/svg%3E");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: 0 50%;
 }
 
-.torch-stripe-vertical {
-  background-image: repeating-linear-gradient(
-    180deg,
-    var(--stripe-1) 0 var(--tk-space-2),
-    var(--stripe-2) var(--tk-space-2) var(--tk-space-4),
-    var(--stripe-3) var(--tk-space-4) var(--tk-space-6)
-  );
-}
-
-/* Vertical rhythm for section edges; low opacity per tokens.opacity.pattern. */
+.torch-stripe-vertical,
 .torch-edge {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--stripe-1) 0 var(--tk-pattern-stripe-width-2),
-    transparent var(--tk-pattern-stripe-width-2) calc(var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)),
-    var(--stripe-2) calc(var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)) calc(2 * var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)),
-    transparent calc(2 * var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)) calc(2 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)),
-    var(--stripe-3) calc(2 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)) calc(3 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)),
-    transparent calc(3 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)) calc(3 * var(--tk-pattern-stripe-width-2) + 3 * var(--tk-pattern-stripe-gap))
-  );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='96' viewBox='0 0 12 96' fill='none' stroke-width='2.6' stroke-linecap='round'%3E%3Cg transform='rotate(90 6 6)'%3E%3Cpath stroke='%23E21B1B' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%23EFC100' transform='translate(32 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%231065E0' transform='translate(64 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+}
+
+/* Section edges: the ribbon at a larger scale, faint (tokens.opacity.pattern). */
+.torch-edge {
   opacity: var(--tk-opacity-pattern);
+}
+
+/* Full-width ribbons: a longer, calmer wave than the short title marks. */
+.torch-stripe.w-full {
+  background-size: 10rem 100%;
 }
 
 /* Placeholder art: diagonal slab rhythm (visual reference) in the current tone. */
