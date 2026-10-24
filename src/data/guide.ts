@@ -20,16 +20,16 @@ function topic(id: string, [en, pt]: Line, lines: Line[], status: ContentStatus 
 export const guide: GuideItem[] = [
   topic("key-dates", ["Key dates", "Datas-chave"], [
     [
-      "The XIII CPLP Games take place in Angola from 17 to 25 July 2027 (provisional dates).",
-      "Os XIII Jogos da CPLP realizam-se em Angola de 17 a 25 de Julho de 2027 (datas provisórias).",
+      "The XIII CPLP Games take place in Angola in March 2027 (proposed: 20 to 28 March, exact days to be confirmed).",
+      "Os XIII Jogos da CPLP realizam-se em Angola em Março de 2027 (proposta: 20 a 28 de Março, dias exatos a confirmar).",
     ],
     [
-      "Opening ceremony: Saturday 17 July 2027, 11 November Stadium, Luanda, from 18:00 (proposed).",
-      "Cerimónia de abertura: sábado, 17 de Julho de 2027, Estádio 11 de Novembro, Luanda, a partir das 18:00 (proposta).",
+      "Opening ceremony: Saturday 20 March 2027, 11 November Stadium, Luanda, from 18:00 (proposed).",
+      "Cerimónia de abertura: sábado, 20 de Março de 2027, Estádio 11 de Novembro, Luanda, a partir das 18:00 (proposta).",
     ],
     [
-      "Cultural Night: 21 July 2027. Closing ceremony and flag handover: 25 July 2027.",
-      "Noite Cultural: 21 de Julho de 2027. Cerimónia de encerramento e passagem da bandeira: 25 de Julho de 2027.",
+      "Cultural Night: 24 March 2027. Closing ceremony and flag handover: 28 March 2027 (proposed).",
+      "Noite Cultural: 24 de Março de 2027. Cerimónia de encerramento e passagem da bandeira: 28 de Março de 2027 (proposta).",
     ],
   ]),
   topic("who-competes", ["Who competes", "Quem participa"], [
@@ -38,8 +38,8 @@ export const guide: GuideItem[] = [
       "Jovens atletas dos nove Estados-membros da CPLP: Angola, Brasil, Cabo Verde, Guiné-Bissau, Guiné Equatorial, Moçambique, Portugal, São Tomé e Príncipe e Timor-Leste.",
     ],
     [
-      "Seven sports on the proposed programme: athletics, para athletics, 3x3 basketball, football, karate, taekwondo and tennis.",
-      "Sete modalidades no programa proposto: atletismo, atletismo adaptado, basquetebol 3x3, futebol, karaté, taekwondo e ténis.",
+      "Nine sports on the programme: athletics, para athletics, 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess.",
+      "Nove modalidades no programa: atletismo, atletismo adaptado, basquetebol 3x3, futebol, karaté, taekwondo, ténis, voleibol de praia e xadrez.",
     ],
     [
       "Age limits and quotas per sport are set out on each sport page and will be confirmed in the Chef de Mission manual.",

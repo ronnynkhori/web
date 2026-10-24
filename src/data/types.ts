@@ -25,7 +25,7 @@ export interface ImageAsset {
 export interface Sport {
   id: string;
   name: Localized;
-  category: "track" | "aquatics" | "team" | "combat" | "court" | "racket" | "digital";
+  category: "track" | "aquatics" | "team" | "combat" | "court" | "racket" | "beach" | "mind" | "digital";
   status: ContentStatus;
   tone: Tone;
   image?: ImageAsset;

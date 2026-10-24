@@ -1,302 +1,102 @@
 {
-  "arena": {
-    "width": 1600,
-    "height": 1069,
-    "source": "unsplash"
-  },
-  "athlete-set": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "athlete-woman": {
-    "width": 1067,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "athlete-yellow": {
-    "width": 1035,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "basketball-hoop": {
-    "width": 1600,
-    "height": 1044,
-    "source": "unsplash"
-  },
-  "basketball-sunset": {
-    "width": 1067,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "client-athlete-waterfront": {
-    "width": 1024,
-    "height": 576,
-    "source": "client"
-  },
-  "client-athletics": {
-    "width": 819,
-    "height": 1024,
-    "source": "client"
-  },
-  "client-flags-harbour": {
-    "width": 1024,
-    "height": 576,
-    "source": "client"
-  },
-  "client-judo": {
-    "width": 819,
-    "height": 1024,
-    "source": "client"
-  },
-  "client-monument": {
-    "width": 768,
-    "height": 576,
-    "source": "client"
-  },
-  "client-skyline": {
-    "width": 768,
-    "height": 576,
-    "source": "client"
-  },
-  "client-sprint-start": {
-    "width": 461,
-    "height": 576,
-    "source": "client"
-  },
-  "client-stadium": {
-    "width": 1024,
-    "height": 576,
-    "source": "client"
-  },
-  "client-swimming": {
-    "width": 819,
-    "height": 1024,
-    "source": "client"
-  },
-  "client-taekwondo": {
-    "width": 819,
-    "height": 1024,
-    "source": "client"
-  },
-  "client-unity": {
-    "width": 1024,
-    "height": 607,
-    "source": "client"
-  },
-  "client-volleyball": {
-    "width": 819,
-    "height": 1024,
-    "source": "client"
-  },
-  "crowd-derby": {
-    "width": 1600,
-    "height": 1200,
-    "source": "unsplash"
-  },
-  "football-ball": {
-    "width": 1600,
-    "height": 935,
-    "source": "unsplash"
-  },
-  "football-beach": {
-    "width": 1067,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "football-kick": {
-    "width": 1600,
-    "height": 1068,
-    "source": "unsplash"
-  },
-  "football-youth": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "guide-volunteers": {
-    "width": 1600,
-    "height": 1200,
+  "ao-arena": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "hero-main": {
-    "width": 2048,
+  "ao-athletics": {
+    "width": 864,
     "height": 1152,
     "source": "generated"
   },
-  "hero-mobile": {
-    "width": 1080,
-    "height": 1350,
+  "ao-basketball": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "hero-sprinter": {
-    "width": 1143,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "live-featured": {
-    "width": 1920,
-    "height": 1080,
+  "ao-beach-volleyball": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "maputo-building": {
-    "width": 1600,
-    "height": 1478,
-    "source": "unsplash"
-  },
-  "maputo-dusk": {
-    "width": 1600,
-    "height": 1060,
-    "source": "unsplash"
-  },
-  "maputo-skyline": {
-    "width": 1600,
-    "height": 1060,
-    "source": "unsplash"
-  },
-  "maputo-sunset": {
-    "width": 1600,
-    "height": 1060,
-    "source": "unsplash"
-  },
-  "martial-sunset": {
-    "width": 1600,
-    "height": 1065,
-    "source": "unsplash"
-  },
-  "media-fans": {
-    "width": 1600,
-    "height": 1200,
+  "ao-broadcast": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "netball-hoop": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "netball-indoor": {
-    "width": 1200,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "netball-match": {
-    "width": 1600,
-    "height": 1401,
-    "source": "unsplash"
-  },
-  "news-dawn": {
-    "width": 1600,
-    "height": 1200,
+  "ao-chess": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "news-torch": {
-    "width": 1600,
-    "height": 1200,
+  "ao-closing": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "results-medal": {
-    "width": 1200,
-    "height": 1200,
+  "ao-cultural": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "runner-sunset": {
-    "width": 1600,
-    "height": 1049,
-    "source": "unsplash"
-  },
-  "runner-track": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "sport-esport": {
-    "width": 960,
-    "height": 1200,
+  "ao-fans": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "sport-judo": {
-    "width": 960,
-    "height": 1200,
+  "ao-football": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "sport-swimming": {
-    "width": 960,
-    "height": 1200,
+  "ao-karate": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "sport-taekwondo": {
-    "width": 960,
-    "height": 1200,
+  "ao-luanda": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "sport-volleyball": {
-    "width": 960,
-    "height": 1200,
+  "ao-medals": {
+    "width": 1024,
+    "height": 1024,
     "source": "generated"
   },
-  "sprint-start-bw": {
-    "width": 1067,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "stadium-african": {
-    "width": 1067,
-    "height": 1600,
-    "source": "unsplash"
-  },
-  "stadium-day": {
-    "width": 1600,
-    "height": 907,
-    "source": "unsplash"
-  },
-  "stadium-night": {
-    "width": 1600,
-    "height": 923,
-    "source": "unsplash"
-  },
-  "start-blocks": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "story-closing": {
-    "width": 1600,
-    "height": 1200,
+  "ao-para-athletics": {
+    "width": 864,
+    "height": 1152,
     "source": "generated"
   },
-  "story-cultural": {
-    "width": 1600,
-    "height": 1200,
+  "ao-parade": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "story-opening": {
-    "width": 1600,
-    "height": 1200,
+  "ao-stadium": {
+    "width": 1280,
+    "height": 720,
     "source": "generated"
   },
-  "swim-butterfly": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
+  "ao-start": {
+    "width": 1280,
+    "height": 720,
+    "source": "generated"
   },
-  "swim-freestyle": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
+  "ao-taekwondo": {
+    "width": 864,
+    "height": 1152,
+    "source": "generated"
   },
-  "track-race": {
-    "width": 1600,
-    "height": 986,
-    "source": "unsplash"
+  "ao-tennis": {
+    "width": 864,
+    "height": 1152,
+    "source": "generated"
   },
-  "volleyball-beach": {
-    "width": 1600,
-    "height": 1067,
-    "source": "unsplash"
-  },
-  "volleyball-sunset": {
-    "width": 1600,
-    "height": 922,
-    "source": "unsplash"
+  "ao-volunteers": {
+    "width": 1280,
+    "height": 720,
+    "source": "generated"
   }
 }

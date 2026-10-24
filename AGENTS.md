@@ -41,13 +41,13 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 ## Brand (from the client's brand pack)
 
 - **`brand-assets/logomarca/`:** 12 logo PNGs (colour, white and black; horizontal and stacked; with and without "Angola 2027"). The `.ai`, `.eps` and `.pdf` vector originals are git-ignored because they are too large.
-- **`brand-assets/Mascote/`:** 15 mascot PNGs. The mascot is a **guinea fowl (galinha-d'angola)** in sports kit: neutral welcome/thumbs-up poses plus athletics, para athletics (wheelchair), 3x3 basketball, football, karate, taekwondo and tennis.
+- **`brand-assets/Mascote/`:** 17 mascot PNGs. The mascot is a **guinea fowl (galinha-d'angola)** in sports kit: neutral welcome/thumbs-up poses plus athletics, para athletics (wheelchair), 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess. The last two were extracted from the brand book (p.7, 376 px, mask recombined) because the ZIP did not include them.
 - **`scripts/brand-assets.mjs`** turns these into web assets:
   - `public/images/brand/cplp-logo-*.png`, including `*-reversed` (colour emblem with a white wordmark, for dark backgrounds).
   - `cplp-emblem.png`.
   - `public/images/mascot/*.png`.
   - `src/app/icon.png` and `apple-icon.png`.
-- **Colours** were sampled from the emblem and live in `docs/design/design-tokens.json`:
+- **Colours** are confirmed by the brand book (p.5) and live in `docs/design/design-tokens.json`:
 
   | Token | Hex |
   |---|---|
@@ -58,14 +58,16 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
   | navy (derived dark surface) | `#0A2A66` |
 
   Dark sections use navy, accents on dark are yellow, and light accents are red. See `src/styles/globals.css`.
-- **Display font:** Kanit (the closest Google font to the wordmark). The UI font is Montserrat.
-- **NOT YET RECEIVED:** `OFFICIAL BRAND XIII CPLP.pdf` (14 pages, sent on WhatsApp). When it arrives, check the official hex values, fonts, mascot name and story, and the host city and dates, then update the tokens and copy.
+- **Display font:** Kanit (the closest Google font to the wordmark). The UI font is Montserrat. The brand book names no typefaces.
+- **Brand book:** `brand-assets/OFFICIAL BRAND XIII CPLP.pdf` (git-ignored; by the agency Ondaka, Sept 2026). It confirms "Angola, Março 2027", the red/blue/yellow hex values, the nine sports and the campaign tagline "Talento, união e desporto em Angola." It does not give the mascot name, host city or exact days.
+- **Hero:** mascot-led (`src/components/hero/hero-stage.tsx`): the emblem's swooshes on navy plus the football, athletics and para-athletics mascots, as on the brand book's billboard. On phones, one mascot sits beside the title. `src/data/hero.ts` can still add a photo or video underneath.
+- **Photos:** a new AI-generated, Angola-themed set (`public/images/demo/ao-*.jpg`, imported by `scripts/import-demo-images.mjs`). None of the Maputo photos remain.
 
 ## Where things live
 
 - **Event facts:** `src/data/event.ts` (dates, countdown, story beats).
 - **Countries:** `src/data/countries.ts` (the 9 CPLP members, flags in `public/images/flags/`).
-- **Sports:** `src/data/sports.ts` (7 sports, each with a `mascot` pose).
+- **Sports:** `src/data/sports.ts` (9 sports from the brand book, each with a `mascot` pose).
 - **Mascot:** `src/data/mascot.ts` (pose registry).
 - **Venues, news, FAQ, guide and media:** `src/data/venues.ts`, `news.ts`, `faq.ts`, `guide.ts`, `media.ts`, and `live-demo.ts` for demo scores.
 - **UI copy:** `src/lib/i18n/messages/pt.ts` and `en.ts`. `pt` is typed against `en`, so add every key to both.
@@ -78,24 +80,26 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 
 ## Provisional facts (flag these to the client)
 
-- **Host city:** Luanda (assumed). Only "Angola 2027" is confirmed.
-- **Dates:** 17–25 July 2027 (placeholder; the countdown targets 17 July 18:00 WAT).
-- **Venues:** proposals only (Estádio 11 de Novembro, Pavilhão da Cidadela, Estádio dos Coqueiros, Marginal de Luanda, Clube de Ténis de Luanda).
-- **Mascot name:** unknown. The mascot section says "galinha-d'angola" with a `[CLIENT TO CONFIRM]` flag, which is visible only with `?review=1`.
-- **Photos:** generic Unsplash/AI demo images (`public/images/demo`), not event photography.
+- **Host city:** Luanda (assumed). The brand book only says "Angola".
+- **Dates:** March 2027 is confirmed. The days 20–28 March are a placeholder (the countdown targets 20 March 18:00 WAT; the hero shows "Março de 2027" with a review flag).
+- **Venues:** proposals only (Estádio 11 de Novembro, Pavilhão da Cidadela, Estádio dos Coqueiros, Marginal de Luanda, Ilha de Luanda beach, Clube de Ténis de Luanda, Centro de Convenções de Talatona).
+- **Mascot name:** unknown (not in the brand book). The mascot section says "galinha-d'angola" with a `[CLIENT TO CONFIRM]` flag, which is visible only with `?review=1`.
+- **Photos:** AI-generated demo images, not event photography.
 
 ## Status (update this list as you work)
 
 - [x] New repo, brand assets processed, colours, fonts, logos and icons swapped.
 - [x] PT default plus EN; all Maputo/AUSC copy replaced with CPLP/Angola 2027.
-- [x] 9 CPLP countries and flags; 7 sports with mascot poses; venues, news, FAQ, guide and live demo rewritten.
+- [x] 9 CPLP countries and flags; 9 sports with mascot poses; venues, news, FAQ, guide and live demo rewritten.
+- [x] Brand book applied: March 2027, official tagline, beach volleyball and chess, confirmed colours.
+- [x] Own look, not a Maputo copy: mascot-led hero with brand swooshes, and a new Angola-themed photo set everywhere (including the admin login).
 - [x] Mascot section, hero mascot, sport-card mascots, admin login and sidebar rebranded.
 - [x] Vercel project `cplp-2027-proposta` (team `ronnynkhoris-projects`), connected to GitHub `ronnynkhori/web`. **Every push to `master` deploys production automatically.** `maputo-2026-x8ni` is untouched.
   - Production env vars set: `ADMIN_SESSION_SECRET`, `ADMIN_EMAIL=admin@cplp2027.demo`, `ADMIN_PASSWORD=CPLP-Angola-2027`.
   - No Supabase, so the Control Room is read-only on Vercel. That is fine for the demo; add Supabase from the Vercel Marketplace to make it editable.
   - Vercel CLI on the owner's PC needs `$env:NODE_OPTIONS='--use-system-ca'` because of a TLS proxy.
 - [ ] Visual QA on mobile and desktop (`/pt`, `/en`, `/pt/sports/football`, `/pt/schedule`, `/admin/login`).
-- [ ] When the brand PDF arrives: exact colours, fonts, mascot name, city and dates.
+- [ ] Still to get from the client: mascot name, host city and exact days in March.
 - [ ] Nice to have: a mascot-led 404 page, a mascot in the assistant button, and a short proposal summary page.
 
 <!-- BEGIN:nextjs-agent-rules -->

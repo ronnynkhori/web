@@ -29,8 +29,8 @@ function BrandPanel({ t, locale }: { t: Translate; locale: Locale }) {
   return (
     <section aria-label="XIII Jogos Desportivos da CPLP" className="surface-black relative isolate flex min-h-72 flex-col overflow-hidden bg-sidebar text-sidebar-foreground sm:min-h-80 lg:min-h-svh">
       <Image
-        src="/images/demo/hero-main.jpg"
-        alt={t("A sprinter in a green kit drives out of the starting blocks under stadium lights at dusk")}
+        src="/images/demo/ao-stadium.jpg"
+        alt={t("Aerial view of a floodlit stadium at dusk")}
         fill
         preload
         quality={90}
@@ -53,7 +53,7 @@ function BrandPanel({ t, locale }: { t: Translate; locale: Locale }) {
 
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <p className="font-display text-base tracking-[0.18em] text-highlight sm:text-lg">{t("13th edition · July 2027")}</p>
+            <p className="font-display text-base tracking-[0.18em] text-highlight sm:text-lg">{t("13th edition · March 2027")}</p>
             <p className="font-display text-5xl leading-[0.9] tracking-wide text-white drop-shadow-lg sm:text-6xl lg:text-8xl">CPLP 2027</p>
             <p className="hidden max-w-md text-base text-white/85 sm:block">{t("Nine nations, one community. Every score, result and story on the official website is published from here.")}</p>
           </div>

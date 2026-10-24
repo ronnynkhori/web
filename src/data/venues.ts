@@ -33,7 +33,7 @@ export const venues: Venue[] = [
     area: same("Camama, Luanda"),
     status: "source",
     tone: "energy",
-    image: img.stadiumNight,
+    image: img.stadium,
   },
   {
     id: "games-village",
@@ -43,7 +43,7 @@ export const venues: Venue[] = [
     area: t(CONTENT_REQUIRED, CONTENT_REQUIRED),
     status: "required",
     tone: "premium",
-    image: img.guideVolunteers,
+    image: img.volunteers,
   },
   {
     id: "pavilhao-cidadela",
@@ -57,7 +57,23 @@ export const venues: Venue[] = [
   },
   competition("estadio-coqueiros", t("Coqueiros Stadium", "Estádio dos Coqueiros"), t("Football", "Futebol")),
   competition("marginal-luanda", t("Luanda Marginal (outdoor court)", "Marginal de Luanda (campo exterior)"), t("3x3 Basketball", "Basquetebol 3x3")),
+  {
+    id: "praia-ilha-luanda",
+    name: t("Ilha de Luanda beach arena", "Arena de praia da Ilha de Luanda"),
+    role: t("Beach volleyball (proposed)", "Voleibol de praia (proposta)"),
+    sports: t("Beach volleyball", "Voleibol de praia"),
+    area: same("Ilha de Luanda"),
+    status: "source",
+    tone: "highlight",
+    image: img.luanda,
+  },
   competition("clube-tenis-luanda", t("Luanda Tennis Club", "Clube de Ténis de Luanda"), t("Tennis", "Ténis")),
+  competition(
+    "centro-convencoes-talatona",
+    t("Talatona Convention Centre", "Centro de Convenções de Talatona"),
+    t("Chess", "Xadrez"),
+    same("Talatona, Luanda"),
+  ),
 ];
 
 export function getVenue(id: string): Venue | undefined {

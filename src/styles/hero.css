@@ -1,16 +1,30 @@
-/* Hero composition: photography under a navy scrim, with the mascot standing
-   on the right from tablet up. */
-.hero-placeholder .slab-pattern {
-  opacity: 1;
-}
-
+/* Hero composition: the emblem's swooshes on navy with the mascot trio running
+   in from the right (brand book campaign layout). */
 .hero-title-2026 {
   color: var(--tk-color-text-accent);
 }
 
+.hero-swoosh {
+  animation: hero-swoosh-in var(--tk-duration-cinematic) var(--tk-ease-emphasized) both;
+  animation-delay: calc(150ms + var(--swoosh-i, 0) * 120ms);
+}
+@keyframes hero-swoosh-in {
+  from {
+    opacity: 0;
+    transform: translateX(6%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html[data-motion="reduce"] .hero-swoosh {
+  animation: none;
+}
+
 .hero-mascot {
   animation: hero-mascot-in var(--tk-duration-cinematic) var(--tk-ease-emphasized) both;
-  animation-delay: 400ms;
+  animation-delay: calc(400ms + var(--mascot-i, 0) * 140ms);
 }
 @keyframes hero-mascot-in {
   from {

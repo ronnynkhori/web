@@ -1,6 +1,8 @@
 /**
  * Official mascot artwork (brand-assets/Mascote, built by scripts/brand-assets.mjs).
- * A guinea fowl (galinha-d'angola) in the Games kit. [CLIENT TO CONFIRM] mascot name.
+ * A guinea fowl (galinha-d'angola) in the Games kit. The beach volleyball and
+ * chess poses come from the brand book (OFFICIAL BRAND XIII CPLP p.7).
+ * [CLIENT TO CONFIRM] mascot name.
  */
 import type { Localized } from "@/lib/i18n/config";
 
@@ -14,11 +16,11 @@ export interface MascotPose {
   label: Localized;
 }
 
-const pose = (id: string, width: number, sportId: string | null, en: string, pt: string): MascotPose => ({
+const pose = (id: string, width: number, sportId: string | null, en: string, pt: string, height = 800): MascotPose => ({
   id,
   src: `/images/mascot/${id}.png`,
   width,
-  height: 800,
+  height,
   sportId,
   label: { en, pt },
 });
@@ -39,6 +41,8 @@ export const mascotPoses = {
   taekwondo: pose("taekwondo-1", 627, "taekwondo", "Taekwondo", "Taekwondo"),
   taekwondo2: pose("taekwondo-2", 627, "taekwondo", "Taekwondo", "Taekwondo"),
   tennis: pose("tenis-1", 761, "tennis", "Tennis", "Ténis"),
+  beachVolleyball: pose("voleibol-de-praia-1", 282, "beach-volleyball", "Beach volleyball", "Voleibol de praia", 356),
+  chess: pose("xadrez-1", 275, "chess", "Chess", "Xadrez", 340),
 } satisfies Record<string, MascotPose>;
 
 /** One pose per sport, in programme order, for the mascot carousel. */
@@ -50,4 +54,6 @@ export const sportPoses: MascotPose[] = [
   mascotPoses.karate,
   mascotPoses.taekwondo,
   mascotPoses.tennis,
+  mascotPoses.beachVolleyball,
+  mascotPoses.chess,
 ];

@@ -29,11 +29,11 @@ const go = {
 export const faq: FaqEntry[] = [
   {
     id: "dates",
-    keywords: ["when", "date", "dates", "july", "start", "begin", "quando", "data", "datas", "julho", "comeca", "inicio"],
+    keywords: ["when", "date", "dates", "march", "start", "begin", "quando", "data", "datas", "marco", "comeca", "inicio"],
     question: t("When are the Games?", "Quando são os Jogos?"),
     answer: t(
-      "The XIII CPLP Games take place in Angola from 17 to 25 July 2027 (provisional dates, to be confirmed by the Organising Committee). The opening ceremony is on 17 July and the closing ceremony on 25 July.",
-      "Os XIII Jogos da CPLP realizam-se em Angola de 17 a 25 de Julho de 2027 (datas provisórias, a confirmar pelo Comité Organizador). A cerimónia de abertura é a 17 de Julho e o encerramento a 25 de Julho.",
+      "The XIII CPLP Games take place in Angola in March 2027. The exact days will be confirmed by the Organising Committee; this proposal uses 20 to 28 March, with the opening ceremony on 20 March and the closing ceremony on 28 March.",
+      "Os XIII Jogos da CPLP realizam-se em Angola em Março de 2027. Os dias exatos serão confirmados pelo Comité Organizador; esta proposta usa 20 a 28 de Março, com a cerimónia de abertura a 20 de Março e o encerramento a 28 de Março.",
     ),
     link: go.guide,
   },
@@ -62,8 +62,8 @@ export const faq: FaqEntry[] = [
     keywords: ["sports", "sport", "programme", "modalidades", "modalidade", "programa", "football", "futebol", "athletics", "atletismo"],
     question: t("Which sports are on the programme?", "Que modalidades fazem parte do programa?"),
     answer: t(
-      "Seven sports are proposed: athletics, para athletics, 3x3 basketball, football, karate, taekwondo and tennis.",
-      "Estão propostas sete modalidades: atletismo, atletismo adaptado, basquetebol 3x3, futebol, karaté, taekwondo e ténis.",
+      "Nine sports: athletics, para athletics, 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess.",
+      "Nove modalidades: atletismo, atletismo adaptado, basquetebol 3x3, futebol, karaté, taekwondo, ténis, voleibol de praia e xadrez.",
     ),
     link: go.sports,
   },

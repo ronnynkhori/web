@@ -128,12 +128,11 @@ const part: CatalogPart = {
     "Official website": "Site oficial",
     "XIII CPLP Games": "XIII Jogos Desportivos da CPLP",
     "Angola 2027": "Angola 2027",
-    "13th edition · July 2027": "13.ª edição · Julho de 2027",
+    "13th edition · March 2027": "13.ª edição · Março de 2027",
     "Nine nations, one community. Every score, result and story on the official website is published from here.":
       "Nove nações, uma comunidade. Cada resultado, classificação e notícia do site oficial é publicado a partir daqui.",
     "The 9 nations": "As 9 nações",
-    "A sprinter in a green kit drives out of the starting blocks under stadium lights at dusk":
-      "Uma velocista de equipamento verde sai dos blocos de partida sob as luzes do estádio ao anoitecer",
+    "Aerial view of a floodlit stadium at dusk": "Vista aérea de um estádio iluminado ao entardecer",
     "Sign in to manage the CPLP 2027 website.": "Entre para gerir o site dos Jogos CPLP 2027.",
     "Forgot password": "Palavra-passe esquecida",
     "Enter your sign-in email and we will send you a link to choose a new password.":
@@ -315,8 +314,7 @@ const part: CatalogPart = {
     "Ten nations, ten days of Games. Every score, result and story on the official website is published from here.":
       "Dix nations, dix jours de Jeux. Chaque score, résultat et article du site officiel est publié d’ici.",
     "The 10 nations": "Les 10 nations",
-    "A sprinter in a green kit drives out of the starting blocks under stadium lights at dusk":
-      "Une sprinteuse en tenue verte s'élance des blocs de départ sous les projecteurs du stade au crépuscule",
+    "Aerial view of a floodlit stadium at dusk": "Vue aérienne d'un stade éclairé au crépuscule",
     "Sign in to manage the CPLP 2027 website.": "Connectez-vous pour gérer le site de Maputo 2026.",
     "Forgot password": "Mot de passe oublié",
     "Enter your sign-in email and we will send you a link to choose a new password.":

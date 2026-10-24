@@ -49,6 +49,7 @@ yarn-error.log*
 /brand-assets/**/*.ai
 /brand-assets/**/*.eps
 /brand-assets/**/*.pdf
+/brand-assets/_pdf-preview/
 
 # vercel
 .vercel

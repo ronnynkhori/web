@@ -1,6 +1,4 @@
 import type { CSSProperties } from "react";
-import Image from "next/image";
-import { mascotPoses } from "@/data/mascot";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { fill, pick, type Locale } from "@/lib/i18n/config";
 import { getCountries, getCountryFlags } from "@/lib/cms/read";
@@ -14,19 +12,19 @@ import { DemoBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ContentFlag, RichContent } from "@/components/ui/content-flag";
 import { Flag } from "@/components/ui/flag";
-import { TorchStripe } from "@/components/ui/torch-stripe";
 import { Countdown } from "./countdown";
 import { HeroParallax } from "./hero-parallax";
 import { HeroPicture } from "./hero-picture";
+import { HeroMascotInline, HeroMascots, HeroSwooshes } from "./hero-stage";
 import { HeroVideo } from "./hero-video";
 
 const i = (name: string, n: number) => ({ [name]: n }) as CSSProperties;
 
 /**
- * Homepage hero: full-bleed photography under a navy scrim, left-aligned
- * overline + two-tone display title, yellow primary action, the nine member
- * flags, and the official mascot on the right from tablet up. The entrance is
- * pure CSS (no JS on the LCP path).
+ * Homepage hero, mascot-led: navy stage with the emblem's swooshes, left-aligned
+ * overline + two-tone display title, the official tagline, yellow primary
+ * action, the nine member flags, and the mascot trio running in on the right.
+ * The entrance is pure CSS (no JS on the LCP path).
  */
 export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dictionary; locale: Locale; phase?: Phase; day?: number }) {
   const h = dict.hero;
@@ -57,40 +55,21 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         phase === "pre" ? "min-h-[calc(100svh-var(--quickbar-h))] tablet:min-h-svh" : "min-h-[82svh] tablet:min-h-svh",
       )}
     >
-      {/* Media layer */}
+      {/* Art layer: brand swooshes and the mascot trio (optional photo or video underneath) */}
       <HeroParallax className="absolute inset-0 -z-10">
         <div className="hero-media absolute inset-0">
-          {heroMedia.poster ? (
-            <HeroPicture desktop={heroMedia.poster} mobile={heroMedia.posterMobile} />
-          ) : (
-            <div aria-hidden="true" className="hero-placeholder absolute inset-0 bg-surface-2 text-surface-overlay">
-              <span className="slab-pattern absolute inset-0" />
-            </div>
-          )}
+          {heroMedia.poster && <HeroPicture desktop={heroMedia.poster} mobile={heroMedia.posterMobile} />}
           {heroMedia.video && (
             <HeroVideo src={heroMedia.video} poster={heroMedia.poster?.src} labels={{ pause: dict.a11y.pause, play: dict.a11y.play }} />
           )}
+          <HeroSwooshes className="absolute inset-0 size-full" />
         </div>
       </HeroParallax>
       <div aria-hidden="true" className="hero-scrim absolute inset-0 -z-10">
-        <div className="absolute inset-0 scrim-side" />
-        <div className="absolute inset-0 scrim-hero" />
+        <div className="absolute inset-0 scrim-side opacity-70" />
       </div>
       <span aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-px bg-line-accent/40" />
-      <TorchStripe variant="edge" className="right-0 -z-10" />
-      <Image
-        src={mascotPoses.welcome.src}
-        alt=""
-        width={mascotPoses.welcome.width}
-        height={mascotPoses.welcome.height}
-        sizes="(min-width: 64rem) 34vw, 40vw"
-        className="hero-mascot pointer-events-none absolute right-[3%] bottom-[22%] -z-[5] hidden h-[52%] w-auto drop-shadow-[0_24px_40px_rgb(0_0_0/0.5)] tablet:block desktop:right-[7%] desktop:bottom-[24%] desktop:h-[60%] squat:h-[46%]"
-      />
-      {!heroMedia.poster && (
-        <p className="absolute top-[calc(var(--header-h)+var(--tk-space-4))] right-4 m-0 max-w-[60%] text-right type-caption text-fg-muted">
-          {h.mediaPlaceholder}
-        </p>
-      )}
+      <HeroMascots />
 
       {/* Content */}
       <section
@@ -107,7 +86,8 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           <p className="hero-rise m-0 mb-4 type-overline short:mb-2 tablet:mb-6 squat:mb-3" style={i("--rise-i", -5)}>
             {phase === "post" ? h.postOverline : h.overline}
           </p>
-          <h1 id="hero-title" className="m-0">
+          <h1 id="hero-title" className="relative isolate m-0">
+            <HeroMascotInline />
             <span className="hero-rise mb-3 block type-heading-m short:mb-1 font-medium text-fg-2 tablet:type-heading-l" style={i("--rise-i", -4)}>
               {h.leadLine}
             </span>
@@ -120,11 +100,11 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           </h1>
           <p className="hero-rise m-0 mt-4 flex max-w-prose flex-wrap items-center gap-3 type-body-xl font-light text-fg-2 short:mt-2 tablet:mt-6 squat:mt-4" style={i("--rise-i", 0)}>
             <span>{phase === "post" ? h.postLine : h.tagline}</span>
-            {phase !== "post" && <ContentFlag>{h.taglineFlag}</ContentFlag>}
           </p>
           {phase !== "post" && (
-            <p className="hero-rise m-0 mt-3 type-heading-m font-extrabold uppercase" style={i("--rise-i", 1)}>
-              <time dateTime="2027-07-17/2027-07-25">{h.dates}</time>
+            <p className="hero-rise m-0 mt-3 flex flex-wrap items-center gap-3 type-heading-m font-extrabold uppercase" style={i("--rise-i", 1)}>
+              <time dateTime="2027-03">{h.dates}</time>
+              <ContentFlag>{h.datesFlag}</ContentFlag>
             </p>
           )}
           <div className="hero-cta mt-5 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex squat:mt-5">

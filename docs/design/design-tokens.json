@@ -3,16 +3,16 @@
   "meta": {
     "project": "XIII Jogos Desportivos da CPLP - Angola 2027",
     "direction": "Cinematic sports; colours sampled from the official emblem (red, blue and yellow swooshes)",
-    "status": "PROPOSAL v0.1 - colours sampled from the logo PNGs; confirm against OFFICIAL BRAND XIII CPLP.pdf",
+    "status": "PROPOSAL v0.2 - red, blue and yellow confirmed by OFFICIAL BRAND XIII CPLP (p.5); the brand book specifies no typefaces",
     "locales": [
       "pt",
       "en"
     ],
     "event": {
       "dates": {
-        "start": "[DATAS A CONFIRMAR]",
-        "end": "[DATAS A CONFIRMAR]",
-        "status": "Only Angola 2027 is confirmed (dated logo variants)."
+        "start": "2027-03-20 (proposed)",
+        "end": "2027-03-28 (proposed)",
+        "status": "Brand book confirms Angola, March 2027; exact days to be confirmed."
       },
       "edition": "XIII",
       "logo": "brand-assets/logomarca (AI, EPS, PDF and PNG variants)"
