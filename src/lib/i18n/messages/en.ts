@@ -133,6 +133,8 @@ const en = {
     host: "Host nation",
     selected: "Selected delegation",
     clear: "Clear selection",
+    mapHost: "Luanda 2027",
+    mapCaption: "Nine nations, four continents, one destination: the delegations travel to Angola.",
   },
   sports: {
     overline: "Sports",
@@ -356,6 +358,17 @@ const en = {
     posesLabel: "The mascot in every sport",
     poseAlt: "The XIII CPLP Games mascot, a guinea fowl, in {sport} kit",
     cta: "See the sports",
+  },
+  stats: {
+    overline: "The Games in numbers",
+    items: [
+      { value: 9, label: "member nations" },
+      { value: 9, label: "sports" },
+      { value: 4, label: "continents" },
+      { value: 9, label: "days of competition" },
+      { value: 1000, prefix: "~", label: "young athletes" },
+    ],
+    flag: "[CLIENT TO CONFIRM] athlete numbers and competition days",
   },
   phase: {
     label: "Preview",

@@ -7,21 +7,19 @@
    ========================================================================== */
 
 /* ---------- Brand ribbon (replaces the block stripe) ----------
-   The emblem's three swooshes as interlaced waves: red, yellow and blue, a
-   third of a period apart, so they braid like the ribbons around the mark. */
+   A solid tricolour band from the emblem's swooshes: red, yellow and blue
+   fill the full height edge to edge; only the borders between them wave. */
 .torch-stripe {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='12' viewBox='0 0 96 12' fill='none' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath id='w' stroke='%23E21B1B' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%23EFC100' transform='translate(32 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%231065E0' transform='translate(64 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='12' viewBox='0 0 96 12' preserveAspectRatio='none'%3E%3Crect width='96' height='12' fill='%23E21B1B'/%3E%3Cpath fill='%23EFC100' d='M0 4c16-3 32-3 48 0s32 3 48 0V12H0Z'/%3E%3Cpath fill='%231065E0' d='M0 8c16-3 32-3 48 0s32 3 48 0V12H0Z'/%3E%3C/svg%3E");
   background-size: auto 100%;
   background-repeat: repeat-x;
-  background-position: 0 50%;
 }
 
 .torch-stripe-vertical,
 .torch-edge {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='96' viewBox='0 0 12 96' fill='none' stroke-width='2.6' stroke-linecap='round'%3E%3Cg transform='rotate(90 6 6)'%3E%3Cpath stroke='%23E21B1B' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%23EFC100' transform='translate(32 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3Cpath stroke='%231065E0' transform='translate(64 0)' d='M-192 6c16-6 32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0s32-6 48 0s32 6 48 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='96' viewBox='0 0 12 96' preserveAspectRatio='none'%3E%3Cg transform='rotate(90 6 6)'%3E%3Crect width='96' height='12' fill='%23E21B1B'/%3E%3Cpath fill='%23EFC100' d='M0 4c16-3 32-3 48 0s32 3 48 0V12H0Z'/%3E%3Cpath fill='%231065E0' d='M0 8c16-3 32-3 48 0s32 3 48 0V12H0Z'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 100% auto;
   background-repeat: repeat-y;
-  background-position: 50% 0;
 }
 
 /* Section edges: the ribbon at a larger scale, faint (tokens.opacity.pattern). */

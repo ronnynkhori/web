@@ -1,0 +1,172 @@
+/* Visual layer from the benchmark pass: kinetic marquee, swoosh dividers,
+   nations map, count-up stats, mascot cameos, Sona texture, photo
+   treatment and confetti. Every loop stops under reduced motion. */
+
+/* ---------- Swoosh section edges ---------- */
+.swoosh-line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.4s var(--tk-ease-emphasized);
+}
+.swoosh-line--yellow {
+  stroke: var(--tk-color-brand-yellow);
+  stroke-width: 5px;
+}
+.swoosh-line--red {
+  stroke: var(--tk-color-brand-red);
+  stroke-width: 2.5px;
+  transition-delay: 200ms;
+}
+[data-revealed] .swoosh-line,
+html:not(.js) .swoosh-line,
+html[data-motion="reduce"] .swoosh-line {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- Stats band (yellow) ---------- */
+.stats-band::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto auto;
+  z-index: -1;
+  width: 55%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: clamp(2.5rem, 6vw, 5rem) solid rgb(255 255 255 / 0.18);
+}
+.stat-ribbon {
+  line-height: 0.9;
+}
+.stat-ribbon::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 0.375rem;
+  margin-top: 0.75rem;
+  background: var(--tk-color-brand-navy);
+  border-radius: 999px;
+}
+
+/* ---------- Nine nations map ---------- */
+.map-graticule line {
+  stroke: rgb(255 255 255 / 0.07);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.map-graticule .map-equator {
+  stroke: rgb(255 255 255 / 0.18);
+  stroke-dasharray: 4 6;
+}
+.map-arc,
+.map-pulse {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+.map-arc {
+  stroke: var(--tk-color-brand-yellow);
+  stroke-width: 2px;
+  stroke-opacity: 0.75;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.6s var(--tk-ease-emphasized);
+  transition-delay: calc(300ms + var(--arc-i, 0) * 140ms);
+}
+[data-revealed] .map-arc,
+html:not(.js) .map-arc {
+  stroke-dashoffset: 0;
+}
+.map-pulse {
+  stroke: var(--tk-color-neutral-white);
+  stroke-width: 3.5px;
+  stroke-dasharray: 0.05 0.95;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+[data-revealed] .map-pulse {
+  opacity: 1;
+  animation: map-pulse 3.2s linear infinite;
+  animation-delay: calc(2s + var(--arc-i, 0) * 0.35s);
+}
+@keyframes map-pulse {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.map-host-ring {
+  fill: none;
+  stroke: var(--tk-color-brand-yellow);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-ring 2.4s ease-out infinite;
+}
+.map-host-ring--late {
+  animation-delay: 1.2s;
+}
+@keyframes map-ring {
+  from {
+    opacity: 0.9;
+    scale: 0.6;
+  }
+  to {
+    opacity: 0;
+    scale: 2.4;
+  }
+}
+.map-pin {
+  position: absolute;
+  width: clamp(1rem, 2.9%, 2.25rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+.map-pin--host {
+  width: clamp(1.4rem, 4%, 3.25rem);
+}
+.map-flag {
+  width: 100%;
+  height: 100%;
+  background: var(--tk-color-neutral-white);
+  box-shadow:
+    0 0 0 2px var(--tk-color-neutral-white),
+    0 6px 14px rgb(0 0 0 / 0.4);
+  transition: scale var(--tk-duration-ui) cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.map-pin--host .map-flag {
+  box-shadow:
+    0 0 0 3px var(--tk-color-brand-yellow),
+    0 8px 18px rgb(0 0 0 / 0.45);
+}
+.map-pin:hover .map-flag {
+  scale: 1.25;
+}
+html.js .nations-map:not([data-revealed]) .map-pin {
+  opacity: 0;
+  scale: 0.3;
+}
+.nations-map[data-revealed] .map-pin {
+  transition:
+    opacity 400ms ease,
+    scale 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--pin-i, 0) * 70ms);
+}
+.map-host-label {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  translate: -50% 0;
+  color: var(--tk-color-brand-yellow);
+}
+html[data-motion="reduce"] :is(.map-pulse, .map-host-ring) {
+  animation: none !important;
+  opacity: 0;
+}
+html[data-motion="reduce"] .map-arc {
+  stroke-dashoffset: 0;
+  transition: none;
+}
+

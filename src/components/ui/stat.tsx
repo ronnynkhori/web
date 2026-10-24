@@ -8,6 +8,8 @@ interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
   /** Number to show, or a content marker while the figure is unconfirmed. */
   value: number | string;
   label: string;
+  /** Shown before the number, e.g. "~" for an estimate. */
+  prefix?: string;
   size?: "xl" | "l" | "m";
   countUp?: boolean;
   locale?: string;
@@ -27,12 +29,13 @@ const sizeClass = {
  * Primitive 6/8 - big number + label. Countdown units, sport/venue stats,
  * medal counts. Tabular numerals keep widths stable (no layout shift).
  */
-export function Stat({ value, label, size = "xl", countUp, locale, align = "start", valueClassName, className, children, ...rest }: StatProps) {
+export function Stat({ value, label, prefix, size = "xl", countUp, locale, align = "start", valueClassName, className, children, ...rest }: StatProps) {
   const pending = typeof value === "string" && isPending(value);
   return (
     <div className={cn("flex flex-col gap-2", align === "center" && "items-center text-center", className)} {...rest}>
       <dt className="order-2 type-label">{label}</dt>
       <dd className={cn("order-1 m-0", sizeClass[size], valueClassName)}>
+        {prefix}
         {pending ? (
           <ContentFlag fallback="—">{value}</ContentFlag>
         ) : typeof value === "number" && countUp ? (

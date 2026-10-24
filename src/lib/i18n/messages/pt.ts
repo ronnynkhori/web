@@ -132,6 +132,8 @@ const pt: Dictionary = {
     host: "País anfitrião",
     selected: "Delegação selecionada",
     clear: "Limpar seleção",
+    mapHost: "Luanda 2027",
+    mapCaption: "Nove nações, quatro continentes, um destino: as delegações viajam até Angola.",
   },
   sports: {
     overline: "Modalidades",
@@ -356,6 +358,17 @@ const pt: Dictionary = {
     posesLabel: "A mascote em todas as modalidades",
     poseAlt: "A mascote dos XIII Jogos da CPLP, uma galinha-d'angola, equipada para {sport}",
     cta: "Ver as modalidades",
+  },
+  stats: {
+    overline: "Os Jogos em números",
+    items: [
+      { value: 9, label: "nações membros" },
+      { value: 9, label: "modalidades" },
+      { value: 4, label: "continentes" },
+      { value: 9, label: "dias de competição" },
+      { value: 1000, prefix: "~", label: "jovens atletas" },
+    ],
+    flag: "[CLIENT TO CONFIRM] número de atletas e dias de competição",
   },
   phase: {
     label: "Pré-visualizar",

@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Flag } from "@/components/ui/flag";
 import { CountriesGrid } from "./countries-grid";
+import { NationsMap } from "./nations-map";
 
 /**
  * Cinematic dark section: "One language. Nine nations." .
@@ -15,13 +16,18 @@ export async function CountriesSection({ dict, locale, compact }: { dict: Dictio
   const c = dict.countries;
   const countries = await getCountries();
   return (
-    <Section id="countries" labelledBy="countries-title" theme="dark" framed>
+    <Section id="countries" labelledBy="countries-title" theme="dark" swoosh>
       <SectionHeader
         id="countries-title"
         overline={c.overline}
         title={c.title}
         titleAccent={c.titleAccent}
         intro={c.intro}
+      />
+      <NationsMap
+        nations={countries.map((x) => ({ code: x.code, name: pick(x.name, locale), flag: x.flag }))}
+        hostLabel={c.mapHost}
+        caption={c.mapCaption}
       />
       {compact && (
         <ul className="m-0 grid list-none grid-cols-2 gap-2 p-0 tablet:hidden">

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { SwooshEdge } from "./swoosh-edge";
 
 const bandClass = {
   base: "bg-surface text-fg",
@@ -20,6 +21,8 @@ interface SectionProps {
   theme?: "dark" | "light";
   /** Gold hairlines on the top and bottom edges (institutional frame). */
   framed?: boolean;
+  /** Curved swoosh edges rising into the neighbouring sections (dark bands). */
+  swoosh?: boolean;
   className?: string;
   containerClassName?: string;
   wide?: boolean;
@@ -27,15 +30,40 @@ interface SectionProps {
 }
 
 /** Page section: landmark + labelled heading + token section rhythm + grid margins. */
-export function Section({ id, labelledBy, band = "base", theme, framed, className, containerClassName, wide, children }: SectionProps) {
+export function Section({
+  id,
+  labelledBy,
+  band = "base",
+  theme,
+  framed,
+  swoosh,
+  className,
+  containerClassName,
+  wide,
+  children,
+}: SectionProps) {
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
       data-theme={theme}
-      className={cn("relative section-y", bandClass[band], framed && "border-y border-line-accent/40", className)}
+      className={cn(
+        "relative section-y",
+        bandClass[band],
+        framed && !swoosh && "border-y border-line-accent/40",
+        className,
+      )}
     >
-      <div className={cn(wide ? "container-wide" : "container-page", containerClassName)}>{children}</div>
+      {swoosh && <SwooshEdge side="top" />}
+      <div
+        className={cn(
+          wide ? "container-wide" : "container-page",
+          containerClassName,
+        )}
+      >
+        {children}
+      </div>
+      {swoosh && <SwooshEdge side="bottom" flip />}
     </section>
   );
 }

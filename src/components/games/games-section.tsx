@@ -6,6 +6,8 @@ import { getCountries } from "@/lib/cms/read";
 import { reveal } from "@/lib/animation/reveal";
 import { Stat, StatGroup } from "@/components/ui/stat";
 import { SectionHeader } from "@/components/ui/section-header";
+import { ContentFlag } from "@/components/ui/content-flag";
+import { cn } from "@/lib/cn";
 import { StoryMosaic } from "./story-mosaic";
 import { StoryPanels, type StoryBeatView } from "./story-panels";
 
@@ -17,11 +19,9 @@ import { StoryPanels, type StoryBeatView } from "./story-panels";
 export async function GamesSection({ dict, locale, compact }: { dict: Dictionary; locale: Locale; compact?: boolean }) {
   const g = dict.games;
   const countries = await getCountries();
-  const stats = [
-    { key: "days", value: gamesDays, label: g.stats.days, note: g.statNotes.days },
-    { key: "sports", value: sports.length, label: g.stats.sports, note: g.statNotes.sports },
-    { key: "countries", value: countries.length, label: g.stats.countries, note: g.statNotes.countries },
-  ];
+  // Band order: nations, sports, continents, days, athletes; figures that the data files hold come from them.
+  const fromData = [countries.length, sports.length, undefined, gamesDays, undefined];
+  const stats = dict.stats.items.map((s, i) => ({ ...s, value: fromData[i] ?? s.value }));
   const nationsFact = String(countries.length);
   const beats: StoryBeatView[] = storyBeats.map((b) => ({
     id: b.id,
@@ -49,24 +49,29 @@ export async function GamesSection({ dict, locale, compact }: { dict: Dictionary
       <StoryPanels beats={beats} labels={storyLabels} compact={compact} className="desktop:hidden" />
       <StoryMosaic beats={beats} labels={storyLabels} className="hidden desktop:block" />
 
-      <div className="container-page section-y pt-7! desktop:pt-8!">
-        <StatGroup className="grid-cols-3 border-t border-line">
-          {stats.map((s, i) => (
-            <Stat
-              key={s.key}
-              value={s.value}
-              label={s.label}
-              size="l"
-              countUp
-              locale={locale}
-              valueClassName="text-accent"
-              className="border-r border-line py-5 pr-3 pl-3 first:pl-0 last:border-r-0 tablet:px-5 tablet:first:pl-0"
-              {...reveal("fade-up", i)}
-            >
-              <dd className="order-4 m-0 hidden type-body-s text-fg-muted tablet:block">{s.note}</dd>
-            </Stat>
-          ))}
-        </StatGroup>
+      <div className="stats-band relative isolate overflow-hidden bg-band-highlight text-on-band-highlight">
+        <div className="container-page pt-7 pb-[clamp(4.5rem,3rem+5vw,7.5rem)] tablet:pt-8">
+          <p className="m-0 mb-6 flex flex-wrap items-center gap-3 type-overline">
+            {dict.stats.overline}
+            <ContentFlag>{dict.stats.flag}</ContentFlag>
+          </p>
+          <StatGroup className="grid-cols-2 gap-x-5 gap-y-7 tablet:grid-cols-5">
+            {stats.map((s, i) => (
+              <Stat
+                key={s.label}
+                value={s.value}
+                prefix={"prefix" in s ? s.prefix : undefined}
+                label={s.label}
+                size="l"
+                countUp
+                locale={locale}
+                valueClassName="stat-ribbon font-display"
+                className={cn("border-l-2 border-current/20 pl-4", i === stats.length - 1 && "col-span-2 tablet:col-span-1")}
+                {...reveal("fade-up", i)}
+              />
+            ))}
+          </StatGroup>
+        </div>
       </div>
     </section>
   );

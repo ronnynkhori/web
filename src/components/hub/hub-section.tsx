@@ -18,7 +18,7 @@ export async function HubSection({ dict, locale, phase }: { dict: Dictionary; lo
 
   if (phase === "pre") {
     return (
-      <Section id="live" labelledBy="live-title" theme="dark" framed>
+      <Section id="live" labelledBy="live-title" theme="dark" swoosh>
         <span id="results" className="sr-only" />
         <div className="flex flex-col gap-5 desktop:flex-row desktop:items-end desktop:justify-between">
           <div className="flex max-w-prose flex-col gap-3">
@@ -37,7 +37,7 @@ export async function HubSection({ dict, locale, phase }: { dict: Dictionary; lo
   }
 
   return (
-    <Section id="live" labelledBy="live-title" theme="dark" framed className="scroll-mt-0">
+    <Section id="live" labelledBy="live-title" theme="dark" swoosh className="scroll-mt-0">
       <SectionHeader
         id="live-title"
         overline={h.overline}
