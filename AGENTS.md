@@ -84,7 +84,10 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 - [x] PT default plus EN; all Maputo/AUSC copy replaced with CPLP/Angola 2027.
 - [x] 9 CPLP countries and flags; 7 sports with mascot poses; venues, news, FAQ, guide and live demo rewritten.
 - [x] Mascot section, hero mascot, sport-card mascots, admin login and sidebar rebranded.
-- [ ] Deploy to a NEW Vercel project (do not touch `maputo-2026-x8ni`) and send the client the URL.
+- [x] Vercel project `cplp-2027-proposta` (team `ronnynkhoris-projects`), connected to GitHub `ronnynkhori/web`. **Every push to `master` deploys production automatically.** `maputo-2026-x8ni` is untouched.
+  - Production env vars set: `ADMIN_SESSION_SECRET`, `ADMIN_EMAIL=admin@cplp2027.demo`, `ADMIN_PASSWORD=CPLP-Angola-2027`.
+  - No Supabase, so the Control Room is read-only on Vercel. That is fine for the demo; add Supabase from the Vercel Marketplace to make it editable.
+  - Vercel CLI on the owner's PC needs `$env:NODE_OPTIONS='--use-system-ca'` because of a TLS proxy.
 - [ ] Visual QA on mobile and desktop (`/pt`, `/en`, `/pt/sports/football`, `/pt/schedule`, `/admin/login`).
 - [ ] When the brand PDF arrives: exact colours, fonts, mascot name, city and dates.
 - [ ] Nice to have: a mascot-led 404 page, a mascot in the assistant button, and a short proposal summary page.
