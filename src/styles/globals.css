@@ -1,0 +1,447 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./typography.css";
+@import "./motion.css";
+@import "./hero.css";
+
+/* ==========================================================================
+   XIII CPLP Games - theme layer
+   Source of truth: docs/design/design-tokens.json -> src/styles/tokens.css
+   Components use ONLY the semantic utilities defined here. Tailwind's default
+   palette, radii, shadows, easings and breakpoints are removed on purpose so
+   off-system values cannot be used by accident.
+   ========================================================================== */
+
+/* Single motion switch: html[data-motion] is set before paint from the OS setting
+   or the footer toggle (motion-specifications.md §4). */
+@custom-variant reduced (&:where(html[data-motion="reduce"] *));
+@custom-variant animated (&:where(html:not([data-motion="reduce"]) *));
+/* Short phones (iPhone SE and similar), where the hero must still show the countdown. */
+@custom-variant short (@media (max-height: 44rem) and (width < 40rem));
+/* Laptops and landscape tablets: wide but too short for the full hero above the countdown. */
+@custom-variant squat (@media (max-height: 62rem) and (width >= 40rem));
+
+@theme inline {
+  /* ---- colour: semantic only ---- */
+  --color-*: initial;
+  --color-surface: var(--tk-color-surface-primary);
+  --color-surface-2: var(--tk-color-surface-secondary);
+  --color-surface-raised: var(--tk-color-surface-raised);
+  --color-surface-overlay: var(--tk-color-surface-overlay);
+  --color-surface-inverse: var(--tk-color-surface-inverse);
+  --color-surface-inverse-subtle: var(--tk-color-surface-inverse-subtle);
+
+  --color-fg: var(--tk-color-text-primary);
+  --color-fg-2: var(--tk-color-text-secondary);
+  --color-fg-muted: var(--tk-color-text-muted);
+  --color-accent: var(--tk-color-text-accent);
+  --color-fg-on-inverse: var(--tk-color-text-on-inverse);
+
+  --color-line: var(--tk-color-border-subtle);
+  --color-line-strong: var(--tk-color-border-strong);
+  --color-line-accent: var(--tk-color-border-accent);
+  --color-focus: var(--tk-color-border-focus);
+
+  --color-action-primary: var(--tk-color-action-primary);
+  --color-on-action-primary: var(--tk-color-action-primary-text);
+  --color-action-primary-edge: var(--tk-color-action-primary-edge);
+  --color-trend-up: var(--tk-color-trend-up);
+  --color-action-secondary: var(--tk-color-action-secondary);
+  --color-on-action-secondary: var(--tk-color-action-secondary-text);
+  --color-action-ghost-border: var(--tk-color-action-ghost-border);
+  --color-link: var(--tk-color-action-link);
+
+  --color-live: var(--tk-color-state-live-bg);
+  --color-on-live: var(--tk-color-state-live-text);
+  --color-success: var(--tk-color-state-success-bg);
+  --color-on-success: var(--tk-color-state-success-text);
+  --color-warning: var(--tk-color-state-warning-bg);
+  --color-on-warning: var(--tk-color-state-warning-text);
+  --color-error: var(--tk-color-state-error-bg);
+  --color-on-error: var(--tk-color-state-error-text);
+  --color-info: var(--tk-color-state-info-bg);
+  --color-on-info: var(--tk-color-state-info-text);
+
+  /* Brand bands: CI fills used as full-bleed section/hero surfaces. */
+  --color-band-energy: var(--sem-band-energy);
+  --color-band-region: var(--sem-band-region);
+  --color-band-highlight: var(--sem-band-highlight);
+  --color-band-premium: var(--sem-band-premium);
+  --color-on-band-energy: var(--tk-color-text-on-red);
+  --color-on-band-region: var(--tk-color-text-on-blue);
+  --color-on-band-highlight: var(--tk-color-text-on-yellow);
+  --color-on-band-premium: var(--tk-color-text-on-gold);
+
+  /* Medal colours: [DECISION REQUIRED] silver/bronze not in CI. Proposed values only. */
+  --color-medal-gold: var(--sem-medal-gold);
+  --color-medal-silver: var(--sem-medal-silver);
+  --color-medal-bronze: var(--sem-medal-bronze);
+
+  /* ---- typography ---- */
+  --font-*: initial;
+  --font-display: var(--tk-font-display);
+  --font-ui: var(--tk-font-ui);
+  --font-data: var(--tk-font-data);
+
+  /* ---- spacing: token scale overrides Tailwind's numeric keys ---- */
+  --spacing-0: var(--tk-space-0);
+  --spacing-1: var(--tk-space-1);
+  --spacing-2: var(--tk-space-2);
+  --spacing-3: var(--tk-space-3);
+  --spacing-4: var(--tk-space-4);
+  --spacing-5: var(--tk-space-5);
+  --spacing-6: var(--tk-space-6);
+  --spacing-7: var(--tk-space-7);
+  --spacing-8: var(--tk-space-8);
+  --spacing-9: var(--tk-space-9);
+  --spacing-10: var(--tk-space-10);
+  --spacing-11: var(--tk-space-11);
+  --spacing-touch: var(--tk-touch-min);
+  --spacing-touch-lg: var(--tk-touch-preferred);
+  /* Primary buttons on mobile: 52px (component-specifications §3) */
+  --spacing-touch-xl: calc(var(--tk-touch-preferred) + var(--tk-space-1));
+  --spacing-header: var(--tk-header-height-mobile);
+  --spacing-header-lg: var(--tk-header-height-desktop);
+  --spacing-hairline: var(--tk-border-hairline);
+  --spacing-rule: var(--tk-border-regular);
+  --spacing-accent: var(--tk-border-accent);
+
+  /* ---- layout ---- */
+  --container-content: var(--tk-max-width-content);
+  --container-wide: var(--tk-max-width-wide);
+  --container-prose: var(--tk-max-width-prose);
+
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 40rem; /* 640px  - tokens.breakpoints.tablet */
+  --breakpoint-desktop: 64rem; /* 1024px - tokens.breakpoints.desktop */
+  --breakpoint-large: 90rem; /* 1440px - tokens.breakpoints.large */
+
+  /* ---- shape / depth ---- */
+  --radius-*: initial;
+  --radius-xs: var(--tk-radius-xs);
+  --radius-sm: var(--tk-radius-sm);
+  --radius-md: var(--tk-radius-md);
+  --radius-pill: var(--tk-radius-pill);
+
+  --shadow-*: initial;
+  --shadow-sm: var(--tk-shadow-sm);
+  --shadow-md: var(--tk-shadow-md);
+  --shadow-lg: var(--tk-shadow-lg);
+  --shadow-focus: var(--tk-shadow-focus);
+
+  /* ---- motion ---- */
+  --ease-*: initial;
+  --ease-standard: var(--tk-ease-standard);
+  --ease-enter: var(--tk-ease-enter);
+  --ease-exit: var(--tk-ease-exit);
+  --ease-emphasized: var(--tk-ease-emphasized);
+  --ease-cinematic: var(--tk-ease-cinematic);
+}
+
+/* Durations and z-index as named utilities (Tailwind has no theme key for these). */
+@utility duration-micro-fast { transition-duration: var(--tk-duration-micro-fast); }
+@utility duration-micro { transition-duration: var(--tk-duration-micro); }
+@utility duration-ui { transition-duration: var(--tk-duration-ui); }
+@utility duration-ui-slow { transition-duration: var(--tk-duration-ui-slow); }
+@utility duration-content { transition-duration: var(--tk-duration-content); }
+@utility duration-content-slow { transition-duration: var(--tk-duration-content-slow); }
+@utility duration-cinematic { transition-duration: var(--tk-duration-cinematic); }
+
+@utility z-raised { z-index: var(--tk-z-raised); }
+@utility z-sticky { z-index: var(--tk-z-sticky); }
+@utility z-header { z-index: var(--tk-z-header); }
+@utility z-dropdown { z-index: var(--tk-z-dropdown); }
+@utility z-overlay { z-index: var(--tk-z-overlay); }
+@utility z-modal { z-index: var(--tk-z-modal); }
+@utility z-toast { z-index: var(--tk-z-toast); }
+
+@utility scrim-hero { background-image: var(--tk-color-overlay-scrim-hero); }
+@utility scrim-side { background-image: var(--tk-color-overlay-scrim-side); }
+@utility scrim-card { background-image: var(--tk-color-overlay-scrim-card); }
+@utility scrim-modal { background-color: var(--tk-color-overlay-scrim-modal); }
+
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+/* Page container: grid margins per tokens.layout.grid, centred at content width. */
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: calc(var(--tk-max-width-content) + 2 * var(--page-margin));
+  padding-inline: var(--page-margin);
+}
+@utility container-wide {
+  width: 100%;
+  margin-inline: auto;
+  max-width: calc(var(--tk-max-width-wide) + 2 * var(--page-margin));
+  padding-inline: var(--page-margin);
+}
+
+/* Section rhythm: tokens.spacing.section */
+@utility section-y {
+  --section-pad: var(--tk-space-section-mobile);
+  padding-block: var(--section-pad);
+  /* Anchor jumps skip most of the top padding so the heading sits just under the header. */
+  scroll-margin-top: calc(var(--tk-space-5) - var(--section-pad));
+  @media (width >= 40rem) { --section-pad: var(--tk-space-section-tablet); }
+  @media (width >= 64rem) { --section-pad: var(--tk-space-section-desktop); }
+  @media (width >= 90rem) { --section-pad: var(--tk-space-section-large); }
+}
+
+/* Same anchor offset for sections whose padding sits on an inner section-y block. */
+@utility section-anchor {
+  --section-pad: var(--tk-space-section-mobile);
+  scroll-margin-top: calc(var(--tk-space-5) - var(--section-pad));
+  @media (width >= 40rem) { --section-pad: var(--tk-space-section-tablet); }
+  @media (width >= 64rem) { --section-pad: var(--tk-space-section-desktop); }
+  @media (width >= 90rem) { --section-pad: var(--tk-space-section-large); }
+}
+
+/* ==========================================================================
+   Theme values (dark is the cinematic default; light per a11y rules §1)
+   ========================================================================== */
+:root {
+  --tk-font-display: var(--font-kanit), "Kanit", "Arial Black", sans-serif;
+  --tk-font-ui: var(--font-montserrat), system-ui, sans-serif;
+  --tk-font-data: var(--font-montserrat), system-ui, sans-serif;
+
+  --sem-band-energy: var(--tk-color-brand-red);
+  --sem-band-region: var(--tk-color-brand-blue);
+  --sem-band-highlight: var(--tk-color-brand-yellow);
+  --sem-band-premium: var(--tk-color-brand-navy);
+
+  /* [DECISION REQUIRED] medal colours. Proposed by design-tokens.json: gold = brand.gold,
+     silver = neutral.300, bronze = client to approve (falls back to neutral.400). */
+  --sem-medal-gold: var(--tk-color-brand-gold);
+  --sem-medal-silver: var(--tk-color-neutral-300);
+  --sem-medal-bronze: var(--tk-color-neutral-400);
+
+  /* Stripe colour order follows the emblem swooshes: red, blue, yellow. */
+  --stripe-1: var(--tk-color-brand-red);
+  --stripe-2: var(--tk-color-brand-blue);
+  --stripe-3: var(--tk-color-brand-yellow);
+
+  --logo-on-dark: block;
+  --logo-on-light: none;
+
+  --page-margin: var(--tk-grid-mobile-margin);
+  --header-h: var(--tk-header-height-mobile);
+  --grid-gutter: var(--tk-grid-mobile-gutter);
+
+  color-scheme: dark;
+}
+
+@media (width >= 40rem) {
+  :root {
+    --page-margin: var(--tk-grid-tablet-margin);
+    --grid-gutter: var(--tk-grid-tablet-gutter);
+  }
+}
+@media (width >= 64rem) {
+  :root {
+    --page-margin: var(--tk-grid-desktop-margin);
+    --header-h: var(--tk-header-height-desktop);
+    --grid-gutter: var(--tk-grid-desktop-gutter);
+  }
+}
+@media (width >= 90rem) {
+  :root {
+    --grid-gutter: var(--tk-grid-large-gutter);
+  }
+}
+
+/* Light theme: on white, accent text is the logo red (gold/yellow fail contrast). */
+[data-theme="light"] {
+  --tk-color-surface-primary: var(--tk-color-neutral-white);
+  --tk-color-surface-secondary: var(--tk-color-neutral-100);
+  --tk-color-surface-raised: var(--tk-color-neutral-white);
+  --tk-color-surface-overlay: var(--tk-color-neutral-100);
+  --tk-color-surface-inverse: var(--tk-color-brand-black);
+  --tk-color-text-primary: var(--tk-color-brand-black);
+  --tk-color-text-secondary: var(--tk-color-neutral-700);
+  --tk-color-text-muted: var(--tk-color-neutral-600);
+  --tk-color-text-accent: var(--tk-color-brand-red);
+  --tk-color-text-on-inverse: var(--tk-color-neutral-white);
+  --tk-color-border-subtle: var(--tk-color-neutral-200);
+  --tk-color-border-strong: var(--tk-color-neutral-400);
+  --tk-color-border-accent: var(--tk-color-brand-red);
+  --tk-color-action-ghost-text: var(--tk-color-brand-black);
+  --tk-color-action-link: var(--tk-color-brand-red);
+  /* Yellow is ~1.6:1 on white; black stays >= 3:1 on white and the brand bands. */
+  --tk-color-border-focus: var(--tk-color-brand-black);
+  --logo-on-dark: none;
+  --logo-on-light: block;
+  color-scheme: light;
+}
+
+/* Secondary actions use the emblem yellow on every surface. */
+:root {
+  --tk-color-action-secondary: var(--tk-color-brand-yellow);
+  --tk-color-action-secondary-text: var(--tk-color-text-on-yellow);
+  --tk-color-action-primary-edge: transparent;
+  /* Medal-table rank rises: blue on white, yellow on navy. */
+  --tk-color-trend-up: var(--tk-color-brand-blue);
+}
+
+/* Dark = navy (the emblem blue toward black) so the red, blue and yellow
+   swooshes and the member flags read cleanly on top of it. Accent on dark is
+   the emblem yellow. Cinematic sections (hero, countries, live, results,
+   media, footer) force it; editorial sections follow the site theme. */
+[data-theme="dark"] {
+  --tk-color-surface-primary: var(--tk-color-brand-navy);
+  --tk-color-surface-secondary: color-mix(in oklab, var(--tk-color-brand-navy) 85%, black);
+  --tk-color-surface-raised: color-mix(in oklab, var(--tk-color-brand-navy) 80%, var(--tk-color-brand-blue));
+  --tk-color-surface-overlay: color-mix(in oklab, var(--tk-color-brand-navy) 65%, var(--tk-color-brand-blue));
+  --tk-color-surface-inverse: var(--tk-color-neutral-white);
+  --tk-color-text-primary: var(--tk-color-neutral-white);
+  --tk-color-text-secondary: var(--tk-color-neutral-100);
+  --tk-color-text-muted: var(--tk-color-neutral-200);
+  --tk-color-text-accent: var(--tk-color-brand-yellow);
+  --tk-color-text-on-inverse: var(--tk-color-brand-black);
+  --tk-color-action-primary: var(--tk-color-brand-red);
+  --tk-color-action-primary-text: var(--tk-color-neutral-white);
+  --tk-color-action-primary-edge: transparent;
+  --tk-color-trend-up: var(--tk-color-brand-yellow);
+  --tk-color-state-live-bg: var(--tk-color-brand-red);
+  --tk-color-state-live-text: var(--tk-color-neutral-white);
+  --tk-color-state-error-bg: var(--tk-color-neutral-white);
+  --tk-color-state-error-text: var(--tk-color-brand-red);
+  --tk-color-border-subtle: color-mix(in oklab, var(--tk-color-brand-navy) 65%, white);
+  --tk-color-border-strong: var(--tk-color-neutral-200);
+  --tk-color-action-ghost-border: var(--tk-color-neutral-200);
+  --tk-color-border-accent: var(--tk-color-brand-yellow);
+  --tk-color-action-ghost-text: var(--tk-color-neutral-white);
+  --tk-color-action-link: var(--tk-color-brand-yellow);
+  --tk-color-border-focus: var(--tk-color-brand-yellow);
+  --logo-on-dark: block;
+  --logo-on-light: none;
+  color-scheme: dark;
+}
+
+/* Photo-led dark sections (hero, story mosaic, media) go deeper navy so the
+   photography reads naturally; red returns for actions and live states. */
+[data-surface="black"],
+[data-surface="black"] [data-theme="dark"] {
+  --tk-color-surface-primary: var(--tk-color-region-950);
+  --tk-color-surface-secondary: color-mix(in oklab, var(--tk-color-region-950) 80%, black);
+  --tk-color-surface-raised: var(--tk-color-region-900);
+  --tk-color-surface-overlay: var(--tk-color-region-800);
+  --tk-color-text-secondary: var(--tk-color-neutral-200);
+  --tk-color-text-muted: var(--tk-color-neutral-300);
+  --tk-color-action-primary: var(--tk-color-brand-red);
+  --tk-color-action-primary-text: var(--tk-color-neutral-white);
+  /* Red is ~2.4:1 on near-black, so red buttons carry a white edge here. */
+  --tk-color-action-primary-edge: var(--tk-color-neutral-white);
+  --tk-color-state-live-bg: var(--tk-color-brand-red);
+  --tk-color-state-live-text: var(--tk-color-neutral-white);
+  --tk-color-state-error-bg: var(--tk-color-brand-red);
+  --tk-color-state-error-text: var(--tk-color-neutral-white);
+  --tk-color-border-subtle: var(--tk-color-neutral-600);
+  --tk-color-border-strong: var(--tk-color-neutral-400);
+  --tk-color-action-ghost-border: var(--tk-color-neutral-400);
+}
+
+.logo-on-dark {
+  display: var(--logo-on-dark);
+}
+.logo-on-light {
+  display: var(--logo-on-light);
+}
+
+/* Phone quick bar (fixed bottom) and the demo phase switch that floats above it. */
+:root {
+  --quickbar-h: calc(var(--tk-touch-preferred) + var(--tk-space-4));
+}
+.quick-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.quick-bar-spacer {
+  height: calc(var(--quickbar-h) + env(safe-area-inset-bottom, 0px));
+}
+.phase-switch {
+  bottom: calc(var(--quickbar-h) + env(safe-area-inset-bottom, 0px) + var(--tk-space-3));
+}
+.assistant-dock {
+  bottom: calc(var(--quickbar-h) + env(safe-area-inset-bottom, 0px) + var(--tk-space-3));
+}
+.assistant-panel {
+  bottom: calc(var(--quickbar-h) + env(safe-area-inset-bottom, 0px) + var(--tk-space-3));
+  max-height: min(36rem, calc(100svh - var(--header-h) - var(--quickbar-h) - var(--tk-space-5)));
+}
+@media (width >= 40rem) {
+  .phase-switch,
+  .assistant-dock {
+    bottom: var(--tk-space-4);
+  }
+  .assistant-panel {
+    bottom: calc(var(--tk-space-4) + var(--tk-touch-preferred) + var(--tk-space-3));
+    max-height: min(36rem, calc(100svh - var(--header-h) - var(--tk-space-9)));
+  }
+}
+
+/* Content markers: hidden from visitors, dashed flags in review mode (?review=1). */
+.content-flag {
+  display: none;
+}
+[data-review] .content-flag {
+  display: inline-block;
+}
+[data-review] .content-fallback {
+  display: none;
+}
+
+/* Top edge for sticky bars: follows the header as it hides on scroll down. */
+:root {
+  --sticky-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+}
+:root[data-header-hidden] {
+  --sticky-top: 0px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  }
+
+  body {
+    min-height: 100svh;
+    background-color: var(--color-surface);
+    color: var(--color-fg);
+    font-family: var(--tk-font-ui);
+    font-size: var(--tk-type-body-m-size);
+    line-height: var(--tk-type-body-m-line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-warning);
+    color: var(--color-on-warning);
+  }
+
+  /* Focus: 3px ring (yellow on dark, black on light), 2px offset, never removed (a11y §2). */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}

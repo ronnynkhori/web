@@ -1,0 +1,701 @@
+/* ==========================================================================
+   Motion layer - motion-specifications.md
+   CSS handles hover, fades, reveals, the hero entrance, pulses and marquee.
+   Only transform, opacity and clip-path are animated.
+   Initial "hidden" states are gated behind html.js so no-JS users get the
+   complete static page.
+   ========================================================================== */
+
+/* ---------- Torch stripe (pattern.torch-stripe) ---------- */
+/* Order from the logo's torch shaft: green, red, yellow (mirrored in the mark). */
+.torch-stripe {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--stripe-1) 0 var(--tk-space-2),
+    var(--stripe-2) var(--tk-space-2) var(--tk-space-4),
+    var(--stripe-3) var(--tk-space-4) var(--tk-space-6)
+  );
+}
+
+.torch-stripe-vertical {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--stripe-1) 0 var(--tk-space-2),
+    var(--stripe-2) var(--tk-space-2) var(--tk-space-4),
+    var(--stripe-3) var(--tk-space-4) var(--tk-space-6)
+  );
+}
+
+/* Vertical rhythm for section edges; low opacity per tokens.opacity.pattern. */
+.torch-edge {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--stripe-1) 0 var(--tk-pattern-stripe-width-2),
+    transparent var(--tk-pattern-stripe-width-2) calc(var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)),
+    var(--stripe-2) calc(var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)) calc(2 * var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)),
+    transparent calc(2 * var(--tk-pattern-stripe-width-2) + var(--tk-pattern-stripe-gap)) calc(2 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)),
+    var(--stripe-3) calc(2 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)) calc(3 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)),
+    transparent calc(3 * var(--tk-pattern-stripe-width-2) + 2 * var(--tk-pattern-stripe-gap)) calc(3 * var(--tk-pattern-stripe-width-2) + 3 * var(--tk-pattern-stripe-gap))
+  );
+  opacity: var(--tk-opacity-pattern);
+}
+
+/* Placeholder art: diagonal slab rhythm (visual reference) in the current tone. */
+.slab-pattern {
+  background-image: repeating-linear-gradient(
+    115deg,
+    currentColor 0 var(--tk-pattern-stripe-width-3),
+    transparent var(--tk-pattern-stripe-width-3) var(--tk-space-5)
+  );
+  opacity: var(--tk-opacity-scrim-light);
+}
+.slab-pattern {
+  inset: 0 0 0 calc(-1 * var(--tk-space-5));
+  transition: transform var(--tk-duration-content) var(--tk-ease-emphasized);
+}
+@media (hover: hover) {
+  .group:hover .slab-pattern {
+    transform: translateX(var(--tk-distance-ui));
+  }
+}
+
+/* ---------- Micro: underline wipe (concept 20) ---------- */
+.u-wipe {
+  position: relative;
+}
+.u-wipe::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: calc(-1 * var(--tk-space-1));
+  height: var(--tk-border-accent);
+  background-color: var(--color-line-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--tk-duration-micro) var(--tk-ease-standard);
+}
+.u-wipe:hover::after,
+.u-wipe:focus-visible::after,
+.u-wipe[aria-current]::after,
+.group:hover .u-wipe::after,
+.group:focus-visible .u-wipe::after {
+  transform: scaleX(1);
+}
+
+/* Arrow nudge 4px (micro distance) */
+.nudge {
+  transition: transform var(--tk-duration-micro) var(--tk-ease-standard);
+}
+.group:hover .nudge,
+.group:focus-visible .nudge {
+  transform: translateX(var(--tk-distance-micro));
+}
+
+/* Button press */
+.press {
+  transition:
+    transform var(--tk-duration-micro-fast) var(--tk-ease-standard),
+    background-color var(--tk-duration-micro) var(--tk-ease-standard),
+    color var(--tk-duration-micro) var(--tk-ease-standard);
+}
+.press:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(0.98);
+}
+
+/* 12% white hover overlay (tokens.opacity.hover-overlay) - not a new colour */
+.hover-overlay {
+  position: relative;
+  isolation: isolate;
+}
+.hover-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--tk-color-neutral-white);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--tk-duration-micro) var(--tk-ease-standard);
+}
+@media (hover: hover) {
+  .hover-overlay:hover:not(:disabled):not([aria-disabled="true"])::before {
+    opacity: var(--tk-opacity-hover-overlay);
+  }
+}
+.hover-overlay:active:not(:disabled):not([aria-disabled="true"])::before {
+  opacity: var(--tk-opacity-pressed-overlay);
+}
+
+/* Card media zoom: up to 1.04 over 640ms, pointer only */
+.media-zoom {
+  transition: transform var(--tk-duration-content) var(--tk-ease-emphasized);
+}
+@media (hover: hover) {
+  .group:hover .media-zoom {
+    transform: scale(1.04);
+  }
+}
+.group:focus-visible .media-zoom {
+  transform: scale(1.04);
+}
+
+/* ---------- Institutional hover  ----------
+   Card lifts one UI step, border warms to the accent, and a hairline accent
+   rule draws across the top edge. Pointer only; focus shows the same rule. */
+.lift {
+  transition:
+    transform var(--tk-duration-ui) var(--tk-ease-standard),
+    border-color var(--tk-duration-ui) var(--tk-ease-standard),
+    background-color var(--tk-duration-ui) var(--tk-ease-standard);
+}
+@media (hover: hover) {
+  .lift:hover {
+    transform: translateY(calc(-1 * var(--tk-distance-ui)));
+    border-color: var(--color-line-accent);
+  }
+}
+.lift:focus-within {
+  border-color: var(--color-line-accent);
+}
+
+.rule-wipe {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--tk-duration-ui-slow) var(--tk-ease-emphasized);
+}
+.group:hover .rule-wipe,
+.group:focus-within .rule-wipe,
+.group[aria-pressed="true"] .rule-wipe,
+.group[aria-current] .rule-wipe {
+  transform: scaleX(1);
+}
+
+/* Faint index numerals ("01") warm to the accent on hover. */
+.index-num {
+  transition: color var(--tk-duration-ui) var(--tk-ease-standard);
+}
+.group:hover .index-num,
+.group:focus-within .index-num {
+  color: var(--color-accent);
+}
+
+/* ---------- Games story ----------
+   Full-bleed dark stage. Below desktop: stacked panels (photo full frame,
+   copy on the scrim). Desktop: the editorial mosaic further down. */
+.story-stage {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(85svh, 125vw);
+}
+.story-media-slot {
+  position: absolute;
+  inset: 0;
+}
+.story-copy {
+  position: relative;
+  padding-block: var(--tk-space-7);
+}
+.story-beat + .story-beat {
+  border-top: var(--tk-border-hairline) solid var(--color-line);
+}
+/* Oversized outlined beat numeral behind the copy, plus a warm gold glow so
+   the stage never reads as a flat dark field. */
+.story-ghost {
+  position: absolute;
+  top: var(--tk-space-6);
+  right: var(--page-margin);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 34vw, 13rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--tk-color-brand-gold) 45%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+.story-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 70% at 0% 100%, color-mix(in srgb, var(--tk-color-brand-gold) 16%, transparent), transparent 70%),
+    radial-gradient(40% 50% at 100% 0%, color-mix(in srgb, var(--tk-color-brand-red) 14%, transparent), transparent 70%);
+}
+.story-list {
+  position: relative;
+}
+.story-place {
+  position: absolute;
+  top: var(--tk-space-4);
+  right: var(--tk-space-4);
+  z-index: var(--tk-z-raised);
+}
+@media (width < 64rem) {
+  .story[data-compact] .story-facts {
+    display: none;
+  }
+  .story[data-compact] .story-list {
+    display: flex;
+    gap: var(--tk-space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--page-margin);
+    padding: var(--tk-space-5) var(--page-margin);
+    scrollbar-width: none;
+  }
+  .story[data-compact] .story-beat {
+    flex: 0 0 82%;
+    max-width: 26rem;
+    scroll-snap-align: start;
+    border-top: 0;
+    border-radius: var(--tk-radius-sm);
+    overflow: hidden;
+  }
+  .story[data-compact] .story-stage {
+    min-height: min(68svh, 108vw);
+  }
+  .story[data-compact] .story-copy {
+    padding: var(--tk-space-5);
+  }
+}
+@media (width >= 40rem) {
+  .story-stage {
+    min-height: 72svh;
+  }
+}
+/* Desktop mosaic: 12 x 3 grid. 01 is the open hero tile; the rest show
+   number, kicker and headline, revealing body and facts on hover/focus. */
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: var(--tk-space-3);
+  height: clamp(38rem, 84svh, 50rem);
+}
+.mosaic-slot:nth-child(1) { grid-area: 1 / 1 / 4 / 7; }
+.mosaic-slot:nth-child(2) { grid-area: 1 / 7 / 2 / 13; }
+.mosaic-slot:nth-child(3) { grid-area: 2 / 7 / 4 / 10; }
+.mosaic-slot:nth-child(4) { grid-area: 2 / 10 / 3 / 13; }
+.mosaic-slot:nth-child(5) { grid-area: 3 / 10 / 4 / 13; }
+
+.mosaic-scrim {
+  background-image: var(--tk-color-overlay-scrim-card);
+}
+.mosaic-scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: color-mix(in srgb, var(--tk-color-brand-black) 35%, transparent);
+  opacity: 0;
+  transition: opacity var(--tk-duration-ui) var(--tk-ease-standard);
+}
+.mosaic-tile:not([data-featured]) h3 {
+  font-size: clamp(2.25rem, 1rem + 2vw, 3rem);
+}
+.mosaic-tile:not([data-featured]) .story-facts dd {
+  font-size: var(--tk-type-heading-m-size);
+}
+/* Only the hero and the tall tile have room for facts under the body line. */
+.mosaic-slot:not(:nth-child(1), :nth-child(3)) .story-facts {
+  display: none;
+}
+
+.mosaic-details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--tk-duration-content) var(--tk-ease-emphasized),
+    opacity var(--tk-duration-ui) var(--tk-ease-standard);
+}
+.mosaic-details > * {
+  overflow: hidden;
+}
+.mosaic-tile[data-featured] .mosaic-details,
+.mosaic-tile:focus-visible .mosaic-details {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.mosaic-tile:not([data-featured]):focus-visible .mosaic-scrim::after {
+  opacity: 1;
+}
+/* Open copy on a short tile reaches the top, so the place pill steps aside. */
+.mosaic-place {
+  transition: opacity var(--tk-duration-ui) var(--tk-ease-standard);
+}
+.mosaic-slot:nth-child(n + 4) .mosaic-tile:focus-visible .mosaic-place {
+  opacity: 0;
+}
+@media (hover: hover) {
+  .mosaic-tile:hover .mosaic-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .mosaic-tile:not([data-featured]):hover .mosaic-scrim::after {
+    opacity: 1;
+  }
+  .mosaic-slot:nth-child(n + 4) .mosaic-tile:hover .mosaic-place {
+    opacity: 0;
+  }
+}
+/* Touch screens at desktop width have no hover: keep every tile open. */
+@media (hover: none) {
+  .mosaic-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .mosaic-slot:nth-child(n + 4) .mosaic-place {
+    display: none;
+  }
+}
+
+/* ---------- Horizontal sport gallery (concept 5) ----------
+   Native swipe row by default; GSAP pins it on desktop with full motion. */
+.sports-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--page-margin);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.sports-viewport::-webkit-scrollbar {
+  display: none;
+}
+.sports-track {
+  display: flex;
+  gap: var(--grid-gutter);
+  width: max-content;
+  /* Card 01 lines up with the section heading (container-wide) on wide screens. */
+  padding-inline: max(var(--page-margin), calc((100vw - var(--tk-max-width-wide)) / 2));
+}
+.sports-item {
+  scroll-snap-align: start;
+  /* Phones: one card plus a visible slice of the next. */
+  width: 72vw;
+  max-width: 20rem;
+}
+@media (width >= 40rem) {
+  .sports-item {
+    width: 40vw;
+  }
+}
+@media (width >= 64rem) {
+  .sports-item {
+    width: 22rem;
+  }
+}
+.sports-progress {
+  display: none;
+}
+.sports-gallery[data-pinned="true"] {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--header-h);
+}
+/* Pinned gallery is a full screen of its own: anchor jumps land exactly where it pins. */
+#sports:has(.sports-gallery[data-pinned="true"]) {
+  scroll-margin-top: calc(-1 * (var(--header-h) + var(--section-pad, 0px)));
+}
+.sports-gallery[data-pinned="true"] .sports-viewport {
+  overflow: visible;
+  scroll-snap-type: none;
+}
+.sports-gallery[data-pinned="true"] .sports-progress {
+  display: block;
+}
+
+/* ---------- LIVE pulse (1.6s, opacity 1 -> 0.4) ---------- */
+@keyframes m26-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+.live-dot {
+  animation: m26-pulse 1.6s var(--tk-ease-standard) infinite;
+}
+
+/* ---------- Skeleton sheen (1.6s) ---------- */
+@keyframes m26-sheen {
+  to {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-raised);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.06), transparent);
+  animation: m26-sheen 1.6s var(--tk-ease-linear) infinite;
+}
+
+/* ---------- Marquee (pauses on hover/focus, has a pause button) ---------- */
+@keyframes m26-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: m26-marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused="true"] .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Countdown odometer (per digit, old out + new in) ---------- */
+@keyframes m26-digit-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+@keyframes m26-digit-out {
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+.digit-cell {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.digit-cell > span {
+  display: block;
+}
+.digit-in {
+  animation: m26-digit-in var(--tk-duration-ui) var(--tk-ease-emphasized) both;
+}
+.digit-out {
+  position: absolute;
+  inset: 0;
+  animation: m26-digit-out var(--tk-duration-ui) var(--tk-ease-emphasized) both;
+}
+html[data-motion="reduce"] .digit-out {
+  visibility: hidden;
+}
+
+/* ---------- Score change flash (concept 9) ---------- */
+@keyframes m26-score-pop {
+  50% {
+    transform: scale(1.08);
+  }
+}
+.score-pop {
+  display: inline-block;
+  animation: m26-score-pop var(--tk-duration-ui) var(--tk-ease-standard);
+}
+@keyframes m26-sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.score-sweep {
+  transform-origin: left;
+  animation: m26-sweep 800ms var(--tk-ease-emphasized) both;
+}
+@keyframes m26-row-flash {
+  from {
+    background-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+}
+.medal-flash {
+  animation: m26-row-flash var(--tk-duration-content-slow) var(--tk-ease-standard);
+}
+
+/* ---------- Scroll reveals (once, threshold 20%) ---------- */
+html.js [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+}
+html.js [data-reveal="fade-up"]:not([data-revealed]) {
+  transform: translateY(var(--tk-distance-ui));
+}
+html.js [data-reveal="mask"]:not([data-revealed]) {
+  opacity: 1;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(var(--tk-distance-ui));
+}
+html.js [data-reveal="image"]:not([data-revealed]) {
+  opacity: 1;
+  clip-path: inset(100% 0 0 0);
+}
+html.js [data-reveal="image"]:not([data-revealed]) > * {
+  transform: scale(1.04);
+}
+html.js [data-reveal="stripe"]:not([data-revealed]) {
+  opacity: 1;
+  transform: scaleX(0);
+}
+
+[data-reveal][data-revealed] {
+  transition:
+    opacity var(--tk-duration-content) var(--tk-ease-enter),
+    transform var(--tk-duration-content) var(--tk-ease-enter),
+    clip-path var(--tk-duration-content) var(--tk-ease-emphasized);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="image"][data-revealed] {
+  transition-duration: var(--tk-duration-content-slow);
+}
+[data-reveal="image"] > * {
+  transition: transform var(--tk-duration-content-slow) var(--tk-ease-emphasized);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="stripe"] {
+  transform-origin: left;
+}
+[data-reveal="stripe"][data-revealed] {
+  transition-duration: var(--tk-duration-ui-slow);
+}
+
+/* ---------- Hero entrance (concept 1, ~2.4s, once per session) ----------
+   Pure CSS keeps the LCP element free of JavaScript. html.hero-seen (set
+   before paint from sessionStorage) skips the sequence on repeat visits. */
+@keyframes m26-fade {
+  from {
+    opacity: 0;
+  }
+}
+/* Scale only: an opacity fade would delay the hero photo's first paint (LCP). */
+@keyframes m26-settle {
+  from {
+    transform: scale(1.06);
+  }
+}
+@keyframes m26-mask-up {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(var(--tk-distance-content));
+  }
+}
+@keyframes m26-wipe-right {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes m26-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--tk-distance-ui));
+  }
+}
+
+html:not(.hero-seen) .hero-scrim {
+  animation: m26-fade 600ms var(--tk-ease-enter) both;
+}
+/* Media settles from a slight push-in under the scrim (photo or placeholder). */
+html:not(.hero-seen) .hero-media {
+  animation: m26-settle var(--tk-duration-cinematic) var(--tk-ease-cinematic) both;
+}
+html:not(.hero-seen) .hero-logo {
+  animation: m26-wipe-right var(--tk-duration-content) var(--tk-ease-emphasized) both;
+  animation-delay: 150ms;
+}
+/* Actions are usable within ~1s even on slower phones. */
+html:not(.hero-seen) .hero-line {
+  animation: m26-mask-up var(--tk-duration-content-slow) var(--tk-ease-emphasized) both;
+  animation-delay: calc(200ms + var(--line-i, 0) * var(--tk-stagger-text-line));
+}
+html:not(.hero-seen) .hero-rise {
+  animation: m26-rise var(--tk-duration-content) var(--tk-ease-enter) both;
+  animation-delay: calc(450ms + var(--rise-i, 0) * 80ms);
+}
+html:not(.hero-seen) .hero-cta {
+  animation: m26-rise var(--tk-duration-content) var(--tk-ease-enter) both;
+  animation-delay: 550ms;
+}
+
+/* Scroll cue */
+@keyframes m26-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  animation: m26-cue 2.4s var(--tk-ease-cinematic) infinite;
+}
+
+/* ---------- Reduced motion (motion-specifications.md §4) ----------
+   html[data-motion="reduce"] is the single switch (OS setting or footer toggle).
+   Reveals collapse to <=200ms opacity fades; loops, marquee, parallax stop. */
+html[data-motion="reduce"] *,
+html[data-motion="reduce"] *::before,
+html[data-motion="reduce"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-motion="reduce"] .marquee-track,
+html[data-motion="reduce"] .live-dot,
+html[data-motion="reduce"] .skeleton::after,
+html[data-motion="reduce"] .scroll-cue::after {
+  animation: none !important;
+}
+html[data-motion="reduce"] .marquee-viewport {
+  overflow-x: auto;
+}
+html[data-motion="reduce"] .marquee [data-marquee-copy],
+html[data-motion="reduce"] .marquee-control {
+  display: none;
+}
+html[data-motion="reduce"] [data-reveal] {
+  clip-path: none !important;
+  transform: none !important;
+  transition: opacity var(--tk-duration-micro) linear !important;
+}
+html[data-motion="reduce"] [data-reveal] > * {
+  transform: none !important;
+}
+html[data-motion="reduce"] .nudge,
+html[data-motion="reduce"] .media-zoom,
+html[data-motion="reduce"] .lift,
+html[data-motion="reduce"] .press {
+  transform: none !important;
+}
+
+/* No-JS fallback for OS reduced motion (no data-motion attribute set). */
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion]) *,
+  html:not([data-motion]) *::before,
+  html:not([data-motion]) *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+  html:not([data-motion]) .marquee-track {
+    animation: none !important;
+  }
+  html:not([data-motion]) .marquee-viewport {
+    overflow-x: auto;
+  }
+  html:not([data-motion]) .marquee [data-marquee-copy],
+  html:not([data-motion]) .marquee-control {
+    display: none;
+  }
+}

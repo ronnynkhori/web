@@ -1,0 +1,631 @@
+{
+  "$schema": "cplp2027-design-tokens/1.0",
+  "meta": {
+    "project": "XIII Jogos Desportivos da CPLP - Angola 2027",
+    "direction": "Cinematic sports; colours sampled from the official emblem (red, blue and yellow swooshes)",
+    "status": "PROPOSAL v0.1 - colours sampled from the logo PNGs; confirm against OFFICIAL BRAND XIII CPLP.pdf",
+    "locales": [
+      "pt",
+      "en"
+    ],
+    "event": {
+      "dates": {
+        "start": "[DATAS A CONFIRMAR]",
+        "end": "[DATAS A CONFIRMAR]",
+        "status": "Only Angola 2027 is confirmed (dated logo variants)."
+      },
+      "edition": "XIII",
+      "logo": "brand-assets/logomarca (AI, EPS, PDF and PNG variants)"
+    },
+    "rules": [
+      "Components consume semantic tokens only. Never reference color.brand.* or color.neutral.* directly in components.",
+      "Brand colours are the emblem red, blue and yellow plus the wordmark ink; navy is a derived dark surface.",
+      "Yellow is never text on white; red and blue fills always carry white text."
+    ]
+  },
+  "color": {
+    "brand": {
+      "gold": {
+        "value": "#C9A85F",
+        "note": "Medal gold only (not part of the CPLP emblem)."
+      },
+      "red": {
+        "value": "#E21B1B",
+        "note": "Emblem red. White text 4.6:1. Accent text on white."
+      },
+      "black": {
+        "value": "#1E1E1E",
+        "note": "Wordmark ink."
+      },
+      "blue": {
+        "value": "#1065E0",
+        "note": "Emblem blue. White text 5.1:1."
+      },
+      "yellow": {
+        "value": "#EFC100",
+        "note": "Emblem yellow. Text on navy/black only."
+      },
+      "navy": {
+        "value": "#0A2A66",
+        "note": "Derived from the emblem blue toward black: dark surface for cinematic sections."
+      }
+    },
+    "neutral": {
+      "100": {
+        "value": "#F2F2F2"
+      },
+      "200": {
+        "value": "#D9D9D9"
+      },
+      "300": {
+        "value": "#B3B3B3"
+      },
+      "400": {
+        "value": "#8A8A8A"
+      },
+      "600": {
+        "value": "#2E2E2E"
+      },
+      "700": {
+        "value": "#1F1F1F"
+      },
+      "800": {
+        "value": "#141414"
+      },
+      "900": {
+        "value": "#0A0A0A"
+      },
+      "white": {
+        "value": "#FFFFFF"
+      },
+      "note": "Derived neutrals approved by client for surfaces, borders and muted text."
+    },
+    "region": {
+      "600": {
+        "value": "#1F4A94",
+        "note": "Dark subtle border"
+      },
+      "700": {
+        "value": "#143B80",
+        "note": "Dark overlay surface"
+      },
+      "800": {
+        "value": "#0F3273",
+        "note": "Dark raised surface"
+      },
+      "900": {
+        "value": "#0A2A66",
+        "note": "Dark surface secondary"
+      },
+      "950": {
+        "value": "#061D4A",
+        "note": "Deep navy for photo-led sections"
+      },
+      "note": "Navy scale derived from brand.blue toward black."
+    },
+    "surface": {
+      "primary": {
+        "value": "{color.brand.black}"
+      },
+      "secondary": {
+        "value": "{color.neutral.900}"
+      },
+      "raised": {
+        "value": "{color.neutral.800}"
+      },
+      "overlay": {
+        "value": "{color.neutral.700}"
+      },
+      "inverse": {
+        "value": "{color.neutral.white}"
+      },
+      "inverse-subtle": {
+        "value": "{color.neutral.100}"
+      }
+    },
+    "text": {
+      "primary": {
+        "value": "{color.neutral.white}"
+      },
+      "secondary": {
+        "value": "{color.neutral.200}"
+      },
+      "muted": {
+        "value": "{color.neutral.300}"
+      },
+      "accent": {
+        "value": "{color.brand.gold}"
+      },
+      "on-inverse": {
+        "value": "{color.brand.black}"
+      },
+      "on-red": {
+        "value": "{color.neutral.white}"
+      },
+      "on-blue": {
+        "value": "{color.neutral.white}"
+      },
+      "on-yellow": {
+        "value": "{color.brand.black}"
+      },
+      "on-gold": {
+        "value": "{color.brand.black}"
+      }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.neutral.600}"
+      },
+      "strong": {
+        "value": "{color.neutral.400}"
+      },
+      "accent": {
+        "value": "{color.brand.gold}"
+      },
+      "focus": {
+        "value": "{color.brand.yellow}"
+      }
+    },
+    "action": {
+      "primary": {
+        "value": "{color.brand.red}",
+        "text": "{color.text.on-red}"
+      },
+      "primary-hover": {
+        "value": "{color.brand.red}",
+        "note": "Hover via 12% white overlay, not a new colour."
+      },
+      "secondary": {
+        "value": "{color.brand.gold}",
+        "text": "{color.text.on-gold}"
+      },
+      "ghost": {
+        "value": "transparent",
+        "border": "{color.border.strong}",
+        "text": "{color.text.primary}"
+      },
+      "link": {
+        "value": "{color.brand.gold}"
+      }
+    },
+    "state": {
+      "live": {
+        "bg": "{color.brand.red}",
+        "text": "{color.text.on-red}",
+        "note": "Always with pulsing dot + LIVE label (never colour alone)."
+      },
+      "success": {
+        "bg": "{color.brand.blue}",
+        "text": "{color.text.on-blue}"
+      },
+      "warning": {
+        "bg": "{color.brand.yellow}",
+        "text": "{color.text.on-yellow}"
+      },
+      "error": {
+        "bg": "{color.brand.red}",
+        "text": "{color.text.on-red}",
+        "note": "Distinguish from LIVE with an icon and message text."
+      },
+      "info": {
+        "bg": "{color.brand.gold}",
+        "text": "{color.text.on-gold}"
+      }
+    },
+    "medal": {
+      "note": "Medal colours are not in the CI palette. [DECISION REQUIRED] Proposed: gold = brand.gold, silver = neutral.300, bronze = [CLIENT TO APPROVE]. Medal rows must also carry a rank number and label."
+    },
+    "overlay": {
+      "scrim-hero": {
+        "value": "linear-gradient(to top, rgba(6,29,74,0.94) 0%, rgba(6,29,74,0.6) 45%, rgba(6,29,74,0.2) 100%)",
+        "note": "Navy scrim over photography."
+      },
+      "scrim-side": {
+        "value": "linear-gradient(to right, rgba(6,29,74,0.88) 0%, rgba(6,29,74,0.55) 55%, rgba(6,29,74,0) 100%)",
+        "note": "Left-weighted scrim for left-aligned hero copy."
+      },
+      "scrim-card": {
+        "value": "linear-gradient(to top, rgba(6,29,74,0.88), rgba(6,29,74,0))"
+      },
+      "scrim-modal": {
+        "value": "rgba(6,29,74,0.82)"
+      }
+    }
+  },
+  "typography": {
+    "family": {
+      "display": {
+        "value": "'Kanit', 'Arial Black', sans-serif",
+        "note": "Closest Google font to the logo wordmark; confirm against the brand PDF."
+      },
+      "ui": {
+        "value": "'Montserrat', system-ui, sans-serif"
+      },
+      "data": {
+        "value": "'Montserrat', system-ui, sans-serif",
+        "feature": "font-variant-numeric: tabular-nums"
+      }
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+    "scale": {
+      "display-xl": {
+        "family": "display",
+        "size": "clamp(3rem, 1.4rem + 6.4vw, 7.25rem)",
+        "lineHeight": 0.98,
+        "letterSpacing": "-0.01em",
+        "case": "upper",
+        "usage": "Hero event title",
+        "weight": 800
+      },
+      "display-l": {
+        "family": "display",
+        "size": "clamp(2.5rem, 1.5rem + 4vw, 5rem)",
+        "lineHeight": 1,
+        "letterSpacing": "-0.01em",
+        "case": "upper",
+        "usage": "Section heroes, sport heroes",
+        "weight": 800
+      },
+      "display-m": {
+        "family": "display",
+        "size": "clamp(2rem, 1.4rem + 2.6vw, 3.25rem)",
+        "lineHeight": 1.02,
+        "letterSpacing": "-0.005em",
+        "case": "upper",
+        "usage": "Feature headings, medal tally headline",
+        "weight": 700
+      },
+      "heading-xl": {
+        "family": "ui",
+        "weight": 800,
+        "size": "clamp(2rem, 1.5rem + 2vw, 3rem)",
+        "lineHeight": 1.1,
+        "letterSpacing": "-0.01em",
+        "case": "sentence",
+        "usage": "Article titles"
+      },
+      "heading-l": {
+        "family": "ui",
+        "weight": 700,
+        "size": "clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem)",
+        "lineHeight": 1.15,
+        "letterSpacing": "-0.005em",
+        "case": "sentence"
+      },
+      "heading-m": {
+        "family": "ui",
+        "weight": 700,
+        "size": "clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem)",
+        "lineHeight": 1.2,
+        "case": "sentence"
+      },
+      "heading-s": {
+        "family": "ui",
+        "weight": 600,
+        "size": "1.125rem",
+        "lineHeight": 1.3,
+        "case": "sentence"
+      },
+      "body-xl": {
+        "family": "ui",
+        "weight": 400,
+        "size": "clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem)",
+        "lineHeight": 1.55,
+        "usage": "Article lede"
+      },
+      "body-l": {
+        "family": "ui",
+        "weight": 400,
+        "size": "1.125rem",
+        "lineHeight": 1.6
+      },
+      "body-m": {
+        "family": "ui",
+        "weight": 400,
+        "size": "1rem",
+        "lineHeight": 1.6,
+        "usage": "Default body"
+      },
+      "body-s": {
+        "family": "ui",
+        "weight": 400,
+        "size": "0.875rem",
+        "lineHeight": 1.5
+      },
+      "caption": {
+        "family": "ui",
+        "weight": 500,
+        "size": "0.75rem",
+        "lineHeight": 1.4,
+        "minimum": "12px"
+      },
+      "label": {
+        "family": "ui",
+        "weight": 600,
+        "size": "0.8125rem",
+        "lineHeight": 1.2,
+        "letterSpacing": "0.04em",
+        "case": "upper"
+      },
+      "overline": {
+        "family": "ui",
+        "weight": 700,
+        "size": "0.75rem",
+        "lineHeight": 1.2,
+        "letterSpacing": "0.16em",
+        "case": "upper",
+        "color": "{color.text.accent}"
+      },
+      "data-xl": {
+        "family": "display",
+        "size": "clamp(2.25rem, 1.5rem + 3.5vw, 4.5rem)",
+        "lineHeight": 1,
+        "feature": "tabular-nums",
+        "usage": "Medal counts, countdown",
+        "weight": 700
+      },
+      "data-m": {
+        "family": "data",
+        "weight": 700,
+        "size": "1.25rem",
+        "lineHeight": 1.1,
+        "feature": "tabular-nums",
+        "usage": "Scores, table figures"
+      }
+    },
+    "rules": [
+      "Kanit is for event identity, sport names and big numbers only. Never body, never labels under 24px.",
+      "Display line-height must stay >= 0.92 so Portuguese accents (Ã, Ç, Ê) never clip.",
+      "Allow 30-40% text expansion for PT; never fix widths on text containers.",
+      "Minimum body size 16px; minimum caption 12px."
+    ]
+  },
+  "spacing": {
+    "base": "4px",
+    "scale": {
+      "0": "0",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "24px",
+      "6": "32px",
+      "7": "48px",
+      "8": "64px",
+      "9": "96px",
+      "10": "128px",
+      "11": "192px"
+    },
+    "section": {
+      "mobile": "{spacing.scale.8}",
+      "tablet": "{spacing.scale.9}",
+      "desktop": "{spacing.scale.10}",
+      "large": "{spacing.scale.11}"
+    },
+    "rule": "Only values from this scale. No arbitrary px/rem."
+  },
+  "radius": {
+    "none": "0",
+    "xs": "2px",
+    "sm": "4px",
+    "md": "8px",
+    "pill": "999px",
+    "usage": {
+      "card": "xs",
+      "button": "xs",
+      "input": "xs",
+      "badge": "sm",
+      "avatar": "pill",
+      "chip": "pill"
+    },
+    "rule": "Default is near-square. md only for media thumbnails in lightbox. No large rounded cards."
+  },
+  "border": {
+    "hairline": "1px",
+    "regular": "2px",
+    "accent": "4px"
+  },
+  "shadow": {
+    "none": "none",
+    "sm": "0 1px 0 rgba(255,255,255,0.06)",
+    "md": "0 8px 24px rgba(0,0,0,0.45)",
+    "lg": "0 24px 64px rgba(0,0,0,0.6)",
+    "focus": "0 0 0 3px #EFC100",
+    "rule": "Elevation on dark UI is expressed by surface tint + hairline border first, shadow second."
+  },
+  "elevation": {
+    "0": {
+      "surface": "{color.surface.primary}"
+    },
+    "1": {
+      "surface": "{color.surface.secondary}",
+      "border": "{color.border.subtle}"
+    },
+    "2": {
+      "surface": "{color.surface.raised}",
+      "border": "{color.border.subtle}",
+      "shadow": "{shadow.md}"
+    },
+    "3": {
+      "surface": "{color.surface.overlay}",
+      "shadow": "{shadow.lg}"
+    }
+  },
+  "opacity": {
+    "disabled": 0.4,
+    "muted": 0.64,
+    "hover-overlay": 0.12,
+    "pressed-overlay": 0.2,
+    "scrim-light": 0.35,
+    "scrim-heavy": 0.8,
+    "pattern": 0.08
+  },
+  "zIndex": {
+    "base": 0,
+    "raised": 10,
+    "sticky": 100,
+    "header": 200,
+    "dropdown": 300,
+    "overlay": 400,
+    "modal": 500,
+    "toast": 600,
+    "cursor": 700
+  },
+  "motion": {
+    "duration": {
+      "micro-fast": "100ms",
+      "micro": "200ms",
+      "ui": "320ms",
+      "ui-slow": "480ms",
+      "content": "640ms",
+      "content-slow": "880ms",
+      "cinematic": "1200ms",
+      "cinematic-slow": "1800ms",
+      "hero": "2400ms"
+    },
+    "easing": {
+      "standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "enter": "cubic-bezier(0, 0, 0, 1)",
+      "exit": "cubic-bezier(0.3, 0, 1, 1)",
+      "emphasized": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "cinematic": "cubic-bezier(0.65, 0, 0.35, 1)",
+      "linear": "linear"
+    },
+    "stagger": {
+      "text-line": "60ms",
+      "list-item": "40ms",
+      "grid-item": "50ms",
+      "max-total": "600ms"
+    },
+    "distance": {
+      "micro": "4px",
+      "ui": "16px",
+      "content": "32px",
+      "cinematic": "64px"
+    },
+    "reducedMotion": {
+      "durationMultiplier": 0.01,
+      "disable": [
+        "parallax",
+        "autoplay-video",
+        "particles",
+        "scale-over-1.05",
+        "translate-over-8px",
+        "marquee"
+      ],
+      "keep": [
+        "opacity fades <= 200ms",
+        "focus indicators",
+        "state colour changes",
+        "progress indicators (static)"
+      ]
+    },
+    "animate-only": [
+      "transform",
+      "opacity",
+      "clip-path"
+    ]
+  },
+  "pattern": {
+    "torch-stripe": {
+      "description": "Stripe rhythm from the emblem swooshes (red, blue, yellow). Dividers, loaders and section edges only.",
+      "colorSequence": "red, blue, yellow",
+      "stripeWidth": [
+        "2px",
+        "4px",
+        "6px"
+      ],
+      "gap": "4px",
+      "opacity": "{opacity.pattern}",
+      "forbidden": [
+        "behind body text",
+        "over the logo",
+        "full-page backgrounds",
+        "animated on loop"
+      ]
+    }
+  },
+  "layout": {
+    "maxWidth": {
+      "content": "1280px",
+      "wide": "1440px",
+      "media": "none (full-bleed)",
+      "prose": "68ch"
+    },
+    "grid": {
+      "mobile": {
+        "columns": 4,
+        "gutter": "16px",
+        "margin": "16px"
+      },
+      "tablet": {
+        "columns": 8,
+        "gutter": "24px",
+        "margin": "32px"
+      },
+      "desktop": {
+        "columns": 12,
+        "gutter": "24px",
+        "margin": "48px"
+      },
+      "large": {
+        "columns": 12,
+        "gutter": "32px",
+        "margin": "auto (centred at wide max)"
+      }
+    },
+    "touchTarget": {
+      "min": "44px",
+      "preferred": "48px"
+    },
+    "headerHeight": {
+      "mobile": "76px",
+      "desktop": "96px"
+    },
+    "safeArea": "env(safe-area-inset-*) required for fixed headers and bottom bars"
+  },
+  "breakpoints": {
+    "mobile": {
+      "min": "0",
+      "max": "639px"
+    },
+    "tablet": {
+      "min": "640px",
+      "max": "1023px"
+    },
+    "desktop": {
+      "min": "1024px",
+      "max": "1439px"
+    },
+    "large": {
+      "min": "1440px",
+      "max": null
+    }
+  },
+  "i18n": {
+    "locales": [
+      "pt",
+      "en"
+    ],
+    "default": "pt",
+    "textExpansion": "plan for +40% (PT)",
+    "dateFormat": {
+      "en": "4 Dec 2026",
+      "pt": "4 de Dezembro de 2026"
+    },
+    "timezone": "Africa/Luanda (WAT, UTC+1) - always show with times",
+    "rule": "No text baked into images. All copy via locale files."
+  },
+  "data": {
+    "live": {
+      "status": "DEMO DATA ONLY",
+      "note": "Live scores, results and medal tables render from a mock provider behind one interface. Data owner and feed TBD by client. Every demo surface must be flagged [DEMO] in dev builds and replaced before launch."
+    }
+  }
+}

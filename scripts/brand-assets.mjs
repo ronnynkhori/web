@@ -1,0 +1,86 @@
+// Builds web assets from the client's brand pack (brand-assets/, not deployed):
+// logos -> public/images/brand, mascot poses -> public/images/mascot, emblem -> app icons.
+// Run: node scripts/brand-assets.mjs
+import { mkdir, readdir } from "node:fs/promises";
+import path from "node:path";
+import sharp from "sharp";
+
+const root = path.resolve(import.meta.dirname, "..");
+const src = path.join(root, "brand-assets");
+const brandOut = path.join(root, "public/images/brand");
+const mascotOut = path.join(root, "public/images/mascot");
+const appDir = path.join(root, "src/app");
+await mkdir(brandOut, { recursive: true });
+await mkdir(mascotOut, { recursive: true });
+
+const logo = (n) => path.join(src, "logomarca", `LOGO - XIII Jogos Desportivos da CPLP_${n}.png`);
+
+// Horizontal (2000x683) and stacked (2000x1779) variants: colour, white, black, with/without date.
+const logos = {
+  "cplp-logo-h": 1,
+  "cplp-logo-stacked": 2,
+  "cplp-logo-h-white": 5,
+  "cplp-logo-stacked-white": 6,
+  "cplp-logo-h-black": 9,
+  "cplp-logo-stacked-black": 10,
+  "cplp-logo-h-date": "com data_3",
+  "cplp-logo-stacked-date": "com data_4",
+  "cplp-logo-h-date-white": "com data_7",
+  "cplp-logo-stacked-date-white": "com data_8",
+};
+
+for (const [name, n] of Object.entries(logos)) {
+  const out = path.join(brandOut, `${name}.png`);
+  const info = await sharp(logo(n)).trim().resize({ width: 1200, withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(out);
+  console.log(name, `${info.width}x${info.height}`);
+}
+
+// Colour emblem + white wordmark, for dark surfaces: near-black pixels inside the
+// wordmark area turn white (the emblem's black flag stripes sit outside it).
+async function reversed(n, name, area) {
+  const { data, info } = await sharp(logo(n)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let y = 0; y < info.height; y++) {
+    for (let x = 0; x < info.width; x++) {
+      if (!area(x / info.width, y / info.height)) continue;
+      const i = (y * info.width + x) * 4;
+      if (data[i] < 90 && data[i + 1] < 90 && data[i + 2] < 90) data[i] = data[i + 1] = data[i + 2] = 255;
+    }
+  }
+  const out = await sharp(data, { raw: info }).trim().resize({ width: 1200 }).png({ compressionLevel: 9 }).toFile(path.join(brandOut, `${name}.png`));
+  console.log(name, `${out.width}x${out.height}`);
+}
+await reversed(1, "cplp-logo-h-reversed", (x) => x > 0.36);
+await reversed("com data_3", "cplp-logo-h-date-reversed", (x) => x > 0.36);
+await reversed(2, "cplp-logo-stacked-reversed", (_, y) => y > 0.7);
+await reversed("com data_4", "cplp-logo-stacked-date-reversed", (_, y) => y > 0.66);
+
+// Emblem only (flags + swooshes), cropped from the stacked colour logo for icons.
+const emblemArea = await sharp(logo(2)).extract({ left: 400, top: 100, width: 1200, height: 1150 }).png().toBuffer();
+const emblem = await sharp(emblemArea).trim().toBuffer();
+const square = async (size, bg) =>
+  sharp({ create: { width: size, height: size, channels: 4, background: bg } })
+    .composite([{ input: await sharp(emblem).resize(Math.round(size * 0.86), Math.round(size * 0.86), { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer(), gravity: "center" }])
+    .png();
+await (await square(512, { r: 255, g: 255, b: 255, alpha: 0 })).toFile(path.join(brandOut, "cplp-emblem.png"));
+await (await square(512, { r: 255, g: 255, b: 255, alpha: 1 })).toFile(path.join(appDir, "icon.png"));
+await (await square(180, { r: 255, g: 255, b: 255, alpha: 1 })).toFile(path.join(appDir, "apple-icon.png"));
+console.log("emblem + icons");
+
+// Mascot poses: 1024 square PNGs -> trimmed 800px PNG with slug names.
+const slug = (s) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/×/g, "x")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+for (const f of (await readdir(path.join(src, "Mascote"))).filter((f) => f.endsWith(".png"))) {
+  const name = slug(f.replace("MASCOTE - XIII Jogos Desportivos da CPLP_", "").replace(".png", ""));
+  const info = await sharp(path.join(src, "Mascote", f))
+    .trim()
+    .resize({ width: 800, height: 800, fit: "inside", withoutEnlargement: true })
+    .png({ compressionLevel: 9, palette: true, quality: 90 })
+    .toFile(path.join(mascotOut, `${name}.png`));
+  console.log("mascot", name, `${info.width}x${info.height}`, info.size);
+}

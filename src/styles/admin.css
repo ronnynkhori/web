@@ -1,0 +1,164 @@
+/* ==========================================================================
+   Games Control Room - shadcn/ui on the standard Tailwind scale, with every
+   colour taken from the CPLP 2027 brand tokens. The public site keeps
+   globals.css (token-only scale), which shadcn components cannot use.
+   ========================================================================== */
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@import "./tokens.css";
+@import "./typography.css";
+
+@source "../app/admin";
+@source "../components/admin";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-display: var(--font-kanit), "Kanit", "Arial Black", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-action: var(--action);
+  --color-action-foreground: var(--action-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-live: var(--live);
+  --color-live-foreground: var(--live-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-medal-gold: var(--tk-color-brand-gold);
+  --color-medal-silver: var(--tk-color-neutral-300);
+  --color-medal-bronze: var(--tk-color-neutral-400);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 3px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 2px);
+  --radius-2xl: calc(var(--radius) + 4px);
+  --radius-3xl: calc(var(--radius) + 6px);
+}
+
+:root {
+  --radius: 0.375rem;
+
+  --background: var(--tk-color-neutral-100);
+  --foreground: var(--tk-color-brand-black);
+  --card: var(--tk-color-neutral-white);
+  --card-foreground: var(--tk-color-brand-black);
+  --popover: var(--tk-color-neutral-white);
+  --popover-foreground: var(--tk-color-brand-black);
+
+  /* Red is the brand accent (links, labels, icons); green is kept for success. */
+  --primary: var(--tk-color-brand-red);
+  --primary-foreground: var(--tk-color-neutral-white);
+  /* Filled buttons are near-black so solid red means Live or a final delete. */
+  --action: var(--tk-color-brand-black);
+  --action-foreground: var(--tk-color-neutral-white);
+  --secondary: color-mix(in oklab, var(--tk-color-brand-red) 7%, white);
+  --secondary-foreground: color-mix(in oklab, var(--tk-color-brand-red) 80%, black);
+  --muted: var(--tk-color-neutral-100);
+  --muted-foreground: color-mix(in oklab, var(--tk-color-neutral-600) 78%, white);
+  /* shadcn uses "accent" for hovers, so it stays a quiet neutral. */
+  --accent: var(--tk-color-neutral-100);
+  --accent-foreground: var(--tk-color-brand-black);
+  --destructive: var(--tk-color-brand-red);
+  --destructive-foreground: var(--tk-color-neutral-white);
+
+  --border: var(--tk-color-neutral-200);
+  --input: color-mix(in oklab, var(--tk-color-neutral-400) 70%, white);
+  --ring: var(--tk-color-brand-red);
+
+  /* Brand highlight (logo yellow): active states, primary score buttons. */
+  --highlight: var(--tk-color-brand-yellow);
+  --highlight-foreground: var(--tk-color-brand-black);
+  --live: var(--tk-color-brand-red);
+  --live-foreground: var(--tk-color-neutral-white);
+  --success: color-mix(in oklab, var(--tk-color-brand-blue) 14%, white);
+  --success-foreground: var(--tk-color-region-700);
+  --warning: color-mix(in oklab, var(--tk-color-brand-yellow) 28%, white);
+  --warning-foreground: #5c4300;
+  --info: var(--tk-color-neutral-100);
+  --info-foreground: var(--tk-color-neutral-700);
+
+  /* Sidebar: navy, as on the public site's dark sections. */
+  --sidebar: var(--tk-color-brand-navy);
+  --sidebar-foreground: var(--tk-color-neutral-white);
+  --sidebar-primary: var(--tk-color-brand-yellow);
+  --sidebar-primary-foreground: var(--tk-color-brand-black);
+  --sidebar-accent: color-mix(in oklab, var(--tk-color-brand-navy) 75%, var(--tk-color-brand-blue));
+  --sidebar-accent-foreground: var(--tk-color-neutral-white);
+  --sidebar-border: color-mix(in oklab, var(--tk-color-brand-navy) 70%, white);
+  --sidebar-ring: var(--tk-color-brand-yellow);
+
+  /* Phone tab bar height, used to keep sticky bars and toasts above it. */
+  --tabbar-h: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Photo panels (login) stay near-black so the photography reads naturally. */
+.surface-black {
+  --sidebar: var(--tk-color-region-950);
+  --sidebar-accent: var(--tk-color-region-800);
+  --sidebar-border: var(--tk-color-region-600);
+}
+
+/* On navy panels dark fills vanish, so fills turn white and focus rings yellow. */
+.bg-sidebar {
+  --live: var(--tk-color-brand-red);
+  --live-foreground: var(--tk-color-neutral-white);
+  --primary: var(--tk-color-neutral-white);
+  --primary-foreground: var(--tk-color-brand-navy);
+  --action: var(--tk-color-neutral-white);
+  --action-foreground: var(--tk-color-brand-navy);
+  --destructive: var(--tk-color-neutral-white);
+  --destructive-foreground: var(--tk-color-brand-red);
+  --ring: var(--tk-color-brand-yellow);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply min-h-svh bg-background font-sans text-foreground antialiased;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
