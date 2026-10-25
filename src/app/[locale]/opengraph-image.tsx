@@ -30,7 +30,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
   const dict = await getDictionary(isLocale(locale) ? locale : "pt");
   const { navy, red, blue, yellow } = designTokens.color.brand;
   const [logo, lead, left, right, ...flags] = await Promise.all([
-    asset("brand/cplp-logo-h-reversed.png"),
+    asset("brand/cplp-logo-h-negative.png"),
     asset("mascot/atletismo-1.png"),
     asset("mascot/futebol-1.png"),
     asset("mascot/atletismo-com-deficiencia-1.png"),

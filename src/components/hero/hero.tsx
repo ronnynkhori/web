@@ -78,7 +78,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         id="top"
         aria-labelledby="hero-title"
         className={cn(
-          "container-wide grid flex-1 content-end items-center gap-x-8 tablet:content-center gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
+          "container-wide grid flex-1 content-center items-center gap-x-8 gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
           phase === "pre"
             ? "pt-[calc(var(--header-h)+var(--tk-space-2))] pb-5 lowphone:pb-3 short:pb-2 tablet:pt-[calc(var(--header-h)+var(--tk-space-6))] tablet:pb-7 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
             : "pt-[calc(var(--header-h)+var(--tk-space-4))] pb-7 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))]",
@@ -90,11 +90,11 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           className="mx-auto max-tablet:hidden tablet:order-2 tablet:w-[min(100%,60svh)]"
         />
         <div className="max-w-content tablet:order-1">
-          <p className="hero-rise m-0 mb-2 type-overline max-tablet:text-[min(0.75rem,2.6vw)] max-tablet:tracking-[0.03em] tablet:mb-5 squat:mb-3" style={i("--rise-i", -5)}>
+          <p className="hero-rise m-0 mb-3 type-overline max-tablet:text-[min(0.75rem,2.6vw)] max-tablet:tracking-[0.03em] tablet:mb-5 squat:mb-3" style={i("--rise-i", -5)}>
             {phase === "post" ? h.postOverline : h.overline}
           </p>
           <h1 id="hero-title" className="m-0">
-            <span className="hero-rise mb-1 block type-heading-m font-medium text-fg-2 max-tablet:text-[min(1.25rem,5.2vw)] tablet:mb-3 desktop:type-heading-l" style={i("--rise-i", -4)}>
+            <span className="hero-rise mb-2 block type-heading-m font-medium text-fg-2 max-tablet:text-[min(1.25rem,5.2vw)] tablet:mb-3 desktop:type-heading-l" style={i("--rise-i", -4)}>
               {h.leadLine}
             </span>
             <span className="hero-line mr-[0.25em] inline-block type-display-xl tall:block tablet:text-[min(var(--tk-type-display-xl-size),12.5svh)] squat:text-[min(var(--tk-type-display-xl-size),9.5svh)]" style={i("--line-i", 0)}>
@@ -104,16 +104,16 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
               {h.titleLine2}
             </span>
           </h1>
-          <p className="hero-rise m-0 mt-4 flex max-w-prose flex-wrap items-center gap-3 type-body-xl font-light text-fg-2 lowphone:hidden tablet:mt-6 squat:mt-4" style={i("--rise-i", 0)}>
+          <p className="hero-rise m-0 mt-4 flex max-w-prose flex-wrap items-center gap-3 type-body-xl font-light text-fg-2 short:hidden tablet:mt-6 squat:mt-4" style={i("--rise-i", 0)}>
             <span>{phase === "post" ? h.postLine : h.tagline}</span>
           </p>
           {phase !== "post" && (
-            <p className="hero-rise m-0 mt-3 flex flex-wrap items-center gap-3 type-heading-m font-extrabold uppercase" style={i("--rise-i", 1)}>
+            <p className="hero-rise m-0 mt-4 flex flex-wrap items-center gap-3 type-heading-m short:mt-3 font-extrabold uppercase" style={i("--rise-i", 1)}>
               <time dateTime="2027-03">{h.dates}</time>
               <ContentFlag>{h.datesFlag}</ContentFlag>
             </p>
           )}
-          <div className="hero-cta mt-5 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex tablet:flex-wrap tablet:*:whitespace-nowrap squat:mt-5">
+          <div className="hero-cta mt-6 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex tablet:flex-wrap tablet:*:whitespace-nowrap squat:mt-5">
             <Button href={cta[0].href} variant="secondary" icon="arrow-right">
               {cta[0].label}
             </Button>

@@ -75,7 +75,7 @@ export function HeroMascotBackdrop({ className }: { className?: string }) {
         alt=""
         sizes="70vw"
         preload
-        className="absolute top-[calc(var(--header-h)+0.25rem)] right-[4%] h-[47%] max-w-[78%] w-auto object-contain object-top lowphone:h-[41%] short:h-[35%]"
+        className="hero-backdrop-mascot absolute top-[calc(var(--header-h)+1%)] right-[-14%] h-[74%] w-auto max-w-none lowphone:h-[70%] short:h-[64%]"
       />
       <span className="hero-backdrop-scrim absolute inset-0" />
     </div>

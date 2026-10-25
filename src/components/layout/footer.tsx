@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { Disclosure } from "@/components/ui/disclosure";
-import { Logo } from "@/components/ui/logo";
 import { TorchStripe } from "@/components/ui/torch-stripe";
 import { MascotActor } from "@/components/mascot/mascot-actor";
 import { mascotPoses } from "@/data/mascot";
@@ -73,8 +73,16 @@ export function Footer({ locale, dict, items }: FooterProps) {
       <div className="container-wide grid gap-6 py-8 tablet:grid-cols-2 tablet:gap-7 desktop:grid-cols-[2fr_1fr_1fr] desktop:py-9">
         <div className="flex flex-col gap-4">
           {/* The logo's red flame vanishes on the red footer, so it sits on a white tile. */}
-          <div data-theme="light" className="self-start rounded-sm bg-surface p-3">
-            <Logo label={dict.a11y.logo} size="footer" />
+          {/* The brand book's primary (vertical) version, dated, full colour on white. */}
+          <div data-theme="light" className="self-start rounded-sm bg-surface p-4">
+            <Image
+              src="/images/brand/cplp-logo-stacked-date.png"
+              alt={dict.a11y.logo}
+              width={1200}
+              height={1406}
+              sizes="160px"
+              className="h-[clamp(7rem,6rem+3vw,9rem)] w-auto"
+            />
           </div>
           <p className="m-0 max-w-prose type-body-s text-fg-2">{f.identity}</p>
           <LanguageSwitch locale={locale} label={dict.a11y.language} switchToTemplate={dict.a11y.switchTo} placement="up" className="self-start" />

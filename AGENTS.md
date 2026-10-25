@@ -43,7 +43,7 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 - **`brand-assets/logomarca/`:** 12 logo PNGs (colour, white and black; horizontal and stacked; with and without "Angola 2027"). The `.ai`, `.eps` and `.pdf` vector originals are git-ignored because they are too large.
 - **`brand-assets/Mascote/`:** 17 mascot PNGs. The mascot is a **guinea fowl (galinha-d'angola)** in sports kit: neutral welcome/thumbs-up poses plus athletics, para athletics (wheelchair), 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess. The last two were extracted from the brand book (p.7, 376 px, mask recombined) because the ZIP did not include them.
 - **`scripts/brand-assets.mjs`** turns these into web assets:
-  - `public/images/brand/cplp-logo-*.png`, including `*-reversed` (colour emblem with a white wordmark, for dark backgrounds).
+  - `public/images/brand/cplp-logo-*.png`, including `*-negative` (the brand book's negative version for dark backgrounds: white swooshes and wordmark, flags in colour). Do not mix colour swooshes with a white wordmark; the book allows no other variations.
   - `cplp-emblem.png`.
   - `public/images/mascot/*.png`.
   - `src/app/icon.png` and `apple-icon.png`.

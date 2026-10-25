@@ -14,9 +14,9 @@ const heightClass = {
 /**
  * Official XIII CPLP Games logo (horizontal: emblem + wordmark), from the
  * supplied brand pack. Never redrawn or recoloured. On light surfaces the
- * full-colour file is used; on dark surfaces a copy with the wordmark in white
- * (emblem unchanged). The swap follows the nearest [data-theme] through the
- * --logo-* custom properties in globals.css.
+ * full-colour (positive) file is used; on dark surfaces the brand book's negative
+ * version (white swooshes and wordmark, flags in colour). The swap follows the
+ * nearest [data-theme] through the --logo-* custom properties in globals.css.
  */
 export function Logo({
   label,
@@ -37,7 +37,7 @@ export function Logo({
       className={cn("inline-flex shrink-0", className)}
     >
       <Image
-        src="/images/brand/cplp-logo-h-reversed.png"
+        src="/images/brand/cplp-logo-h-negative.png"
         alt=""
         width={WIDTH}
         height={HEIGHT}

@@ -32,10 +32,13 @@
 .hero-backdrop-glow {
   background: radial-gradient(circle, color-mix(in oklab, var(--tk-color-brand-blue) 80%, transparent) 0%, transparent 65%);
 }
+/* Like a hero photo: the artwork (never recoloured) fades into navy behind the copy. */
 .hero-backdrop-scrim {
   background:
-    linear-gradient(to top, rgb(10 42 102 / 0.97) 0%, rgb(10 42 102 / 0.82) 34%, rgb(10 42 102 / 0) 64%),
-    linear-gradient(to right, rgb(10 42 102 / 0.55) 0%, transparent 55%);
+    linear-gradient(to bottom, rgb(10 42 102 / 0.55) 0%, transparent 18%),
+    linear-gradient(to top, rgb(10 42 102 / 0.98) 0%, rgb(10 42 102 / 0.7) 30%, rgb(10 42 102 / 0.15) 60%, transparent 75%),
+    linear-gradient(to right, rgb(10 42 102 / 0.88) 0%, rgb(10 42 102 / 0.55) 50%, rgb(10 42 102 / 0.2) 85%),
+    linear-gradient(rgb(10 42 102 / 0.2), rgb(10 42 102 / 0.2));
 }
 
 /* ---------- Stage ---------- */

@@ -35,24 +35,28 @@ for (const [name, n] of Object.entries(logos)) {
   console.log(name, `${info.width}x${info.height}`);
 }
 
-// Colour emblem + white wordmark, for dark surfaces: near-black pixels inside the
-// wordmark area turn white (the emblem's black flag stripes sit outside it).
-async function reversed(n, name, area) {
-  const { data, info } = await sharp(logo(n)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  for (let y = 0; y < info.height; y++) {
-    for (let x = 0; x < info.width; x++) {
-      if (!area(x / info.width, y / info.height)) continue;
-      const i = (y * info.width + x) * 4;
-      if (data[i] < 90 && data[i + 1] < 90 && data[i + 2] < 90) data[i] = data[i + 1] = data[i + 2] = 255;
+// Negative version for dark surfaces, as in the brand book (p.4 "Variação negativa"):
+// white swooshes and wordmark, flags kept in colour. Built from the supplied white
+// file (same canvas as the colour file): its pure-white pixels stay white, and
+// everything else (the greyscale flags) takes the colour file's pixels.
+async function negative(colourN, whiteN, name) {
+  const colour = await sharp(logo(colourN)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const white = await sharp(logo(whiteN)).ensureAlpha().raw().toBuffer();
+  const { data, info } = colour;
+  for (let i = 0; i < data.length; i += 4) {
+    const [r, g, b, a] = [white[i], white[i + 1], white[i + 2], white[i + 3]];
+    if (a > 0 && r > 230 && g > 230 && b > 230) {
+      data[i] = data[i + 1] = data[i + 2] = 255;
+      data[i + 3] = a;
     }
   }
   const out = await sharp(data, { raw: info }).trim().resize({ width: 1200 }).png({ compressionLevel: 9 }).toFile(path.join(brandOut, `${name}.png`));
   console.log(name, `${out.width}x${out.height}`);
 }
-await reversed(1, "cplp-logo-h-reversed", (x) => x > 0.36);
-await reversed("com data_3", "cplp-logo-h-date-reversed", (x) => x > 0.36);
-await reversed(2, "cplp-logo-stacked-reversed", (_, y) => y > 0.7);
-await reversed("com data_4", "cplp-logo-stacked-date-reversed", (_, y) => y > 0.66);
+await negative(1, 5, "cplp-logo-h-negative");
+await negative("com data_3", "com data_7", "cplp-logo-h-date-negative");
+await negative(2, 6, "cplp-logo-stacked-negative");
+await negative("com data_4", "com data_8", "cplp-logo-stacked-date-negative");
 
 // Emblem only (flags + swooshes), cropped from the stacked colour logo for icons.
 const emblemArea = await sharp(logo(2)).extract({ left: 400, top: 100, width: 1200, height: 1150 }).png().toBuffer();
