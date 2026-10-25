@@ -9,6 +9,7 @@ import { downloads, guide } from "@/data/guide";
 import { demoMatches, demoMedalBase, demoResults } from "@/data/live-demo";
 import { media, photoDownloadsUrl } from "@/data/media";
 import { announcements } from "@/data/news";
+import { partners } from "@/data/sponsors";
 import { venues } from "@/data/venues";
 import { CONTENT_REQUIRED } from "@/lib/content";
 import type { Localized } from "@/lib/i18n/config";
@@ -75,7 +76,7 @@ const seeds: Partial<Record<Collection, () => StoredDoc[]>> = {
   documents: () => downloads.map((d): DocumentDoc => ({ ...d, status: "published" })),
   media: () => media.map((m): MediaDoc => ({ ...m, status: "published", consent: true })),
   photoLinks: () => [],
-  sponsors: () => [],
+  sponsors: () => partners.map((p) => ({ ...p })),
   faq: () => faq.map((f): FaqDoc => ({ ...f })),
   guide: () => guide.map((g): GuideDoc => ({ ...g })),
   venues: () => venues.map((v): VenueDoc => ({ ...v })),

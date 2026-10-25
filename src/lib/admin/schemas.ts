@@ -105,6 +105,8 @@ const toneOptions: FieldOption[] = [
 ];
 
 const tierOptions: FieldOption[] = [
+  { value: "institutional", label: "Institutional partner" },
+  { value: "agency", label: "Official marketing and communications agency" },
   { value: "principal", label: "Principal partner" },
   { value: "official", label: "Official partner" },
   { value: "supporters", label: "Supporter" },

@@ -150,6 +150,6 @@ export interface StoryBeat {
 }
 
 export interface SponsorTier {
-  id: "principal" | "official" | "supporters";
+  id: "institutional" | "agency" | "principal" | "official" | "supporters";
   slots: number;
 }

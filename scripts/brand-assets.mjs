@@ -74,6 +74,41 @@ console.log("ondaka-h", `${ondaka.width}x${ondaka.height}`);
   console.log("ondaka-h-negative", `${out.width}x${out.height}`);
 }
 
+// MINJUD (institutional partner), rendered from the client's "36 Anos" PDFs. The
+// client asked to cut the "36 anos" mark: everything up to the divider line
+// (horizontal) or the rule (vertical) is dropped, keeping the ministry lockup.
+async function minjud(file, axis, name) {
+  const { data, info } = await sharp(path.join(src, "minjud", file)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width, height } = info;
+  const dark = (x, y) => {
+    const i = (y * width + x) * 4;
+    return data[i + 3] > 128 && data[i] < 90 && data[i + 1] < 90 && data[i + 2] < 90;
+  };
+  const along = axis === "x" ? width : height;
+  const across = axis === "x" ? height : width;
+  let line = -1;
+  for (let p = Math.round(along * 0.15); p < along * 0.6 && line < 0; p++) {
+    let n = 0;
+    for (let q = 0; q < across; q++) if (axis === "x" ? dark(p, q) : dark(q, p)) n++;
+    if (n > across * (axis === "x" ? 0.45 : 0.6)) line = p;
+  }
+  if (line < 0) throw new Error(`no divider found in ${file}`);
+  let end = line;
+  while (end < along) {
+    let n = 0;
+    for (let q = 0; q < across; q++) if (axis === "x" ? dark(end, q) : dark(q, end)) n++;
+    if (n < across * 0.2) break;
+    end++;
+  }
+  const start = end + 4;
+  const region = axis === "x" ? { left: start, top: 0, width: width - start, height } : { left: 0, top: start, width, height: height - start };
+  const cut = await sharp(path.join(src, "minjud", file)).extract(region).png().toBuffer();
+  const out = await sharp(cut).trim().resize({ width: 900, withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(path.join(brandOut, `${name}.png`));
+  console.log(name, `${out.width}x${out.height}`);
+}
+await minjud("minjud-36-anos-horizontal.png", "x", "minjud-h");
+await minjud("minjud-36-anos-vertical.png", "y", "minjud-v");
+
 // Emblem only (flags + swooshes), cropped from the stacked colour logo for icons.
 const emblemArea = await sharp(logo(2)).extract({ left: 400, top: 100, width: 1200, height: 1150 }).png().toBuffer();
 const emblem = await sharp(emblemArea).trim().toBuffer();

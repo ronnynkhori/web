@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "@/lib/animation/motion-preference";
 import { Icon } from "@/components/ui/icon";
+import { announcePlay, onOtherPlay } from "./media-bus";
 
 const FILM = {
   hd: "/videos/promo/cplp-2027-filme-1080.mp4",
@@ -52,6 +53,8 @@ export function PromoFilm({ labels }: PromoFilmProps) {
     if (src) void filmRef.current?.play().catch(() => {});
   }, [src]);
 
+  useEffect(() => onOtherPlay("film", () => filmRef.current?.pause()), []);
+
   const start = () => setSrc(window.matchMedia("(min-width: 64rem)").matches ? FILM.hd : FILM.sd);
 
   return (
@@ -66,6 +69,7 @@ export function PromoFilm({ labels }: PromoFilmProps) {
           playsInline
           preload="auto"
           aria-label={labels.title}
+          onPlay={() => announcePlay("film")}
         />
       ) : (
         <>

@@ -37,7 +37,7 @@ export interface PhotoLinkDoc extends StoredDoc {
   sportId?: string;
 }
 
-export type SponsorTierId = "principal" | "official" | "supporters";
+export type SponsorTierId = "institutional" | "agency" | "principal" | "official" | "supporters";
 
 export interface SponsorDoc extends StoredDoc {
   name: string;

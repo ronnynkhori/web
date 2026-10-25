@@ -3,8 +3,9 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { reveal } from "@/lib/animation/reveal";
 import { PromoFilm } from "./promo-film";
+import { SongPlayer } from "./song-player";
 
-/** The official promo film and its song, right after the hero. */
+/** The official promo film and the Games song, right after the hero. */
 export function PromoFilmSection({ dict }: { dict: Dictionary }) {
   const f = dict.promoFilm;
   return (
@@ -21,6 +22,9 @@ export function PromoFilmSection({ dict }: { dict: Dictionary }) {
         <PromoFilm labels={{ play: f.play, duration: f.duration, sound: f.sound, title: f.videoLabel }} />
         <span aria-hidden="true" className="torch-stripe block h-2 w-full rounded-b-md" />
         <p className="m-0 mt-3 type-caption text-fg-muted">{f.caption}</p>
+        <div className="mt-5">
+          <SongPlayer labels={{ kicker: f.songKicker, title: f.songTitle, play: f.songPlay, pause: f.songPause, seek: f.songSeek }} />
+        </div>
       </div>
     </Section>
   );

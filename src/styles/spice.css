@@ -272,3 +272,36 @@ html[data-motion="reduce"] .map-arc {
 html[data-motion="reduce"] .promo-film-play {
   animation: none;
 }
+
+/* ---------- Song player ---------- */
+.song-seek {
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--tk-color-brand-red) var(--song-progress, 0%), color-mix(in oklab, currentColor 18%, transparent) 0);
+}
+.song-seek::-webkit-slider-thumb {
+  appearance: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--tk-color-brand-navy);
+  border: 2px solid var(--tk-color-brand-yellow);
+}
+.song-seek::-moz-range-thumb {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--tk-color-brand-navy);
+  border: 2px solid var(--tk-color-brand-yellow);
+}
+.song-cover-spin {
+  animation: song-breathe 2.8s ease-in-out infinite;
+}
+@keyframes song-breathe {
+  50% {
+    scale: 1.08;
+  }
+}
+html[data-motion="reduce"] .song-cover-spin {
+  animation: none;
+}
