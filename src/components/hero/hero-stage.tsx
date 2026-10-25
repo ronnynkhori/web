@@ -62,10 +62,10 @@ export function HeroSpots({ className }: { className?: string }) {
 
 /**
  * Phones: a full-bleed sports photo behind the copy, like a hero photo (the
- * flag-arch stage is too small to read there): sprinters in the brand's red,
- * blue and yellow. A navy fade from the bottom keeps the title legible.
+ * flag-arch stage is too small to read there). A navy fade from the bottom
+ * keeps the title legible.
  */
-export function HeroPhotoBackdrop({ image, className }: { image: ImageAsset; className?: string }) {
+export function HeroPhotoBackdrop({ image, position = "50% 20%", className }: { image: ImageAsset; position?: string; className?: string }) {
   return (
     <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
       <Image
@@ -76,7 +76,7 @@ export function HeroPhotoBackdrop({ image, className }: { image: ImageAsset; cla
         loading="eager"
         fetchPriority="high"
         className="object-cover"
-        style={{ objectPosition: "50% 12%" }}
+        style={{ objectPosition: position }}
       />
       <span className="hero-backdrop-scrim absolute inset-0" />
     </div>

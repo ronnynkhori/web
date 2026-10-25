@@ -72,7 +72,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         <div className="absolute inset-0 scrim-side opacity-60" />
       </div>
       <span aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-px bg-line-accent/40" />
-      <HeroPhotoBackdrop image={demoImages.athletics} className="tablet:hidden" />
+      <HeroPhotoBackdrop image={demoImages.karate} position="42% 30%" className="tablet:hidden" />
 
       {/* Content: copy on the left, the mascot stage on the right (phones: the big mascot backdrop instead) */}
       <section
