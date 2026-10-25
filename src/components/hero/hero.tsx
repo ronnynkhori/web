@@ -15,7 +15,8 @@ import { Flag } from "@/components/ui/flag";
 import { Countdown } from "./countdown";
 import { HeroParallax } from "./hero-parallax";
 import { HeroPicture } from "./hero-picture";
-import { HeroMascotBackdrop, HeroSpots, HeroStage, HeroSwooshes } from "./hero-stage";
+import { HeroPhotoBackdrop, HeroSpots, HeroStage, HeroSwooshes } from "./hero-stage";
+import { demoImages } from "@/data/demo/images";
 import { HeroVideo } from "./hero-video";
 
 const i = (name: string, n: number) => ({ [name]: n }) as CSSProperties;
@@ -71,14 +72,14 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         <div className="absolute inset-0 scrim-side opacity-60" />
       </div>
       <span aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-px bg-line-accent/40" />
-      <HeroMascotBackdrop className="tablet:hidden" />
+      <HeroPhotoBackdrop image={demoImages.athletics} className="tablet:hidden" />
 
       {/* Content: copy on the left, the mascot stage on the right (phones: the big mascot backdrop instead) */}
       <section
         id="top"
         aria-labelledby="hero-title"
         className={cn(
-          "container-wide grid flex-1 content-center items-center gap-x-8 gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
+          "container-wide grid flex-1 content-end items-center gap-x-8 tablet:content-center gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
           phase === "pre"
             ? "pt-[calc(var(--header-h)+var(--tk-space-2))] pb-5 lowphone:pb-3 short:pb-2 tablet:pt-[calc(var(--header-h)+var(--tk-space-6))] tablet:pb-7 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
             : "pt-[calc(var(--header-h)+var(--tk-space-4))] pb-7 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))]",

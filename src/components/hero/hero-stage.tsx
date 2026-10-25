@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { mascotPoses } from "@/data/mascot";
+import type { ImageAsset } from "@/data/types";
 import { MascotActor } from "@/components/mascot/mascot-actor";
 import { HeroStageScene } from "./hero-stage-scene";
 
@@ -60,22 +61,22 @@ export function HeroSpots({ className }: { className?: string }) {
 }
 
 /**
- * Phones: one big running mascot behind the copy, used like a hero photo
- * (the flag-arch stage is too small to read there). Static on purpose; a navy
- * fade from the bottom keeps the title legible over the artwork.
+ * Phones: a full-bleed sports photo behind the copy, like a hero photo (the
+ * flag-arch stage is too small to read there): sprinters in the brand's red,
+ * blue and yellow. A navy fade from the bottom keeps the title legible.
  */
-export function HeroMascotBackdrop({ className }: { className?: string }) {
+export function HeroPhotoBackdrop({ image, className }: { image: ImageAsset; className?: string }) {
   return (
     <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
-      <span className="hero-backdrop-glow absolute top-[6%] right-[-20%] aspect-square w-[100%] rounded-pill" />
       <Image
-        src={mascotPoses.athletics.src}
-        width={mascotPoses.athletics.width}
-        height={mascotPoses.athletics.height}
+        src={image.src}
         alt=""
-        sizes="70vw"
-        preload
-        className="hero-backdrop-mascot absolute top-[calc(var(--header-h)+1%)] right-[-14%] h-[74%] w-auto max-w-none lowphone:h-[70%] short:h-[64%]"
+        fill
+        sizes="(min-width: 40rem) 1px, 100vw"
+        loading="eager"
+        fetchPriority="high"
+        className="object-cover"
+        style={{ objectPosition: "50% 12%" }}
       />
       <span className="hero-backdrop-scrim absolute inset-0" />
     </div>
