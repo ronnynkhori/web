@@ -389,7 +389,6 @@ const pt: Dictionary = {
   },
   quickBar: {
     label: "Atalhos",
-    menu: "Menu",
     countdown: "Contagem",
     sports: "Modalidades",
     venues: "Recintos",

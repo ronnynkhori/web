@@ -61,22 +61,21 @@ export function HeroSpots({ className }: { className?: string }) {
 
 /**
  * Phones: one big running mascot behind the copy, used like a hero photo
- * (the flag-arch stage is too small to read there). A navy fade from the
- * bottom keeps the title legible over the artwork.
+ * (the flag-arch stage is too small to read there). Static on purpose; a navy
+ * fade from the bottom keeps the title legible over the artwork.
  */
 export function HeroMascotBackdrop({ className }: { className?: string }) {
   return (
     <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
-      <span className="hero-backdrop-glow absolute top-[8%] right-[-30%] aspect-square w-[115%] rounded-pill" />
-      <MascotActor
-        {...mascotPoses.athletics}
-        sizes="95vw"
-        enter={false}
-        tap={false}
-        depth={0}
+      <span className="hero-backdrop-glow absolute top-[6%] right-[-20%] aspect-square w-[100%] rounded-pill" />
+      <Image
+        src={mascotPoses.athletics.src}
+        width={mascotPoses.athletics.width}
+        height={mascotPoses.athletics.height}
+        alt=""
+        sizes="70vw"
         preload
-        className="hero-actor absolute top-[calc(var(--header-h)-0.5rem)] right-[-10%] h-[54%] lowphone:h-[47%] short:h-[40%]"
-        imgClassName="h-full w-auto"
+        className="absolute top-[calc(var(--header-h)+0.25rem)] right-[4%] h-[47%] max-w-[78%] w-auto object-contain object-top lowphone:h-[41%] short:h-[35%]"
       />
       <span className="hero-backdrop-scrim absolute inset-0" />
     </div>

@@ -6,10 +6,7 @@ import type { Phase } from "@/lib/phase";
 import { cn } from "@/lib/cn";
 import { Icon, type IconName } from "@/components/ui/icon";
 
-type Item = { key: keyof Omit<Dictionary["quickBar"], "label" | "menu">; href: string; section: string; icon: IconName };
-
-/** Opens the site menu sheet (the header listens), so it is reachable while the header is hidden. */
-export const OPEN_MENU_EVENT = "site-menu:open";
+type Item = { key: keyof Omit<Dictionary["quickBar"], "label">; href: string; section: string; icon: IconName };
 
 const ITEMS: Record<Phase, Item[]> = {
   pre: [
@@ -44,8 +41,7 @@ const pillClass = (on: boolean) =>
   );
 
 /**
- * Phones only: the four things this phase's visitors come for, one thumb away,
- * plus the site menu (the header hides while scrolling down).
+ * Phones only: the four things this phase's visitors come for, one thumb away.
  * The active item follows the section in view; the hub tab follows the hash.
  */
 export function QuickBar({ phase, labels }: { phase: Phase; labels: Dictionary["quickBar"] }) {
@@ -95,7 +91,7 @@ export function QuickBar({ phase, labels }: { phase: Phase; labels: Dictionary["
         className="quick-bar fixed inset-x-0 bottom-0 z-sticky bg-surface/95 text-fg shadow-[0_-8px_24px_rgb(0_0_0/0.25)] backdrop-blur tablet:hidden"
       >
         <span aria-hidden="true" className="torch-stripe absolute inset-x-0 top-0 h-[3px] bg-[length:10rem_100%]" />
-        <ul className="m-0 grid list-none grid-cols-5 p-0">
+        <ul className="m-0 grid list-none grid-cols-4 p-0">
           {items.map((item) => {
             const on = isActive(item);
             return (
@@ -109,14 +105,6 @@ export function QuickBar({ phase, labels }: { phase: Phase; labels: Dictionary["
               </li>
             );
           })}
-          <li className="min-w-0">
-            <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_MENU_EVENT))} className={cellClass(false)}>
-              <span className={pillClass(false)} aria-hidden="true">
-                <Icon name="menu" size={20} />
-              </span>
-              <span className="max-w-full truncate">{labels.menu}</span>
-            </button>
-          </li>
         </ul>
       </nav>
     </>

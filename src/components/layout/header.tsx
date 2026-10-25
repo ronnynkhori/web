@@ -10,7 +10,6 @@ import { TorchStripe } from "@/components/ui/torch-stripe";
 import { LanguageSwitch } from "./language-switch";
 import { MobileNav } from "./mobile-nav";
 import { Navigation } from "./navigation";
-import { OPEN_MENU_EVENT } from "./quick-bar";
 import type { NavItem } from "./nav-items";
 
 export interface HeaderLabels {
@@ -51,12 +50,14 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
 
   useEffect(() => {
     let raf = 0;
+    // Phones keep the header (and its menu button) on screen; larger screens tuck it away on scroll down.
+    const canHide = window.matchMedia("(min-width: 40rem)");
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         const y = window.scrollY;
         setCondensed(y > CONDENSE_AT);
-        if (!reduced && !jumping.current) setHidden(y > lastY.current && y > window.innerHeight * 0.6);
+        if (!reduced && !jumping.current && canHide.matches) setHidden(y > lastY.current && y > window.innerHeight * 0.6);
         else setHidden(false);
         lastY.current = y;
       });
@@ -87,13 +88,6 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
   useEffect(() => {
     document.documentElement.toggleAttribute("data-header-hidden", hidden && !menuOpen);
   }, [hidden, menuOpen]);
-
-  useEffect(() => {
-    const open = () => setMenuOpen(true);
-    window.addEventListener(OPEN_MENU_EVENT, open);
-    return () => window.removeEventListener(OPEN_MENU_EVENT, open);
-  }, []);
-
   // Scroll-spy for the active nav item.
   useEffect(() => {
     const sections = items
