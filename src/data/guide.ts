@@ -20,16 +20,16 @@ function topic(id: string, [en, pt]: Line, lines: Line[], status: ContentStatus 
 export const guide: GuideItem[] = [
   topic("key-dates", ["Key dates", "Datas-chave"], [
     [
-      "The XIII CPLP Games take place in Angola in March 2027 (proposed: 20 to 28 March, exact days to be confirmed).",
-      "Os XIII Jogos da CPLP realizam-se em Angola em Março de 2027 (proposta: 20 a 28 de Março, dias exatos a confirmar).",
+      "The XIII CPLP Games take place in Luanda, Angola, from 25 March to 3 April 2027.",
+      "Os XIII Jogos da CPLP realizam-se em Luanda, Angola, de 25 de Março a 3 de Abril de 2027.",
     ],
     [
-      "Opening ceremony: Saturday 20 March 2027, 11 November Stadium, Luanda, from 18:00 (proposed).",
-      "Cerimónia de abertura: sábado, 20 de Março de 2027, Estádio 11 de Novembro, Luanda, a partir das 18:00 (proposta).",
+      "Opening ceremony: Thursday 25 March 2027, Kilamba Arena, Luanda (start time to be confirmed; proposed 18:00).",
+      "Cerimónia de abertura: quinta-feira, 25 de Março de 2027, Kilamba Arena, Luanda (hora a confirmar; proposta 18:00).",
     ],
     [
-      "Cultural Night: 24 March 2027. Closing ceremony and flag handover: 28 March 2027 (proposed).",
-      "Noite Cultural: 24 de Março de 2027. Cerimónia de encerramento e passagem da bandeira: 28 de Março de 2027 (proposta).",
+      "Closing ceremony: Saturday 3 April 2027, luncheon at the CCB Futungo II Marquee. Cultural Night: 30 March 2027 (proposed).",
+      "Cerimónia de encerramento: sábado, 3 de Abril de 2027, almoço na Marquee do CCB Futungo II. Noite Cultural: 30 de Março de 2027 (proposta).",
     ],
   ]),
   topic("who-competes", ["Who competes", "Quem participa"], [
@@ -48,24 +48,24 @@ export const guide: GuideItem[] = [
   ]),
   topic("travel", ["Getting to Angola", "Viajar para Angola"], [
     [
-      "Delegations arrive at Luanda's international airport, where the Organising Committee runs a welcome desk and transfers to the Games Village.",
-      "As delegações chegam ao aeroporto internacional de Luanda, onde o Comité Organizador tem um balcão de boas-vindas e transferes para a Aldeia dos Jogos.",
+      "Delegations arrive at Luanda's international airport, where the Organising Committee runs a welcome desk and transfers to their accommodation.",
+      "As delegações chegam ao aeroporto internacional de Luanda, onde o Comité Organizador tem um balcão de boas-vindas e transferes para o alojamento.",
     ],
     [
       "The Organising Committee supports visa applications for accredited delegation members. Apply at least four weeks before travel.",
       "O Comité Organizador apoia os pedidos de visto dos membros acreditados das delegações. Faça o pedido pelo menos quatro semanas antes da viagem.",
     ],
   ]),
-  topic("village", ["Games Village and accreditation", "Aldeia dos Jogos e acreditação"], [
+  topic("village", ["Accommodation and accreditation", "Alojamento e acreditação"], [
     [
-      "Athletes and team officials stay in the Games Village. Location: [CONTENT REQUIRED].",
-      "Os atletas e oficiais das equipas ficam alojados na Aldeia dos Jogos. Localização: [CONTENT REQUIRED].",
+      "Delegations stay close to their competition venue: Sayovo, Bengo (athletics), Ilha Mar (3x3 basketball, beach volleyball), Hotel Vila Alice (chess), Academia Diplomática (tennis), Zongo and Vila Alice (karate, taekwondo) and Futungo (football).",
+      "As delegações ficam alojadas perto do seu recinto de competição: Sayovo, Bengo (atletismo), Ilha Mar (basquetebol 3x3, voleibol de praia), Hotel Vila Alice (xadrez), Academia Diplomática (ténis), Zongo e Vila Alice (karaté, taekwondo) e Futungo (futebol).",
     ],
     [
       "Accreditation cards are collected on arrival and must be worn at all venues.",
       "Os cartões de acreditação são levantados à chegada e devem ser usados em todos os recintos.",
     ],
-  ], "required"),
+  ]),
   topic("fans", ["For fans and families", "Para adeptos e famílias"], [
     [
       "Entry to competition venues is planned to be free for the public, subject to capacity (to be confirmed).",
@@ -82,8 +82,8 @@ export const guide: GuideItem[] = [
       "Os XIII Jogos da CPLP são um evento juvenil: cada delegação indica um responsável pela proteção e cada fotografia de um menor exige consentimento.",
     ],
     [
-      "Medical services are available at every venue and in the Games Village.",
-      "Há serviços médicos em todos os recintos e na Aldeia dos Jogos.",
+      "Medical services are available at every venue and every delegation hotel.",
+      "Há serviços médicos em todos os recintos e em todos os alojamentos das delegações.",
     ],
   ]),
 ];

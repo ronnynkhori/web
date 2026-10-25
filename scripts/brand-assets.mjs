@@ -58,6 +58,22 @@ await negative("com data_3", "com data_7", "cplp-logo-h-date-negative");
 await negative(2, 6, "cplp-logo-stacked-negative");
 await negative("com data_4", "com data_8", "cplp-logo-stacked-date-negative");
 
+// Ondaka (the agency behind the proposal): colour logo for light surfaces, and a
+// negative for navy with the gold symbol kept and the near-black wordmark and
+// tagline turned white (the supplied "on black" file keeps a dark wordmark).
+const ondakaSrc = path.join(src, "ondaka", "LOGO_ONDAKA.png");
+const ondaka = await sharp(ondakaSrc).trim().resize({ width: 900, withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(path.join(brandOut, "ondaka-h.png"));
+console.log("ondaka-h", `${ondaka.width}x${ondaka.height}`);
+{
+  const { data, info } = await sharp(ondakaSrc).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let i = 0; i < data.length; i += 4) {
+    const [r, g, b, a] = [data[i], data[i + 1], data[i + 2], data[i + 3]];
+    if (a > 0 && Math.max(r, g, b) < 120 && Math.max(r, g, b) - Math.min(r, g, b) < 40) data[i] = data[i + 1] = data[i + 2] = 255;
+  }
+  const out = await sharp(data, { raw: info }).trim().resize({ width: 900, withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(path.join(brandOut, "ondaka-h-negative.png"));
+  console.log("ondaka-h-negative", `${out.width}x${out.height}`);
+}
+
 // Emblem only (flags + swooshes), cropped from the stacked colour logo for icons.
 const emblemArea = await sharp(logo(2)).extract({ left: 400, top: 100, width: 1200, height: 1150 }).png().toBuffer();
 const emblem = await sharp(emblemArea).trim().toBuffer();

@@ -7,13 +7,13 @@ import { cn } from "@/lib/cn";
 import { pick, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 
-const OPENING = "2026-12-04";
-const CLOSING = "2026-12-13";
+const CEREMONY_DAYS = new Set<string>(keyDates.filter((d) => d.key !== "cultural").map((d) => d.iso));
 
 /** Sport x day grid from the CDM competition schedule (Table 12). Scrolls sideways on small screens. */
 export function CompetitionGrid({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const p = dict.pages;
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" });
+  const month = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
   const rows = sports.filter((s) => s.programme);
   const cell = "h-touch min-w-touch border-b border-line p-1 text-center";
   return (
@@ -40,6 +40,9 @@ export function CompetitionGrid({ dict, locale }: { dict: Dictionary; locale: Lo
                   <time dateTime={iso} className="type-label tabular">
                     {Number(iso.slice(8))}
                   </time>
+                  {(iso === competitionDays[0] || iso.endsWith("-01")) && (
+                    <span className="block type-caption uppercase text-accent">{month.format(new Date(iso))}</span>
+                  )}
                 </th>
               ))}
             </tr>
@@ -98,7 +101,7 @@ function CeremonyRow({ label, cellClass, ceremony }: { label: string; cellClass:
       </th>
       {competitionDays.map((iso) => (
         <td key={iso} className={cellClass}>
-          {(iso === OPENING || iso === CLOSING) && (
+          {CEREMONY_DAYS.has(iso) && (
             <span className="mx-auto block size-5 rounded-xs bg-band-highlight" title={ceremony}>
               <span className="sr-only">{ceremony}</span>
             </span>

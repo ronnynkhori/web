@@ -6,7 +6,8 @@ Read this first. It explains what this repo is, who it is for, what is done and 
 
 - **Client contact:** Edgar Leandro (via WhatsApp).
 - **Ask:** "Create a similar website [to maputo-2026-x8ni.vercel.app] with those logos. I need to present a proposal ... by Sunday. Just change the logos and mascot."
-- **Event:** XIII Jogos Desportivos da CPLP (13th Games of the Community of Portuguese-Speaking Countries), **Angola 2027**. The dated logo variants confirm "Angola 2027".
+- **Event:** XIII Jogos Desportivos da CPLP (13th Games of the Community of Portuguese-Speaking Countries), **Angola 2027**, **25 March to 3 April 2027** in Luanda (confirmed by the client on 25 Oct 2026).
+- **Agency:** Ondaka (strategy, communication, public influence) made the brand book and presents this proposal. Credit in the footer ("Proposta desenvolvida por" + `ondaka-h-negative.png`).
 - **Deadline:** Sunday 25 October 2026 (the proposal presentation).
 - **Origin:** This repo started as a selective copy of the owner's Maputo 2026 site (AUSC Region 5 Youth Games), rebranded. It is NOT linked to that repo or its Vercel project.
 
@@ -41,7 +42,9 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 ## Brand (from the client's brand pack)
 
 - **`brand-assets/logomarca/`:** 12 logo PNGs (colour, white and black; horizontal and stacked; with and without "Angola 2027"). The `.ai`, `.eps` and `.pdf` vector originals are git-ignored because they are too large.
-- **`brand-assets/Mascote/`:** 17 mascot PNGs. The mascot is a **guinea fowl (galinha-d'angola)** in sports kit: neutral welcome/thumbs-up poses plus athletics, para athletics (wheelchair), 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess. The last two were extracted from the brand book (p.7, 376 px, mask recombined) because the ZIP did not include them.
+- **`brand-assets/ondaka/`:** Ondaka agency logos (horizontal colour, vertical gold/black, vertical on black). The brand script outputs `ondaka-h.png` and `ondaka-h-negative.png` (gold symbol, white wordmark) for the navy footer.
+- **`public/videos/promo/`:** the official promo film with its song (69 s, from the client): `cplp-2027-filme-1080.mp4` (desktop), `-720.mp4` (phones), a silent 10 s `-preview.mp4` loop and a poster. Shown by `src/components/promo/` in the "Filme oficial" section right after the hero. Re-encode with ffmpeg (H.264, `-movflags +faststart`) if the client sends a new cut.
+- **`brand-assets/Mascote/`:** 17 mascot PNGs. The mascot is the **galinha-capota (capota guineafowl)**, approved as the official mascot, in sports kit: neutral welcome/thumbs-up poses plus athletics, para athletics (wheelchair), 3x3 basketball, football, karate, taekwondo, tennis, beach volleyball and chess. The last two were extracted from the brand book (p.7, 376 px, mask recombined) because the ZIP did not include them.
 - **`scripts/brand-assets.mjs`** turns these into web assets:
   - `public/images/brand/cplp-logo-*.png`, including `*-negative` (the brand book's negative version for dark backgrounds: white swooshes and wordmark, flags in colour). Do not mix colour swooshes with a white wordmark; the book allows no other variations.
   - `cplp-emblem.png`.
@@ -78,12 +81,29 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
   - Mascot pose on each sport card (`src/components/sports/sport-card.tsx`).
 - **Admin translations:** `src/lib/admin/i18n/catalog/*.ts` (English key to Portuguese).
 
+## Confirmed by the client (Ondaka, 25 Oct 2026)
+
+- **Dates:** 25 March to 3 April 2027 (10 days, `gamesDays = 10`).
+- **Ceremonies:** opening at **Kilamba Arena** on 25 March; closing is a **luncheon at the CCB Futungo II Marquee** on 3 April.
+- **Mascot:** the **galinha-capota** is the official mascot (statement and roles in `mascot.*` messages; the name-the-mascot poll was removed).
+- **Venues, accommodation and participants per sport** (`src/data/sports.ts`, `venues.ts`; 840 participants in total):
+
+ | Sport | Competition | Accommodation | Participants |
+ |---|---|---|---|
+ | Athletics (incl. para athletics) | Sayovo | Sayovo / Bengo | 192 |
+ | 3x3 Basketball | Marginal | Ilha Mar | 112 |
+ | Chess | Cidadela | Hotel Vila Alice | 40 |
+ | Tennis | Kikuchi | Academia Diplomática | 56 |
+ | Karate and taekwondo | Cidadela | Zongo / Vila Alice | 192 |
+ | Football | AFA | Futungo | 184 |
+ | Beach volleyball | Ilha | Ilha Mar | 64 |
+
 ## Provisional facts (flag these to the client)
 
-- **Host city:** Luanda (assumed). The brand book only says "Angola".
-- **Dates:** March 2027 is confirmed. The days 20–28 March are a placeholder (the countdown targets 20 March 18:00 WAT; the hero shows "Março de 2027" with a review flag).
-- **Venues:** proposals only (Estádio 11 de Novembro, Pavilhão da Cidadela, Estádio dos Coqueiros, Marginal de Luanda, Ilha de Luanda beach, Clube de Ténis de Luanda, Centro de Convenções de Talatona).
-- **Mascot name:** unknown (not in the brand book). The mascot section says "galinha-d'angola" with a `[CLIENT TO CONFIRM]` flag, which is visible only with `?review=1`.
+- **Opening time:** 18:00 WAT is assumed (countdown target).
+- **Full venue names:** "Sayovo", "Kikuchi" and "AFA" are as written in the client's table.
+- **Days per sport, Cultural Night (30 Mar), quotas and eligibility:** proposals inside the confirmed dates.
+- **"Remove 36… just keep the logo":** a WhatsApp note from Edgar that is still unclear; nothing changed for it yet.
 - **Photos:** AI-generated demo images, not event photography.
 
 ## Status (update this list as you work)
@@ -111,8 +131,9 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
   - name-the-mascot demo poll.
 - [x] The tricolour "ribbon" (`.torch-stripe`) is a solid wave band. The client rejected the block stripe, the gapped waves, animated ribbons and the kinetic marquee.
 - [x] Share card (`src/app/[locale]/opengraph-image.tsx`) uses Kanit/Montserrat TTFs from `src/assets/fonts/`.
+- [x] Client update (25 Oct): confirmed dates and ceremony venues, galinha-capota copy, venues/accommodation/participants per sport, promo film section, Ondaka footer credit.
 - [ ] Visual QA on mobile and desktop (`/pt`, `/en`, `/pt/sports/football`, `/pt/schedule`, `/admin/login`).
-- [ ] Still to get from the client: mascot name, host city and exact days in March.
+- [ ] Still to get from the client: opening time, full venue names, and what "Remove 36… just keep the logo" means.
 - [ ] Nice to have: a mascot-led 404 page, a mascot in the assistant button, and a short proposal summary page.
 
 <!-- BEGIN:nextjs-agent-rules -->

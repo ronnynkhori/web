@@ -48,6 +48,10 @@ export interface SportProgramme {
   eligibility?: Localized;
   /** Maximum entries per nation (CDM Table 8). */
   quota?: { men: number; women: number; staff: number; judges: number; total: number };
+  /** Where the delegations for this sport stay. */
+  lodging?: Localized;
+  /** Participants for the sport; `group` names the shared total when several sports are counted together. */
+  participants?: { n: number; group?: Localized };
   /** Broadcast mode (CDM Table 12). */
   broadcast?: "live" | "live-delayed" | "live-semis" | "live-semis-delayed" | "delayed" | "eng";
   /** Extra events or notes, e.g. para athletics classes. */
@@ -77,6 +81,8 @@ export interface Venue {
   image?: ImageAsset;
   address?: string;
   mapUrl?: string;
+  /** Spread over several sites (e.g. accommodation), so there is no single map pin. */
+  noMap?: boolean;
   accessibility?: Localized;
 }
 

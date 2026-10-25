@@ -29,11 +29,11 @@ const go = {
 export const faq: FaqEntry[] = [
   {
     id: "dates",
-    keywords: ["when", "date", "dates", "march", "start", "begin", "quando", "data", "datas", "marco", "comeca", "inicio"],
+    keywords: ["when", "date", "dates", "march", "april", "start", "begin", "quando", "data", "datas", "marco", "abril", "comeca", "inicio"],
     question: t("When are the Games?", "Quando são os Jogos?"),
     answer: t(
-      "The XIII CPLP Games take place in Angola in March 2027. The exact days will be confirmed by the Organising Committee; this proposal uses 20 to 28 March, with the opening ceremony on 20 March and the closing ceremony on 28 March.",
-      "Os XIII Jogos da CPLP realizam-se em Angola em Março de 2027. Os dias exatos serão confirmados pelo Comité Organizador; esta proposta usa 20 a 28 de Março, com a cerimónia de abertura a 20 de Março e o encerramento a 28 de Março.",
+      "The XIII CPLP Games run from 25 March to 3 April 2027: the opening ceremony is on 25 March at Kilamba Arena and the closing ceremony is a luncheon on 3 April at the CCB Futungo II Marquee.",
+      "Os XIII Jogos da CPLP decorrem de 25 de Março a 3 de Abril de 2027: a cerimónia de abertura é a 25 de Março na Kilamba Arena e o encerramento é um almoço a 3 de Abril na Marquee do CCB Futungo II.",
     ),
     link: go.guide,
   },
@@ -42,8 +42,8 @@ export const faq: FaqEntry[] = [
     keywords: ["where", "host", "city", "luanda", "angola", "onde", "anfitriao", "cidade"],
     question: t("Where are the Games held?", "Onde se realizam os Jogos?"),
     answer: t(
-      "Angola is the host nation of the XIII CPLP Games. The proposed host city is Luanda, with the opening ceremony at the 11 November Stadium.",
-      "Angola é o país anfitrião dos XIII Jogos da CPLP. A cidade anfitriã proposta é Luanda, com a cerimónia de abertura no Estádio 11 de Novembro.",
+      "Angola is the host nation of the XIII CPLP Games. The Games are held in Luanda, with the opening ceremony at Kilamba Arena.",
+      "Angola é o país anfitrião dos XIII Jogos da CPLP. Os Jogos realizam-se em Luanda, com a cerimónia de abertura na Kilamba Arena.",
     ),
     link: go.venues,
   },
@@ -69,11 +69,11 @@ export const faq: FaqEntry[] = [
   },
   {
     id: "mascot",
-    keywords: ["mascot", "mascote", "guinea fowl", "galinha", "galinha d angola"],
+    keywords: ["mascot", "mascote", "guinea fowl", "guineafowl", "galinha", "capota", "galinha capota"],
     question: t("Who is the mascot?", "Quem é a mascote?"),
     answer: t(
-      "The mascot is a guinea fowl, the galinha-d'angola: a bird that carries Angola's name across the Portuguese-speaking world. It appears in the kit of every sport on the programme.",
-      "A mascote é uma galinha-d'angola: uma ave que leva o nome de Angola a todo o mundo de língua portuguesa. Aparece equipada para todas as modalidades do programa.",
+      "The official mascot is the capota guineafowl (galinha-capota), a recognisable element of Angolan identity. It welcomes, informs and inspires young people, and appears in the kit of every sport on the programme.",
+      "A mascote oficial é a galinha-capota, um elemento reconhecível da identidade angolana. Acolhe, explica e mobiliza os mais jovens, e aparece equipada para todas as modalidades do programa.",
     ),
     link: go.mascot,
   },
@@ -102,8 +102,8 @@ export const faq: FaqEntry[] = [
     keywords: ["venue", "venues", "stadium", "recinto", "recintos", "estadio", "pavilhao"],
     question: t("Where are the venues?", "Onde ficam os recintos?"),
     answer: t(
-      "The proposed venues are in Luanda: the 11 November Stadium, the Cidadela Pavilion, the Coqueiros Stadium, the Marginal outdoor court and the Luanda Tennis Club.",
-      "Os recintos propostos ficam em Luanda: o Estádio 11 de Novembro, o Pavilhão da Cidadela, o Estádio dos Coqueiros, o campo exterior da Marginal e o Clube de Ténis de Luanda.",
+      "Opening at Kilamba Arena and closing at CCB Futungo II. Competition: Sayovo (athletics), the Marginal (3x3 basketball), Cidadela (karate, taekwondo, chess), Kikuchi (tennis), AFA (football) and Ilha de Luanda (beach volleyball).",
+      "Abertura na Kilamba Arena e encerramento no CCB Futungo II. Competição: Sayovo (atletismo), Marginal (basquetebol 3x3), Cidadela (karaté, taekwondo, xadrez), Kikuchi (ténis), AFA (futebol) e Ilha de Luanda (voleibol de praia).",
     ),
     link: go.venues,
   },

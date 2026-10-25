@@ -85,6 +85,10 @@ export function Footer({ locale, dict, items }: FooterProps) {
             />
           </div>
           <p className="m-0 max-w-prose type-body-s text-fg-2">{f.identity}</p>
+          <p className="m-0 flex flex-col items-start gap-2 border-t border-line pt-4">
+            <span className="type-overline text-fg-muted">{f.proposalBy}</span>
+            <Image src="/images/brand/ondaka-h-negative.png" alt="Ondaka" width={805} height={198} sizes="200px" className="h-[clamp(2.25rem,2rem+0.8vw,2.75rem)] w-auto" />
+          </p>
           <LanguageSwitch locale={locale} label={dict.a11y.language} switchToTemplate={dict.a11y.switchTo} placement="up" className="self-start" />
           <MotionToggle label={f.reduceMotion} className="self-start" />
         </div>

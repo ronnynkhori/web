@@ -14,6 +14,7 @@ import { SiteBanner } from "@/components/layout/site-banner";
 import { getSettings } from "@/lib/cms/read";
 import { MediaSection } from "@/components/media/media-section";
 import { NewsSection } from "@/components/news/news-section";
+import { PromoFilmSection } from "@/components/promo/promo-film-section";
 import { SponsorsSection } from "@/components/sponsors/sponsors-section";
 import { SportsSection } from "@/components/sports/sports-section";
 import { VenuesSection } from "@/components/venues/venues-section";
@@ -21,15 +22,15 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
 import { DEMO_GAME_DAY, DEMO_PHASE, gameDay, getPhase, isPhase, type Phase } from "@/lib/phase";
 
-type SectionId = "hub" | "media" | "sports" | "news" | "games" | "mascot" | "countries" | "venues" | "guide" | "sponsors";
+type SectionId = "film" | "hub" | "media" | "sports" | "news" | "games" | "mascot" | "countries" | "venues" | "guide" | "sponsors";
 
 /** Phones read top to bottom: what visitors want first comes first in the DOM.
  * Before the Games the order also alternates the navy bands (mascot, countries,
  * live teaser) with light ones. */
 const ORDER: Record<Phase, SectionId[]> = {
-  pre: ["games", "mascot", "sports", "countries", "venues", "hub", "news", "media", "guide", "sponsors"],
-  live: ["hub", "media", "sports", "news", "mascot", "games", "countries", "venues", "guide", "sponsors"],
-  post: ["hub", "media", "news", "games", "mascot", "sports", "countries", "venues", "guide", "sponsors"],
+  pre: ["film", "games", "mascot", "sports", "countries", "venues", "hub", "news", "media", "guide", "sponsors"],
+  live: ["hub", "media", "film", "sports", "news", "mascot", "games", "countries", "venues", "guide", "sponsors"],
+  post: ["hub", "media", "film", "news", "games", "mascot", "sports", "countries", "venues", "guide", "sponsors"],
 };
 
 export default async function HomePage({ params, searchParams }: PageProps<"/[locale]">) {
@@ -90,6 +91,7 @@ function PhasedHome({
 }) {
   const compact = phase !== "pre";
   const sections: Record<SectionId, ReactNode> = {
+    film: <PromoFilmSection key="film" dict={dict} />,
     hub: <HubSection key="hub" dict={dict} locale={locale} phase={phase} />,
     media: <MediaSection key="media" dict={dict} locale={locale} />,
     sports: <SportsSection key="sports" dict={dict} locale={locale} />,

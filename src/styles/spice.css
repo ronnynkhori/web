@@ -81,21 +81,6 @@ html[data-motion="reduce"] .tilt-card::after {
   display: none;
 }
 
-/* ---------- Name-the-mascot poll ---------- */
-.mascot-poll button {
-  isolation: isolate;
-}
-.poll-bar {
-  background: color-mix(in oklab, var(--tk-color-brand-yellow) 22%, transparent);
-  animation: poll-grow 900ms var(--tk-ease-emphasized) both;
-  transform-origin: left;
-}
-@keyframes poll-grow {
-  from {
-    scale: 0 1;
-  }
-}
-
 /* ---------- Mascot cameos ---------- */
 .mascot-cameo [data-mascot="enter"][data-mascot-in] {
   animation-name: mascot-peek;
@@ -265,3 +250,25 @@ html[data-motion="reduce"] .map-arc {
   transition: none;
 }
 
+
+/* ---------- Promo film ---------- */
+.promo-film-scrim {
+  background:
+    radial-gradient(ellipse at center, rgb(10 42 102 / 0.15), rgb(10 42 102 / 0.6) 75%),
+    linear-gradient(to top, rgb(10 42 102 / 0.7), transparent 45%);
+}
+.promo-film-play {
+  animation: promo-pulse 2.4s var(--tk-ease-standard, ease-in-out) infinite;
+}
+@keyframes promo-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(239 193 0 / 0.55), 0 12px 40px rgb(0 0 0 / 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 1.25rem rgb(239 193 0 / 0), 0 12px 40px rgb(0 0 0 / 0.45);
+  }
+}
+html[data-motion="reduce"] .promo-film-play {
+  animation: none;
+}

@@ -1,8 +1,8 @@
 /**
  * Official mascot artwork (brand-assets/Mascote, built by scripts/brand-assets.mjs).
- * A guinea fowl (galinha-d'angola) in the Games kit. The beach volleyball and
- * chess poses come from the brand book (OFFICIAL BRAND XIII CPLP p.7).
- * [CLIENT TO CONFIRM] mascot name.
+ * The galinha-capota (capota guineafowl), the official mascot approved by the
+ * client, in the Games kit. The beach volleyball and chess poses come from the
+ * brand book (OFFICIAL BRAND XIII CPLP p.7).
  */
 import type { Localized } from "@/lib/i18n/config";
 

@@ -3,13 +3,11 @@ import { fill, pick, type Locale } from "@/lib/i18n/config";
 import { mascotPoses, sportPoses } from "@/data/mascot";
 import { reveal } from "@/lib/animation/reveal";
 import { Button } from "@/components/ui/button";
-import { ContentFlag } from "@/components/ui/content-flag";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SwooshEdge } from "@/components/ui/swoosh-edge";
 import { MascotStage, type MascotPoseView } from "./mascot-stage";
-import { MascotNamePoll } from "./mascot-name-poll";
 
-/** The mascot: the guinea fowl's story on a navy band, with every sport pose. */
+/** The official mascot, the galinha-capota: its role on a navy band, with every sport pose. */
 export function MascotSection({
   dict,
   locale,
@@ -51,11 +49,10 @@ export function MascotSection({
               overline={m.overline}
               title={m.title}
               titleAccent={m.titleAccent}
-              meta={<ContentFlag>{m.nameFlag}</ContentFlag>}
               intro={m.intro}
               className="mb-6! desktop:mb-7!"
             />
-            <ul className="m-0 grid list-none gap-4 p-0 tablet:grid-cols-3 desktop:grid-cols-1">
+            <ul className="m-0 grid list-none gap-x-6 gap-y-4 p-0 tablet:grid-cols-2">
               {m.traits.map((trait, i) => (
                 <li
                   key={trait.title}
@@ -67,7 +64,9 @@ export function MascotSection({
                 </li>
               ))}
             </ul>
-            <MascotNamePoll labels={m.poll} flag={<ContentFlag>{m.poll.flag}</ContentFlag>} />
+            <p className="m-0 mt-7 max-w-[30ch] font-display text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-tight font-extrabold text-accent uppercase" {...reveal("fade-up", 6)}>
+              {m.motto}
+            </p>
             <Button
               href={`/${locale}#sports`}
               variant="secondary"

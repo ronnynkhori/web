@@ -19,8 +19,8 @@ export const announcements: Announcement[] = [
     pinned: true,
     title: t("Official identity and mascot of the XIII CPLP Games unveiled", "Apresentada a identidade oficial e a mascote dos XIII Jogos da CPLP"),
     body: t(
-      "The emblem brings together the flags of the nine member states around three swooshes in red, blue and yellow. The mascot, a guinea fowl (galinha-d'angola), carries the host nation's name across the Portuguese-speaking world.",
-      "O emblema reúne as bandeiras dos nove Estados-membros em torno de três traços em vermelho, azul e amarelo. A mascote, uma galinha-d'angola, leva o nome do país anfitrião a todo o mundo de língua portuguesa.",
+      "The emblem brings together the flags of the nine member states around three swooshes in red, blue and yellow. The official mascot is the capota guineafowl (galinha-capota): an Angolan character to welcome the youth of the CPLP.",
+      "O emblema reúne as bandeiras dos nove Estados-membros em torno de três traços em vermelho, azul e amarelo. A mascote oficial é a galinha-capota: uma personagem angolana para receber a juventude da CPLP.",
     ),
     audience: t("Everyone", "Todos"),
     action: { href: "#mascot", label: t("Meet the mascot", "Conhecer a mascote") },
@@ -42,8 +42,8 @@ export const announcements: Announcement[] = [
     kind: "notice",
     title: t("Volunteer programme: register your interest", "Programa de voluntariado: manifeste o seu interesse"),
     body: t(
-      "Young people in Luanda can register their interest in volunteering at the Games: accreditation, venues, transport and the Games Village.",
-      "Os jovens de Luanda podem manifestar interesse em ser voluntários nos Jogos: acreditação, recintos, transportes e Aldeia dos Jogos.",
+      "Young people in Luanda can register their interest in volunteering at the Games: accreditation, venues, transport and delegation accommodation.",
+      "Os jovens de Luanda podem manifestar interesse em ser voluntários nos Jogos: acreditação, recintos, transportes e alojamento das delegações.",
     ),
     audience: t("Volunteers", "Voluntários"),
     action: guide,

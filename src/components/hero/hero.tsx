@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/icon";
 import { heroMedia } from "@/data/hero";
 import { DemoBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ContentFlag, RichContent } from "@/components/ui/content-flag";
+import { RichContent } from "@/components/ui/content-flag";
 import { Flag } from "@/components/ui/flag";
 import { Countdown } from "./countdown";
 import { HeroParallax } from "./hero-parallax";
@@ -110,8 +110,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
           </p>
           {phase !== "post" && (
             <p className="hero-rise m-0 mt-4 flex flex-wrap items-center gap-3 type-heading-m short:mt-3 font-extrabold uppercase" style={i("--rise-i", 1)}>
-              <time dateTime="2027-03">{h.dates}</time>
-              <ContentFlag>{h.datesFlag}</ContentFlag>
+              <time dateTime="2027-03-25">{h.dates}</time>
             </p>
           )}
           <div className="hero-cta mt-6 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex tablet:flex-wrap tablet:*:whitespace-nowrap squat:mt-5">

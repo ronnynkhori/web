@@ -18,6 +18,7 @@ function accessible(venue: Venue, locale: Locale): string {
 /** The LOC's link if given; otherwise an OpenStreetMap search, only for venues whose location is known. */
 function mapLink(venue: Venue): string | null {
   if (venue.mapUrl) return venue.mapUrl;
+  if (venue.noMap) return null;
   const area = venue.area.en;
   if (venue.status === "required" || isPending(area)) return null;
   const query = [venue.address ?? venue.name.pt, area].join(", ");

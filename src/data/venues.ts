@@ -1,10 +1,11 @@
 /**
- * Proposed venues in Luanda for the proposal. [CLIENT TO CONFIRM] every venue
- * with the Organising Committee. Venues with an image are shown as cards; the
- * rest as a compact list.
+ * Venues of the XIII CPLP Games, from the client's venue table (Ondaka,
+ * 25 Oct 2026): ceremony venues, competition venue and accommodation per
+ * sport. Sayovo, Kikuchi and AFA are named as in the client's table
+ * ([CLIENT TO CONFIRM] full official names). Venues with an image are shown
+ * as cards; the rest as a compact list.
  */
 import type { Localized } from "@/lib/i18n/config";
-import { CONTENT_REQUIRED } from "@/lib/content";
 import { demoImages as img } from "./demo/images";
 import type { Venue } from "./types";
 
@@ -12,68 +13,68 @@ const t = (en: string, pt: string): Localized => ({ en, pt });
 const same = (v: string) => t(v, v);
 const LUANDA = same("Luanda");
 
-function competition(id: string, name: Localized, sports: Localized, area: Localized = LUANDA): Venue {
+function competition(id: string, name: Localized, sports: Localized, area: Localized = LUANDA, status: Venue["status"] = "confirmed"): Venue {
   return {
     id,
     name,
     role: t("Competition venue", "Recinto de competição"),
     sports,
     area,
-    status: "source",
+    status,
     tone: "region",
   };
 }
 
 export const venues: Venue[] = [
   {
-    id: "estadio-11-novembro",
-    name: t("11 November Stadium", "Estádio 11 de Novembro"),
-    role: t("Opening ceremony and athletics (proposed)", "Cerimónia de abertura e atletismo (proposta)"),
-    sports: t("Athletics, para athletics", "Atletismo, atletismo adaptado"),
-    area: same("Camama, Luanda"),
-    status: "source",
-    tone: "energy",
-    image: img.stadium,
-  },
-  {
-    id: "games-village",
-    name: t("Games Village", "Aldeia dos Jogos"),
-    role: t("Delegation accommodation and accreditation centre", "Alojamento das delegações e centro de acreditação"),
+    id: "kilamba-arena",
+    name: same("Kilamba Arena"),
+    role: t("Opening ceremony · 25 March 2027", "Cerimónia de abertura · 25 de Março de 2027"),
     sports: same("—"),
-    area: t(CONTENT_REQUIRED, CONTENT_REQUIRED),
-    status: "required",
-    tone: "premium",
-    image: img.volunteers,
+    area: same("Kilamba, Luanda"),
+    status: "confirmed",
+    tone: "energy",
+    image: img.parade,
   },
   {
     id: "pavilhao-cidadela",
     name: t("Cidadela Pavilion", "Pavilhão da Cidadela"),
-    role: t("Combat sports (proposed)", "Desportos de combate (proposta)"),
-    sports: t("Karate, taekwondo", "Karaté, taekwondo"),
+    role: t("Combat sports and chess", "Lutas e xadrez"),
+    sports: t("Karate, taekwondo, chess", "Karaté, taekwondo, xadrez"),
     area: LUANDA,
-    status: "source",
+    status: "confirmed",
     tone: "highlight",
     image: img.arena,
   },
-  competition("estadio-coqueiros", t("Coqueiros Stadium", "Estádio dos Coqueiros"), t("Football", "Futebol")),
-  competition("marginal-luanda", t("Luanda Marginal (outdoor court)", "Marginal de Luanda (campo exterior)"), t("3x3 Basketball", "Basquetebol 3x3")),
   {
-    id: "praia-ilha-luanda",
-    name: t("Ilha de Luanda beach arena", "Arena de praia da Ilha de Luanda"),
-    role: t("Beach volleyball (proposed)", "Voleibol de praia (proposta)"),
-    sports: t("Beach volleyball", "Voleibol de praia"),
-    area: same("Ilha de Luanda"),
-    status: "source",
-    tone: "highlight",
-    image: img.luanda,
+    id: "ccb-futungo",
+    name: same("CCB Futungo II"),
+    role: t("Closing ceremony luncheon, Marquee · 3 April 2027", "Almoço de encerramento, Marquee · 3 de Abril de 2027"),
+    sports: same("—"),
+    area: same("Futungo de Belas, Luanda"),
+    status: "confirmed",
+    tone: "premium",
+    image: img.closing,
   },
-  competition("clube-tenis-luanda", t("Luanda Tennis Club", "Clube de Ténis de Luanda"), t("Tennis", "Ténis")),
-  competition(
-    "centro-convencoes-talatona",
-    t("Talatona Convention Centre", "Centro de Convenções de Talatona"),
-    t("Chess", "Xadrez"),
-    same("Talatona, Luanda"),
-  ),
+  {
+    id: "accommodation",
+    name: t("Delegation accommodation", "Alojamento das delegações"),
+    role: t(
+      "Sayovo (Bengo), Ilha Mar, Hotel Vila Alice, Academia Diplomática, Zongo, Vila Alice and Futungo: each sport stays close to its venue",
+      "Sayovo (Bengo), Ilha Mar, Hotel Vila Alice, Academia Diplomática, Zongo, Vila Alice e Futungo: cada modalidade fica perto do seu recinto",
+    ),
+    sports: same("—"),
+    area: t("Luanda and Bengo", "Luanda e Bengo"),
+    status: "confirmed",
+    tone: "region",
+    image: img.volunteers,
+    noMap: true,
+  },
+  competition("sayovo", same("Sayovo"), t("Athletics, para athletics", "Atletismo, atletismo adaptado"), same("Bengo"), "source"),
+  competition("afa", same("AFA"), t("Football", "Futebol"), LUANDA, "source"),
+  competition("marginal-luanda", t("Luanda Marginal", "Marginal de Luanda"), t("3x3 Basketball", "Basquetebol 3x3")),
+  competition("praia-ilha-luanda", t("Ilha de Luanda beach", "Praia da Ilha de Luanda"), t("Beach volleyball", "Voleibol de praia"), same("Ilha de Luanda")),
+  competition("kikuchi", same("Kikuchi"), t("Tennis", "Ténis"), LUANDA, "source"),
 ];
 
 export function getVenue(id: string): Venue | undefined {

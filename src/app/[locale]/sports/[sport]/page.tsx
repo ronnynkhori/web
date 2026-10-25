@@ -112,6 +112,24 @@ export default async function SportPage({ params, searchParams }: Props) {
                     </li>
                   ))}
                 </ul>
+                {programme?.lodging && (
+                  <p className="m-0 flex flex-col gap-1">
+                    <span className="type-overline text-accent">{p.sportLodging}</span>
+                    <span className="flex items-center gap-2 type-label">
+                      <Icon name="bed" size={16} className="text-accent" />
+                      {pick(programme.lodging, locale)}
+                    </span>
+                  </p>
+                )}
+                {programme?.participants && (
+                  <p className="m-0 flex flex-col gap-1">
+                    <span className="type-overline text-accent">{p.sportParticipants}</span>
+                    <span className="type-heading-m tabular">{fill(p.participantsN, { n: programme.participants.n })}</span>
+                    {programme.participants.group && (
+                      <span className="type-caption text-fg-muted">{fill(p.participantsGroup, { group: pick(programme.participants.group, locale) })}</span>
+                    )}
+                  </p>
+                )}
                 <Link href={`/${locale}#venues`} className="inline-flex min-h-touch items-center gap-2 type-label text-link underline-offset-4 hover:underline">
                   {dict.venues.title}
                   <Icon name="arrow-right" size={16} />

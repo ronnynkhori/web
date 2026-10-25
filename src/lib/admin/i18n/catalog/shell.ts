@@ -128,7 +128,7 @@ const part: CatalogPart = {
     "Official website": "Site oficial",
     "XIII CPLP Games": "XIII Jogos Desportivos da CPLP",
     "Angola 2027": "Angola 2027",
-    "13th edition · March 2027": "13.ª edição · Março de 2027",
+    "13th edition · 25 Mar – 3 Apr 2027": "13.ª edição · 25 Mar – 3 Abr 2027",
     "Nine nations, one community. Every score, result and story on the official website is published from here.":
       "Nove nações, uma comunidade. Cada resultado, classificação e notícia do site oficial é publicado a partir daqui.",
     "The 9 nations": "As 9 nações",
