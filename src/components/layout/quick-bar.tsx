@@ -6,7 +6,10 @@ import type { Phase } from "@/lib/phase";
 import { cn } from "@/lib/cn";
 import { Icon, type IconName } from "@/components/ui/icon";
 
-type Item = { key: keyof Omit<Dictionary["quickBar"], "label">; href: string; section: string; icon: IconName };
+type Item = { key: keyof Omit<Dictionary["quickBar"], "label" | "menu">; href: string; section: string; icon: IconName };
+
+/** Opens the site menu sheet (the header listens), so it is reachable while the header is hidden. */
+export const OPEN_MENU_EVENT = "site-menu:open";
 
 const ITEMS: Record<Phase, Item[]> = {
   pre: [
@@ -29,8 +32,20 @@ const ITEMS: Record<Phase, Item[]> = {
   ],
 };
 
+const cellClass = (on: boolean) =>
+  cn(
+    "press flex h-(--quickbar-h) w-full flex-col items-center justify-center gap-[0.3rem] text-[0.625rem] leading-none font-semibold tracking-tight transition-colors duration-ui ease-standard",
+    on ? "text-accent" : "text-fg-muted hover:text-fg",
+  );
+const pillClass = (on: boolean) =>
+  cn(
+    "grid h-[1.625rem] w-[2.75rem] place-items-center rounded-pill transition-colors duration-ui ease-standard",
+    on && "bg-action-secondary text-on-action-secondary",
+  );
+
 /**
- * Phones only: the four things this phase's visitors come for, one thumb away.
+ * Phones only: the four things this phase's visitors come for, one thumb away,
+ * plus the site menu (the header hides while scrolling down).
  * The active item follows the section in view; the hub tab follows the hash.
  */
 export function QuickBar({ phase, labels }: { phase: Phase; labels: Dictionary["quickBar"] }) {
@@ -77,34 +92,31 @@ export function QuickBar({ phase, labels }: { phase: Phase; labels: Dictionary["
       <nav
         aria-label={labels.label}
         data-theme="dark"
-        className="quick-bar fixed inset-x-0 bottom-0 z-sticky border-t border-line bg-surface/95 text-fg backdrop-blur tablet:hidden"
+        className="quick-bar fixed inset-x-0 bottom-0 z-sticky bg-surface/95 text-fg shadow-[0_-8px_24px_rgb(0_0_0/0.25)] backdrop-blur tablet:hidden"
       >
-        <ul className="m-0 grid list-none grid-cols-4 p-0">
+        <span aria-hidden="true" className="torch-stripe absolute inset-x-0 top-0 h-[3px] bg-[length:10rem_100%]" />
+        <ul className="m-0 grid list-none grid-cols-5 p-0">
           {items.map((item) => {
             const on = isActive(item);
             return (
-              <li key={item.key}>
-                <a
-                  href={item.href}
-                  aria-current={on ? "location" : undefined}
-                  className={cn(
-                    "relative flex h-(--quickbar-h) flex-col items-center justify-center gap-1 type-caption font-semibold transition-colors duration-ui ease-standard",
-                    on ? "text-accent" : "text-fg-muted",
-                  )}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-x-5 top-0 h-[2px] origin-center bg-accent transition-transform duration-ui ease-standard",
-                      on ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                  <Icon name={item.icon} size={20} />
-                  {labels[item.key]}
+              <li key={item.key} className="min-w-0">
+                <a href={item.href} aria-current={on ? "location" : undefined} className={cellClass(on)}>
+                  <span className={pillClass(on)} aria-hidden="true">
+                    <Icon name={item.icon} size={20} />
+                  </span>
+                  <span className="max-w-full truncate">{labels[item.key]}</span>
                 </a>
               </li>
             );
           })}
+          <li className="min-w-0">
+            <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_MENU_EVENT))} className={cellClass(false)}>
+              <span className={pillClass(false)} aria-hidden="true">
+                <Icon name="menu" size={20} />
+              </span>
+              <span className="max-w-full truncate">{labels.menu}</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </>

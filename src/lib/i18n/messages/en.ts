@@ -389,6 +389,7 @@ const en = {
   },
   quickBar: {
     label: "Quick links",
+    menu: "Menu",
     countdown: "Countdown",
     sports: "Sports",
     venues: "Venues",

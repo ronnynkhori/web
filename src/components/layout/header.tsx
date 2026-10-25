@@ -10,6 +10,7 @@ import { TorchStripe } from "@/components/ui/torch-stripe";
 import { LanguageSwitch } from "./language-switch";
 import { MobileNav } from "./mobile-nav";
 import { Navigation } from "./navigation";
+import { OPEN_MENU_EVENT } from "./quick-bar";
 import type { NavItem } from "./nav-items";
 
 export interface HeaderLabels {
@@ -86,6 +87,12 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
   useEffect(() => {
     document.documentElement.toggleAttribute("data-header-hidden", hidden && !menuOpen);
   }, [hidden, menuOpen]);
+
+  useEffect(() => {
+    const open = () => setMenuOpen(true);
+    window.addEventListener(OPEN_MENU_EVENT, open);
+    return () => window.removeEventListener(OPEN_MENU_EVENT, open);
+  }, []);
 
   // Scroll-spy for the active nav item.
   useEffect(() => {

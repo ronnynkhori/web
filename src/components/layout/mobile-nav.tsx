@@ -107,7 +107,7 @@ export function MobileNav({ locale, items, active, ctaHref, labels, open, onOpen
             <Button variant="icon" icon="close" onClick={close} aria-label={labels.closeMenu} />
           </div>
 
-          <nav aria-label={labels.mobileNav} className="container-page flex-1 overflow-y-auto py-5">
+          <nav aria-label={labels.mobileNav} className="container-page flex-1 overflow-x-hidden overflow-y-auto py-5">
             <ul className="m-0 flex list-none flex-col p-0">
               {items.map((item, i) => (
                 <motion.li

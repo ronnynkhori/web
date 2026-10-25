@@ -59,6 +59,30 @@ export function HeroSpots({ className }: { className?: string }) {
   return <div aria-hidden="true" className={`hero-spots ${className ?? ""}`} />;
 }
 
+/**
+ * Phones: one big running mascot behind the copy, used like a hero photo
+ * (the flag-arch stage is too small to read there). A navy fade from the
+ * bottom keeps the title legible over the artwork.
+ */
+export function HeroMascotBackdrop({ className }: { className?: string }) {
+  return (
+    <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
+      <span className="hero-backdrop-glow absolute top-[8%] right-[-30%] aspect-square w-[115%] rounded-pill" />
+      <MascotActor
+        {...mascotPoses.athletics}
+        sizes="95vw"
+        enter={false}
+        tap={false}
+        depth={0}
+        preload
+        className="hero-actor absolute top-[calc(var(--header-h)-0.5rem)] right-[-10%] h-[54%] lowphone:h-[47%] short:h-[40%]"
+        imgClassName="h-full w-auto"
+      />
+      <span className="hero-backdrop-scrim absolute inset-0" />
+    </div>
+  );
+}
+
 export interface StageFlag {
   code: string;
   name: string;

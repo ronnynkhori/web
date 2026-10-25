@@ -28,6 +28,16 @@
   mask-image: radial-gradient(60% 75% at 78% 45%, #000 15%, transparent 72%);
 }
 
+/* ---------- Phone backdrop: one big mascot behind the copy ---------- */
+.hero-backdrop-glow {
+  background: radial-gradient(circle, color-mix(in oklab, var(--tk-color-brand-blue) 80%, transparent) 0%, transparent 65%);
+}
+.hero-backdrop-scrim {
+  background:
+    linear-gradient(to top, rgb(10 42 102 / 0.97) 0%, rgb(10 42 102 / 0.82) 34%, rgb(10 42 102 / 0) 64%),
+    linear-gradient(to right, rgb(10 42 102 / 0.55) 0%, transparent 55%);
+}
+
 /* ---------- Stage ---------- */
 .hero-sun {
   background: radial-gradient(circle at 50% 60%, color-mix(in oklab, var(--tk-color-brand-blue) 75%, transparent), transparent 70%);
