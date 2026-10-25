@@ -31,9 +31,10 @@
 /* ---------- Phone backdrop: full-bleed photo that fades into navy behind the copy ---------- */
 .hero-backdrop-scrim {
   background:
-    linear-gradient(to bottom, rgb(10 42 102 / 0.55) 0%, transparent 18%),
-    linear-gradient(to top, rgb(10 42 102 / 0.98) 0%, rgb(10 42 102 / 0.7) 30%, rgb(10 42 102 / 0.15) 60%, transparent 75%),
-    linear-gradient(to right, rgb(10 42 102 / 0.6) 0%, rgb(10 42 102 / 0.25) 50%, transparent 85%);
+    linear-gradient(to bottom, rgb(10 42 102 / 0.6) 0%, transparent 20%),
+    linear-gradient(to top, rgb(10 42 102 / 0.98) 0%, rgb(10 42 102 / 0.6) 24%, transparent 48%),
+    linear-gradient(to right, rgb(10 42 102 / 0.9) 0%, rgb(10 42 102 / 0.55) 40%, rgb(10 42 102 / 0.1) 75%, transparent 100%),
+    linear-gradient(rgb(10 42 102 / 0.18), rgb(10 42 102 / 0.18));
 }
 
 /* ---------- Stage ---------- */

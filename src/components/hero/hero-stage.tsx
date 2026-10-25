@@ -68,16 +68,18 @@ export function HeroSpots({ className }: { className?: string }) {
 export function HeroPhotoBackdrop({ image, position = "50% 20%", className }: { image: ImageAsset; position?: string; className?: string }) {
   return (
     <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
-      <Image
-        src={image.src}
-        alt=""
-        fill
-        sizes="(min-width: 40rem) 1px, 100vw"
-        loading="eager"
-        fetchPriority="high"
-        className="object-cover"
-        style={{ objectPosition: position }}
-      />
+      <div className="absolute inset-y-0 right-[-34%] left-[26%]">
+        <Image
+          src={image.src}
+          alt=""
+          fill
+          sizes="(min-width: 40rem) 1px, 110vw"
+          loading="eager"
+          fetchPriority="high"
+          className="object-cover"
+          style={{ objectPosition: position }}
+        />
+      </div>
       <span className="hero-backdrop-scrim absolute inset-0" />
     </div>
   );
