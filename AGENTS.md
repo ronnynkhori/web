@@ -7,7 +7,7 @@ Read this first. It explains what this repo is, who it is for, what is done and 
 - **Client contact:** Edgar Leandro (via WhatsApp).
 - **Ask:** "Create a similar website [to maputo-2026-x8ni.vercel.app] with those logos. I need to present a proposal ... by Sunday. Just change the logos and mascot."
 - **Event:** XIII Jogos Desportivos da CPLP (13th Games of the Community of Portuguese-Speaking Countries), **Angola 2027**, **25 March to 3 April 2027** in Luanda (confirmed by the client on 25 Oct 2026).
-- **Partners (confirmed 25 Oct):** MINJUD (Ministério da Juventude e Desportos) is the **institutional partner**; Ondaka is the **official marketing and communications agency**. Both are seeded in `src/data/sponsors.ts` and shown as two large cards in the partners section; Ondaka is also credited in the footer.
+- **Partners (confirmed 25 Oct):** MINJUD (Ministério da Juventude e Desportos) is the **institutional partner**; Ondaka is the **official marketing and communications agency**. Both are seeded in `src/data/sponsors.ts`, shown in a slim strip right after the film (`partners-strip.tsx`) and as two large cards in the partners section at the bottom. No agency credit in the footer.
 - **Deadline:** Sunday 25 October 2026 (the proposal presentation).
 - **Origin:** This repo started as a selective copy of the owner's Maputo 2026 site (AUSC Region 5 Youth Games), rebranded. It is NOT linked to that repo or its Vercel project.
 

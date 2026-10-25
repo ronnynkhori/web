@@ -407,9 +407,7 @@ const en = {
   },
   footer: {
     farewell: "See you in Angola!",
-    identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nine nations, one community.",
-    proposalBy: "Official marketing and communications agency",
-    explore: "Explore",
+    identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nine nations, one community.",    explore: "Explore",
     info: "Information",
     partners: "Partners",
     legal: "Legal and privacy",

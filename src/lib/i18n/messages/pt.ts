@@ -407,9 +407,7 @@ const pt: Dictionary = {
   },
   footer: {
     farewell: "Até já, em Angola!",
-    identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nove nações, uma comunidade.",
-    proposalBy: "Agência oficial de marketing e comunicação",
-    explore: "Explorar",
+    identity: "XIII Jogos Desportivos da CPLP, Angola 2027. Nove nações, uma comunidade.",    explore: "Explorar",
     info: "Informação",
     partners: "Parceiros",
     legal: "Informação legal e privacidade",
