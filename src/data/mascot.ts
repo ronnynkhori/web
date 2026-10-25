@@ -45,16 +45,6 @@ export const mascotPoses = {
   chess: pose("xadrez-1", 275, "chess", "Chess", "Xadrez", 340),
 } satisfies Record<string, MascotPose>;
 
-/**
- * Animated clips from the client (WhatsApp, Oct 2026), keyed by pose id: white
- * background, 540px square, muted loops (public/videos/mascot).
- */
-export const mascotClips: Record<string, { src: string; poster: string }> = {
-  [mascotPoses.welcome.id]: { src: "/videos/mascot/welcome.mp4", poster: "/videos/mascot/welcome.jpg" },
-  [mascotPoses.karate.id]: { src: "/videos/mascot/karate.mp4", poster: "/videos/mascot/karate.jpg" },
-  [mascotPoses.taekwondo.id]: { src: "/videos/mascot/taekwondo.mp4", poster: "/videos/mascot/taekwondo.jpg" },
-};
-
 /** One pose per sport, in programme order, for the mascot carousel. */
 export const sportPoses: MascotPose[] = [
   mascotPoses.athletics,
