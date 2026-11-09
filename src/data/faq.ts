@@ -102,8 +102,8 @@ export const faq: FaqEntry[] = [
     keywords: ["venue", "venues", "stadium", "recinto", "recintos", "estadio", "pavilhao"],
     question: t("Where are the venues?", "Onde ficam os recintos?"),
     answer: t(
-      "Opening at Kilamba Arena and closing at CCB Futungo II. Competition: Sayovo (athletics), the Marginal (3x3 basketball), Cidadela (karate, taekwondo, chess), Kikuchi (tennis), AFA (football) and Ilha de Luanda (beach volleyball).",
-      "Abertura na Kilamba Arena e encerramento no CCB Futungo II. Competição: Sayovo (atletismo), Marginal (basquetebol 3x3), Cidadela (karaté, taekwondo, xadrez), Kikuchi (ténis), AFA (futebol) e Ilha de Luanda (voleibol de praia).",
+      "Opening at Kilamba Arena and closing at CCB Futungo II. Competition: Sayovo (athletics), the Marginal (3x3 basketball), Cidadela (karate, taekwondo, chess), Kikuxi (tennis), AFA (football) and Ilha de Luanda (beach volleyball).",
+      "Abertura na Kilamba Arena e encerramento no CCB Futungo II. Competição: Sayovo (atletismo), Marginal (basquetebol 3x3), Cidadela (karaté, taekwondo, xadrez), Kikuxi (ténis), AFA (futebol) e Ilha de Luanda (voleibol de praia).",
     ),
     link: go.venues,
   },

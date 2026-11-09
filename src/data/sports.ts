@@ -158,7 +158,7 @@ export const sports: Sport[] = [
     mascot: mascotPoses.tennis,
     programme: {
       days: span("03-26", "04-01"),
-      venues: ["kikuchi"],
+      venues: ["kikuxi"],
       lodging: t("Academia Diplomática", "Academia Diplomática"),
       participants: { n: 56 },
       eligibility: youth(2009, 2011),

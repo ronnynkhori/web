@@ -95,7 +95,7 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
  | Athletics (incl. para athletics) | Sayovo | Sayovo / Bengo | 192 |
  | 3x3 Basketball | Marginal | Ilha Mar | 112 |
  | Chess | Cidadela | Hotel Vila Alice | 40 |
- | Tennis | Kikuchi | Academia Diplomática | 56 |
+ | Tennis | Kikuxi | Academia Diplomática | 56 |
  | Karate and taekwondo | Cidadela | Zongo / Vila Alice | 192 |
  | Football | AFA | Futungo | 184 |
  | Beach volleyball | Ilha | Ilha Mar | 64 |
@@ -103,7 +103,7 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
 ## Provisional facts (flag these to the client)
 
 - **Opening time:** 18:00 WAT is assumed (countdown target).
-- **Full venue names:** "Sayovo", "Kikuchi" and "AFA" are as written in the client's table.
+- **Full venue names:** "Sayovo" and "AFA" are as written in the client's table; "Kikuxi" (not Kikuchi) was corrected by the client.
 - **Days per sport, Cultural Night (30 Mar), quotas and eligibility:** proposals inside the confirmed dates.
 - **Photos:** AI-generated demo images, not event photography.
 

@@ -1,7 +1,7 @@
 /**
  * Venues of the XIII CPLP Games, from the client's venue table (Ondaka,
  * 25 Oct 2026): ceremony venues, competition venue and accommodation per
- * sport. Sayovo, Kikuchi and AFA are named as in the client's table
+ * sport. Sayovo, Kikuxi and AFA are named as in the client's table
  * ([CLIENT TO CONFIRM] full official names). Venues with an image are shown
  * as cards; the rest as a compact list.
  */
@@ -74,7 +74,7 @@ export const venues: Venue[] = [
   competition("afa", same("AFA"), t("Football", "Futebol"), LUANDA, "source"),
   competition("marginal-luanda", t("Luanda Marginal", "Marginal de Luanda"), t("3x3 Basketball", "Basquetebol 3x3")),
   competition("praia-ilha-luanda", t("Ilha de Luanda beach", "Praia da Ilha de Luanda"), t("Beach volleyball", "Voleibol de praia"), same("Ilha de Luanda")),
-  competition("kikuchi", same("Kikuchi"), t("Tennis", "Ténis"), LUANDA, "source"),
+  competition("kikuxi", same("Kikuxi"), t("Tennis", "Ténis"), LUANDA, "source"),
 ];
 
 export function getVenue(id: string): Venue | undefined {
