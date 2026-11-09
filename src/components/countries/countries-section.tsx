@@ -16,7 +16,7 @@ export async function CountriesSection({ dict, locale, compact }: { dict: Dictio
   const c = dict.countries;
   const countries = await getCountries();
   return (
-    <Section id="countries" labelledBy="countries-title" theme="dark" swoosh className="sona-bg">
+    <Section id="countries" labelledBy="countries-title" theme="dark" swoosh className="brand-pattern pattern-lusona pattern-corner">
       <SectionHeader
         id="countries-title"
         overline={c.overline}

@@ -36,7 +36,7 @@ export function MascotSection({
         id="mascot"
         aria-labelledby="mascot-title"
         data-theme="dark"
-        className="section-anchor sona-bg relative isolate overflow-hidden bg-surface text-fg"
+        className="section-anchor brand-pattern pattern-lusona relative isolate overflow-hidden bg-surface text-fg"
       >
         <span
           aria-hidden="true"
