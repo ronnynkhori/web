@@ -16,6 +16,7 @@ Read this first. It explains what this repo is, who it is for, what is done and 
 - **Site:** https://jogoscpl2027.vercel.app (Portuguese at `/pt`, English at `/en`). `https://cplp-2027-proposta.vercel.app` redirects here.
 - **Control Room:** https://jogoscpl2027.vercel.app/admin/login. Sign in with `admin@cplp2027.demo` / `CPLP-Angola-2027`. It is read-only because no database is connected. The menu is registration only: dashboard, registrations, quotas and documents, users (one officer per country) and the activity log.
 - **Briefing:** https://jogoscpl2027.vercel.app/briefing.html is a short HTML walkthrough of who registers whom and how a record moves from draft to the accreditation number.
+- **Ask the client:** `docs/client-clarifications.md` lists the accounts, quotas, documents, event list, and database still to confirm.
 - **Repo:** https://github.com/ronnynkhori/web (branch `master`; every push redeploys production).
 
 ## Stack
