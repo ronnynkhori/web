@@ -8,7 +8,7 @@ import { HeroStageScene } from "./hero-stage-scene";
 /**
  * Hero art from the brand book: the emblem's swooshes framing the bottom and
  * right edge, guinea-fowl spots as texture, and a mascot stage where the nine
- * member flags arch over the mascot trio (as they ring the emblem).
+ * member flags arch over the karate mascot.
  */
 export function HeroSwooshes({ className }: { className?: string }) {
   return (
@@ -91,7 +91,7 @@ export interface StageFlag {
   src?: string;
 }
 
-/** Nine flags on an arch over the trio: 200deg to 340deg around the stage centre. */
+/** Nine flags on an arch over the mascot: 200deg to 340deg around the stage centre. */
 function flagPosition(i: number, n: number): CSSProperties {
   const angle = ((200 + (140 * i) / Math.max(1, n - 1)) * Math.PI) / 180;
   return {
@@ -101,13 +101,11 @@ function flagPosition(i: number, n: number): CSSProperties {
   } as CSSProperties;
 }
 
-export function HeroStage({ flags, bubble, className }: { flags: StageFlag[]; bubble: string; className?: string }) {
+export function HeroStage({ flags, className }: { flags: StageFlag[]; className?: string }) {
   return (
     <HeroStageScene className={className}>
-      <span aria-hidden="true" className="hero-sun absolute inset-[14%] rounded-pill" />
-      <span aria-hidden="true" className="hero-ring absolute inset-[10%] rounded-pill" />
-      <span aria-hidden="true" className="hero-ring hero-ring--dashed absolute inset-[6%] rounded-pill" />
-      <span aria-hidden="true" className="hero-ring absolute inset-0 rounded-pill opacity-50" />
+      <span aria-hidden="true" className="hero-sun absolute inset-[18%] rounded-pill" />
+      <span aria-hidden="true" className="hero-ring absolute inset-[8%] rounded-pill" />
 
       <ul className="hero-flags m-0 list-none p-0">
         {flags.map((f, i) => (
@@ -123,36 +121,17 @@ export function HeroStage({ flags, bubble, className }: { flags: StageFlag[]; bu
         ))}
       </ul>
 
-      <div aria-hidden="true" className="hero-trio absolute inset-x-[4%] bottom-[8%] flex h-[66%] items-end justify-center">
-        <span className="hero-ground absolute inset-x-[12%] -bottom-[3%] h-[8%] rounded-pill" />
+      <div aria-hidden="true" className="hero-trio absolute inset-x-[8%] bottom-[4%] flex h-[78%] items-end justify-center">
         <MascotActor
-          {...mascotPoses.football}
-          sizes="(min-width: 64rem) 16vw, 30vw"
-          enter={false}
-          depth={0.6}
-          className="hero-actor h-[70%] -mr-[9%]"
-          imgClassName="h-full w-auto"
-        />
-        <MascotActor
-          {...mascotPoses.athletics}
-          sizes="(min-width: 64rem) 24vw, 45vw"
+          {...mascotPoses.karate}
+          alt=""
+          sizes="(min-width: 64rem) 28vw, 50vw"
           enter={false}
           depth={1}
           preload
-          className="hero-actor relative z-10 h-full"
+          className="hero-actor h-full"
           imgClassName="h-full w-auto"
         />
-        <MascotActor
-          {...mascotPoses.paraAthletics}
-          sizes="(min-width: 64rem) 16vw, 30vw"
-          enter={false}
-          depth={0.6}
-          className="hero-actor h-[64%] -ml-[12%]"
-          imgClassName="h-full w-auto"
-        />
-        <span className="hero-bubble absolute inset-x-0 top-[-13%] z-20 mx-auto w-fit rounded-md px-[0.9em] py-[0.45em] font-display text-[clamp(0.7rem,0.45rem+0.7vw,1.05rem)] font-extrabold whitespace-nowrap uppercase shadow-lg">
-          {bubble}
-        </span>
       </div>
     </HeroStageScene>
   );

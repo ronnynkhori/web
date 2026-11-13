@@ -15,6 +15,10 @@ export const collections = [
   "settings",
   "users",
   "loginAttempts",
+  "delegations",
+  "participants",
+  "participantFiles",
+  "registrationNotices",
 ] as const;
 
 export type Collection = (typeof collections)[number];

@@ -61,6 +61,13 @@ const part: CatalogPart = {
     "Venue scorer": "Marcador de recinto",
     "Communications editor": "Editor de comunicação",
     "Media manager": "Gestor de multimédia",
+    "Delegation officer": "Oficial de delegação",
+    "Registration reviewer": "Revisor de inscrições",
+    "Registers one country's athletes and officials. Cannot open the Control Room.":
+      "Inscreve os atletas e oficiais de um país. Não abre a Sala de Controlo.",
+    "Reviews, approves and returns delegation registrations.": "Revê, aprova e devolve as inscrições das delegações.",
+    Registrations: "Inscrições",
+    Entries: "Inscrições",
     "Local mode: changes are saved to .data/store.json on this computer. Connect Supabase for the live site.":
       "Modo local: as alterações são guardadas em .data/store.json neste computador. Ligue o Supabase para o site em produção.",
     "Read-only: this deployment has no database. Add Supabase from the Vercel Marketplace to enable saving.":

@@ -191,6 +191,8 @@ export async function saveUser(id: string | null, _prev: FormState, form: FormDa
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.email = t("Enter a valid email address.");
   if (password && password.length < 10) errors.password = t("Use at least 10 characters.");
   if (!roles.includes(role)) errors.role = t("Choose a role.");
+  const countryCode = String(values.countryCode ?? "");
+  if (role === "delegation" && !countryCode) errors.countryCode = t("Choose the officer's country.");
 
   const users = await loadItems<UserDoc>("users");
   const existing = id ? users.find((u) => u.id === id) : undefined;
@@ -215,6 +217,7 @@ export async function saveUser(id: string | null, _prev: FormState, form: FormDa
       name: String(values.name ?? ""),
       role,
       sportIds: sportId ? [sportId] : [],
+      countryCode: role === "delegation" ? countryCode : undefined,
       active: existing?.active ?? true,
       passwordHash: store.kind === "supabase" ? undefined : passwordHash,
     };

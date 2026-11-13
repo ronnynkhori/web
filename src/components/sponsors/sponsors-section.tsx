@@ -37,9 +37,8 @@ function PartnerLink({ partner, className, children }: { partner: SponsorDoc; cl
 }
 
 /**
- * Partners (#partners): the institutional partner and the official agency as
- * two large cards, then any sponsor tiers added in the Control Room. No
- * partners, no section.
+ * Partners (#partners): featured partners as large cards (MINJUD today),
+ * then any sponsor tiers added in the Control Room. No partners, no section.
  */
 export async function SponsorsSection({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const s = dict.sponsors;
@@ -51,7 +50,12 @@ export async function SponsorsSection({ dict, locale }: { dict: Dictionary; loca
       <SectionHeader id="partners-title" overline={s.overline} title={s.title} />
       <div className="flex flex-col gap-7">
         {featured.length > 0 && (
-          <ul className="m-0 grid list-none gap-4 p-0 tablet:grid-cols-2">
+          <ul
+            className={cn(
+              "m-0 grid list-none gap-4 p-0",
+              featured.length > 1 ? "tablet:grid-cols-2" : "mx-auto w-full max-w-xl",
+            )}
+          >
             {featured.map((p, i) => (
               <li key={p.id} className="flex flex-col gap-3" {...reveal("fade-up", i)}>
                 <h3 className="m-0 type-overline text-fg-2">{s.tiers[p.tier]}</h3>

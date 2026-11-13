@@ -21,6 +21,7 @@ export function MascotActor({
   delay = 0,
   depth = 1,
   preload,
+  loading,
   className,
   bodyClassName,
   imgClassName,
@@ -41,6 +42,8 @@ export function MascotActor({
   /** Pointer-parallax strength inside a [data-mascot-track] area. */
   depth?: number;
   preload?: boolean;
+  /** Above-the-fold artwork (the 404) should load eagerly so it is not a lazy LCP. */
+  loading?: "eager" | "lazy";
   className?: string;
   bodyClassName?: string;
   imgClassName?: string;
@@ -61,6 +64,7 @@ export function MascotActor({
           height={height}
           sizes={sizes}
           preload={preload}
+          loading={loading}
           draggable={false}
           className={cn("mascot-img", imgClassName)}
         />

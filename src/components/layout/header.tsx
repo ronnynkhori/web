@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 import type { Locale } from "@/lib/i18n/config";
 import { useMotionPreference } from "@/lib/animation/motion-preference";
@@ -34,11 +35,13 @@ interface HeaderProps {
 const CONDENSE_AT = 80;
 
 /**
- * Variants: transparent-over-hero -> solid/condensed after 80px.
+ * Homepage: transparent over the hero, solid after 80px. Other pages stay solid so the links stay visible.
  * Hides on scroll down, returns on scroll up (transform only). Reduced motion:
  * no hide/show, instant swap. Active section gets the 4px gold underline.
  */
 export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
+  const pathname = usePathname();
+  const home = pathname === `/${locale}` || pathname === `/${locale}/`;
   const [condensed, setCondensed] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState<string | null>(null);
@@ -104,21 +107,23 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
     return () => io.disconnect();
   }, [items]);
 
+  // The transparent navy header only works over the homepage hero. Every other page is light, so the bar stays solid or the links disappear.
+  const solid = !home || condensed;
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-header pt-[env(safe-area-inset-top)] transition-transform duration-ui ease-standard",
         hidden && !menuOpen && "-translate-y-full",
       )}
-      // Forced dark: the header floats over the cinematic hero.
-      data-theme={condensed ? undefined : "dark"}
-      data-surface={condensed ? undefined : "black"}
+      data-theme={solid ? undefined : "dark"}
+      data-surface={solid ? undefined : "black"}
     >
       <div
         aria-hidden="true"
         className={cn(
           "absolute inset-0 border-b border-line bg-surface transition-opacity duration-ui ease-standard",
-          condensed ? "opacity-100" : "opacity-0",
+          solid ? "opacity-100" : "opacity-0",
         )}
       />
       <div className="relative container-wide flex h-header items-center justify-between gap-4 desktop:h-header-lg">
@@ -136,7 +141,7 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
             className="tablet:max-desktop:hidden"
           />
           {/* Outlined over the hero so its yellow button stays the single main action. */}
-          <Button href={ctaHref} variant={condensed ? "primary" : "ghost"} className="whitespace-nowrap max-tablet:hidden">
+          <Button href={ctaHref} variant={solid ? "primary" : "ghost"} className="whitespace-nowrap max-tablet:hidden">
             {labels.cta}
           </Button>
           <MobileNav
@@ -151,7 +156,7 @@ export function Header({ locale, items, ctaHref, labels }: HeaderProps) {
         </div>
       </div>
       <TorchStripe
-        className={cn("absolute inset-x-0 bottom-0 h-1 transition-opacity duration-ui", condensed ? "opacity-100" : "opacity-0")}
+        className={cn("absolute inset-x-0 bottom-0 h-1 transition-opacity duration-ui", solid ? "opacity-100" : "opacity-0")}
       />
     </header>
   );

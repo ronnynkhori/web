@@ -24,7 +24,7 @@ const i = (name: string, n: number) => ({ [name]: n }) as CSSProperties;
 /**
  * Homepage hero, mascot-led: navy stage with the emblem's swooshes, left-aligned
  * overline + two-tone display title, the official tagline, yellow primary
- * action, the nine member flags, and the mascot trio running in on the right.
+ * action, the nine member flags, and the karate mascot on the right.
  * The entrance is pure CSS (no JS on the LCP path).
  */
 export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dictionary; locale: Locale; phase?: Phase; day?: number }) {
@@ -87,7 +87,6 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
       >
         <HeroStage
           flags={countries.map((c) => ({ code: c.code, name: pick(c.name, locale), src: c.flag?.src }))}
-          bubble={h.bubble}
           className="mx-auto max-tablet:hidden tablet:order-2 tablet:w-[min(100%,60svh)]"
         />
         <div className="max-w-content tablet:order-1">

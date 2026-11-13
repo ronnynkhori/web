@@ -1,9 +1,7 @@
 /**
- * Partners and sponsors, confirmed by the client (25 Oct 2026): MINJUD as
- * institutional partner and Ondaka as official marketing and communications
- * agency. Further sponsors are added from the Control Room. Lockups follow the
- * CI partnership rule: Games logo + vertical hairline + partner logo, equal
- * visual weight.
+ * Partners and sponsors. MINJUD is the institutional partner (confirmed 25 Oct
+ * 2026). The client asked on 13 Nov 2026 to remove the Ondaka logo, so the
+ * agency is not shown. Further sponsors are added from the Control Room.
  */
 import type { SponsorDoc } from "@/lib/cms/types";
 import type { SponsorTier } from "./types";
@@ -26,11 +24,5 @@ export const partners: SponsorDoc[] = [
     tier: "institutional",
     logo: { src: "/images/brand/minjud-h.png", width: 900, height: 192, alt: { en: "Ministry of Youth and Sports (MINJUD)", pt: "Ministério da Juventude e Desportos (MINJUD)" } },
     url: "https://minjud.gov.ao",
-  },
-  {
-    id: "ondaka",
-    name: "Ondaka",
-    tier: "agency",
-    logo: { src: "/images/brand/ondaka-h.png", width: 805, height: 198, alt: { en: "Ondaka", pt: "Ondaka" } },
   },
 ];

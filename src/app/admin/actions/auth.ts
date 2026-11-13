@@ -43,6 +43,10 @@ export async function login(_prev: { error?: string }, form: FormData): Promise<
   } catch {
     // Signing in must still work if the audit log is unavailable (read-only preview).
   }
+  if (result.session.role === "delegation") {
+    const next = String(form.get("next") ?? "");
+    redirect(/^\/(pt|en)\/delegation(\/|$)/.test(next) ? next : "/pt/delegation");
+  }
   redirect("/admin");
 }
 

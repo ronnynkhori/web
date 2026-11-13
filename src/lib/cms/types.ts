@@ -138,7 +138,7 @@ export interface MedalAdjustmentDoc extends StoredDoc {
   reason: string;
 }
 
-export type Role = "super" | "editor" | "media" | "results" | "scorer";
+export type Role = "super" | "editor" | "media" | "results" | "scorer" | "delegation" | "registrar";
 
 export interface UserDoc extends StoredDoc {
   email: string;
@@ -146,6 +146,8 @@ export interface UserDoc extends StoredDoc {
   role: Role;
   /** Scorers only see these sports. Empty means all. */
   sportIds: string[];
+  /** Delegation officers are limited to this country (ISO alpha-3). */
+  countryCode?: string;
   active: boolean;
   /** Local development store only; Supabase Auth keeps passwords in production. */
   passwordHash?: string;

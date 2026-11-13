@@ -28,5 +28,11 @@ export function getNavItems(dict: Dictionary, locale: Locale): NavItem[] {
     item("news", "news", true),
     item("media", "media", false),
     item("guide", "guide", true),
+    {
+      id: "delegation",
+      label: dict.nav.delegation,
+      href: `/${locale}/delegation`,
+      primary: false,
+    },
   ];
 }

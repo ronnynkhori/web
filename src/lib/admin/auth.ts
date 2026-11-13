@@ -23,7 +23,11 @@ export async function getSession(): Promise<Session | null> {
   }
   // Re-check the account on every request so deactivation and role changes apply immediately.
   const user = users.find((u) => u.email === session.email);
-  if (user) return user.active ? { ...session, name: user.name, role: user.role, sportIds: user.sportIds } : null;
+  if (user) {
+    return user.active
+      ? { ...session, name: user.name, role: user.role, sportIds: user.sportIds, countryCode: user.countryCode ?? "" }
+      : null;
+  }
   const bootstrapStillAllowed = !users.some((u) => u.role === "super" && u.active);
   return bootstrapStillAllowed && session.email === bootstrapCredentials()?.email ? session : null;
 }
@@ -32,7 +36,10 @@ export async function getSession(): Promise<Session | null> {
 export async function requireUser(area: Area = "dashboard"): Promise<Session> {
   const session = await getSession();
   if (!session) redirect("/admin/login");
-  if (!can(session.role, area)) redirect(`/admin?denied=${area}`);
+  if (!can(session.role, area)) {
+    if (session.role === "delegation") redirect("/pt/delegation");
+    redirect(`/admin?denied=${area}`);
+  }
   return session;
 }
 
@@ -79,14 +86,14 @@ export async function authenticate(rawEmail: string, password: string): Promise<
     if (!user.active) return { ok: false, error: "This account has been deactivated." };
     const ok = store.kind === "supabase" ? await supabasePasswordOk(email, password) : await verifyPassword(password, user.passwordHash);
     if (!ok) return { ok: false, error: "Email or password is incorrect." };
-    return { ok: true, session: { email, name: user.name, role: user.role, sportIds: user.sportIds } };
+    return { ok: true, session: { email, name: user.name, role: user.role, sportIds: user.sportIds, countryCode: user.countryCode ?? "" } };
   }
 
   const hasSuper = users.some((u) => u.role === "super" && u.active);
   const boot = bootstrapCredentials();
   if (!hasSuper && boot && email === boot.email && password === boot.password) {
     const role: Role = "super";
-    return { ok: true, session: { email, name: "Control Room admin", role, sportIds: [] } };
+    return { ok: true, session: { email, name: "Control Room admin", role, sportIds: [], countryCode: "" } };
   }
   return { ok: false, error: "Email or password is incorrect." };
 }

@@ -13,6 +13,8 @@ export interface Session {
   name: string;
   role: Role;
   sportIds: string[];
+  /** Set for a delegation officer; empty for every other role. */
+  countryCode: string;
   exp: number;
 }
 
@@ -43,7 +45,8 @@ export function decodeSession(token: string | undefined): Session | null {
   if (expected.length !== given.length || !timingSafeEqual(expected, given)) return null;
   try {
     const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8")) as Session;
-    return session.exp > Date.now() ? session : null;
+    if (session.exp <= Date.now()) return null;
+    return { ...session, countryCode: session.countryCode ?? "" };
   } catch {
     return null;
   }

@@ -50,6 +50,7 @@ const pt: Dictionary = {
     news: "Comunicados",
     media: "Multimédia",
     guide: "Guia dos Jogos",
+    delegation: "Inscrição de delegações",
     more: "Mais",
     cta: "Datas-chave",
   },

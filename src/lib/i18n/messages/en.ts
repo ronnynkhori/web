@@ -52,6 +52,7 @@ const en = {
     news: "Announcements",
     media: "Media",
     guide: "Games Guide",
+    delegation: "Delegation registration",
     more: "More",
     cta: "Key dates",
   },

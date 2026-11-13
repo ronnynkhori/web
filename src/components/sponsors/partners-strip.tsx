@@ -3,15 +3,21 @@ import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { pick, type Locale } from "@/lib/i18n/config";
 import { featuredTiers, sponsorTiers } from "@/data/sponsors";
 import { getSponsors } from "@/lib/cms/read";
+import { cn } from "@/lib/cn";
 
-/** Slim band near the top of the home page: the institutional partner and the official agency. */
+/** Slim band near the top of the home page: featured partners, currently MINJUD. */
 export async function PartnersStrip({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const sponsors = await getSponsors();
   const featured = sponsorTiers.filter((t) => featuredTiers.has(t.id)).flatMap((t) => sponsors.filter((p) => p.tier === t.id && p.logo));
   if (featured.length === 0) return null;
   return (
     <section aria-label={dict.sponsors.title} data-theme="light" className="border-y border-line bg-surface text-fg">
-      <ul className="container-page m-0 grid list-none items-center gap-x-8 gap-y-5 py-6 tablet:grid-cols-2 tablet:divide-x tablet:divide-line">
+      <ul
+        className={cn(
+          "container-page m-0 grid list-none items-center gap-x-8 gap-y-5 py-6",
+          featured.length > 1 && "tablet:grid-cols-2 tablet:divide-x tablet:divide-line",
+        )}
+      >
         {featured.map((p) => {
           const logo = p.logo!;
           const img = (

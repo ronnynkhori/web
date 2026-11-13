@@ -55,6 +55,7 @@ export const adminNav: AdminNavGroup[] = [
     items: [
       { href: "/admin/settings", label: "Site settings", short: "Settings", icon: "globe", area: "settings" },
       { href: "/admin/users", label: "Users", icon: "id", area: "users" },
+      { href: "/admin/registrations", label: "Registrations", short: "Entries", icon: "list", area: "registrations" },
       { href: "/admin/activity", label: "Activity log", short: "Activity", icon: "clock", area: "activity" },
     ],
   },
@@ -67,6 +68,8 @@ const phoneTabs: Record<Role, string[]> = {
   scorer: ["/admin", "/admin/scores", "/admin/results"],
   editor: ["/admin", "/admin/c/announcements", "/admin/settings"],
   media: ["/admin", "/admin/c/media", "/admin/c/photoLinks"],
+  delegation: ["/admin"],
+  registrar: ["/admin", "/admin/registrations"],
 };
 
 export function phoneTabsFor(role: Role): AdminNavItem[] {

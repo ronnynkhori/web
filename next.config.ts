@@ -12,6 +12,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  serverExternalPackages: ["exceljs", "qrcode"],
   partialPrefetching: true,
   poweredByHeader: false,
   devIndicators: { position: "bottom-right" },

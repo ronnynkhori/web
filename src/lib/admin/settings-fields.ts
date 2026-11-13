@@ -1,6 +1,6 @@
 import type { SettingsDoc, UserDoc } from "@/lib/cms/types";
 import { roleLabels, roles } from "./roles";
-import { sportOptions, type FieldDef } from "./schemas";
+import { countryOptions, sportOptions, type FieldDef } from "./schemas";
 
 export const settingsFields: FieldDef[] = [
   {
@@ -83,6 +83,13 @@ export function userFields(isNew: boolean): FieldDef[] {
       help: "Venue scorers only see matches for this sport. Leave empty for all sports.",
     },
     {
+      name: "countryCode",
+      label: "Country (delegation officers)",
+      type: "select",
+      options: countryOptions,
+      help: "Required for a delegation officer. That account can only register this country.",
+    },
+    {
       name: "password",
       label: isNew ? "Temporary password" : "Set a new password",
       type: "password",
@@ -95,5 +102,5 @@ export function userFields(isNew: boolean): FieldDef[] {
 }
 
 export function userValues(u: UserDoc | undefined): Record<string, unknown> {
-  return u ? { name: u.name, email: u.email, role: u.role, sportId: u.sportIds[0] ?? "" } : { role: "editor", sportId: "" };
+  return u ? { name: u.name, email: u.email, role: u.role, sportId: u.sportIds[0] ?? "", countryCode: u.countryCode ?? "" } : { role: "editor", sportId: "", countryCode: "" };
 }

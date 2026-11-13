@@ -1,6 +1,6 @@
 import type { Role } from "@/lib/cms/types";
 
-export const roles: Role[] = ["super", "editor", "media", "results", "scorer"];
+export const roles: Role[] = ["super", "editor", "media", "results", "scorer", "delegation", "registrar"];
 
 export const roleLabels: Record<Role, string> = {
   super: "Super admin",
@@ -8,6 +8,8 @@ export const roleLabels: Record<Role, string> = {
   media: "Media manager",
   results: "Results manager",
   scorer: "Venue scorer",
+  delegation: "Delegation officer",
+  registrar: "Registration reviewer",
 };
 
 export const roleDescriptions: Record<Role, string> = {
@@ -16,6 +18,8 @@ export const roleDescriptions: Record<Role, string> = {
   media: "Gallery photos, photo download links and highlights.",
   results: "Approves and corrects results, manages fixtures, countries, the medal table and schedule.",
   scorer: "Enters scores for assigned sports from a phone. Cannot publish final results.",
+  delegation: "Registers one country's athletes and officials. Cannot open the Control Room.",
+  registrar: "Reviews, approves and returns delegation registrations.",
 };
 
 export type Area =
@@ -36,12 +40,13 @@ export type Area =
   | "results"
   | "approvals"
   | "medals"
-  | "activity";
+  | "activity"
+  | "registrations";
 
-const everyone = roles;
+const staff = ["super", "editor", "media", "results", "scorer"] as const satisfies readonly Role[];
 
 export const access: Record<Area, Role[]> = {
-  dashboard: everyone,
+  dashboard: [...staff, "registrar"],
   announcements: ["super", "editor"],
   documents: ["super", "editor"],
   faq: ["super", "editor"],
@@ -59,6 +64,7 @@ export const access: Record<Area, Role[]> = {
   results: ["super", "results", "scorer"],
   approvals: ["super", "results"],
   medals: ["super", "results"],
+  registrations: ["super", "registrar"],
 };
 
 export function can(role: Role, area: Area): boolean {
