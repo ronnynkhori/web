@@ -15,7 +15,7 @@ import { requireUser } from "@/lib/admin/auth";
 import { getAdminLocale } from "@/lib/admin/i18n/server";
 import { translator } from "@/lib/admin/i18n/translate";
 import { loadItems } from "@/lib/admin/mutate";
-import { roleDescriptions, roleLabels, roles } from "@/lib/admin/roles";
+import { assignableRoles, roleDescriptions, roleLabels } from "@/lib/admin/roles";
 import type { UserDoc } from "@/lib/cms/types";
 import { pick } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
@@ -87,7 +87,7 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
       <PageHeader
         title={t("Users")}
         description={t(
-          "Everyone who can sign in to the Control Room, and what they are allowed to do. Deactivate someone first to be able to delete them.",
+          "One officer account per country, plus the people who review registrations. Officers sign in on the public site, not here.",
         )}
         icon="id"
         primary={{ href: "/admin/users/new", label: t("Add user") }}
@@ -116,7 +116,7 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
 
         {users.length === 0 ? (
           <EmptyState icon="id" title={t("No users yet")}>
-            {t("Add the LOC communications, media and results teams.")}
+            {t("Add one officer for each country.")}
           </EmptyState>
         ) : (
           <ItemList rows={rows} label={t("Users")} />
@@ -128,7 +128,7 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
           </CardHeader>
           <CardContent>
             <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
-              {roles.map((r) => (
+              {assignableRoles.map((r) => (
                 <div key={r} className="flex flex-col gap-1">
                   <dt className="text-sm font-semibold">{t(roleLabels[r])}</dt>
                   <dd className="text-sm text-muted-foreground">{t(roleDescriptions[r])}</dd>

@@ -11,6 +11,7 @@ const columns = [
   "documentExpiry",
   "sportId",
   "discipline",
+  "sportNotes",
   "ageCategory",
   "competitionCategory",
   "federation",
@@ -30,7 +31,7 @@ export async function athleteTemplate(): Promise<Buffer> {
   const book = new ExcelJS.Workbook();
   const sheet = book.addWorksheet("Athletes");
   sheet.addRow([...columns]);
-  sheet.addRow(["Ana Silva", "2009-06-01", "female", "Angolan", "AB123456", "2030-01-01", "athletics", "100 m", "Youth", "Women", "National federation", "", "", "Contact name", "+244900000000", "", "", ""]);
+  sheet.addRow(["Ana Silva", "2009-06-01", "female", "Angolan", "AB123456", "2030-01-01", "athletics", "100 m", "", "Youth", "Women", "National federation", "", "", "Contact name", "+244900000000", "", "", ""]);
   sheet.getRow(1).font = { bold: true };
   const buffer = await book.xlsx.writeBuffer();
   return Buffer.from(buffer);
@@ -102,6 +103,7 @@ export function rowToAthlete(row: AthleteRow, countryCode: string): Partial<Part
     documentExpiry: row.documentExpiry.slice(0, 10),
     sportId: row.sportId,
     discipline: row.discipline,
+    sportNotes: row.sportNotes,
     ageCategory: row.ageCategory,
     competitionCategory: row.competitionCategory,
     federation: row.federation,

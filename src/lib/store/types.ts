@@ -19,6 +19,7 @@ export const collections = [
   "participants",
   "participantFiles",
   "registrationNotices",
+  "registrationRules",
 ] as const;
 
 export type Collection = (typeof collections)[number];

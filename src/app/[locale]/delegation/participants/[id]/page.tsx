@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { countries } from "@/data/countries";
 import { sports } from "@/data/sports";
 import { ParticipantForm } from "@/components/registration/participant-form";
 import { isLocale, pick } from "@/lib/i18n/config";
@@ -48,6 +49,7 @@ export default async function EditParticipantPage({ params, searchParams }: { pa
           person={person}
           sports={sports.map((sport) => ({ id: sport.id, name: pick(sport.name, locale) }))}
           files={files.filter((file) => file.participantId === person.id)}
+          countryName={pick(countries.find((item) => item.code === person.countryCode)?.name ?? { en: person.countryCode, pt: person.countryCode }, locale)}
         />
       ) : (
         <p className="m-0 type-body-s text-fg-muted">{copy.locked}</p>

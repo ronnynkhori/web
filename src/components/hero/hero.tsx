@@ -1,35 +1,32 @@
 import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { fill, pick, type Locale } from "@/lib/i18n/config";
-import { getCountries, getCountryFlags } from "@/lib/cms/read";
+import { getCountryFlags } from "@/lib/cms/read";
 import { countdownTarget, gamesDays, gamesEnd } from "@/data/event";
+import { mascotPoses } from "@/data/mascot";
 import { getLiveBaseline } from "@/lib/live/provider";
 import { cn } from "@/lib/cn";
 import type { Phase } from "@/lib/phase";
 import { Icon } from "@/components/ui/icon";
-import { heroMedia } from "@/data/hero";
 import { DemoBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { RichContent } from "@/components/ui/content-flag";
 import { Flag } from "@/components/ui/flag";
+import { MascotActor } from "@/components/mascot/mascot-actor";
 import { Countdown } from "./countdown";
-import { HeroParallax } from "./hero-parallax";
-import { HeroPicture } from "./hero-picture";
-import { HeroPhotoBackdrop, HeroSpots, HeroStage, HeroSwooshes } from "./hero-stage";
+import { HeroPhotoBackdrop } from "./hero-stage";
 import { demoImages } from "@/data/demo/images";
-import { HeroVideo } from "./hero-video";
 
 const i = (name: string, n: number) => ({ [name]: n }) as CSSProperties;
 
 /**
- * Homepage hero, mascot-led: navy stage with the emblem's swooshes, left-aligned
- * overline + two-tone display title, the official tagline, yellow primary
- * action, the nine member flags, and the karate mascot on the right.
- * The entrance is pure CSS (no JS on the LCP path).
+ * Homepage hero, in the same quiet shape as a games opener: one photograph
+ * on the right, the title on the left, and a single mascot standing in the
+ * countdown band. The entrance is pure CSS (no JS on the LCP path).
  */
 export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dictionary; locale: Locale; phase?: Phase; day?: number }) {
   const h = dict.hero;
-  const [live, countries, flags] = await Promise.all([getLiveBaseline(), getCountries(), getCountryFlags()]);
+  const [live, flags] = await Promise.all([getLiveBaseline(), getCountryFlags()]);
   const liveCount = live.matches.filter((m) => m.status === "live").length;
   const cta =
     phase === "live"
@@ -57,39 +54,21 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
         phase === "pre" ? "min-h-[calc(100svh-var(--quickbar-h))] tablet:min-h-svh" : "min-h-[82svh] tablet:min-h-svh",
       )}
     >
-      {/* Art layer: brand swooshes and the mascot trio (optional photo or video underneath) */}
-      <HeroParallax className="absolute inset-0 -z-10">
-        <div className="hero-media absolute inset-0">
-          {heroMedia.poster && <HeroPicture desktop={heroMedia.poster} mobile={heroMedia.posterMobile} />}
-          {heroMedia.video && (
-            <HeroVideo src={heroMedia.video} poster={heroMedia.poster?.src} labels={{ pause: dict.a11y.pause, play: dict.a11y.play }} />
-          )}
-          <HeroSpots className="absolute inset-0" />
-          <HeroSwooshes className="absolute inset-0 size-full" />
-        </div>
-      </HeroParallax>
-      <div aria-hidden="true" className="hero-scrim absolute inset-0 -z-10">
-        <div className="absolute inset-0 scrim-side opacity-60" />
-      </div>
-      <span aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-px bg-line-accent/40" />
-      <HeroPhotoBackdrop image={demoImages.karate} position="0% 30%" className="tablet:hidden" />
+      {/* Photograph only in the space above the countdown, so she stands on the gold line. */}
+      <div className="relative flex min-h-0 flex-1 flex-col">
+      <HeroPhotoBackdrop image={demoImages.karate} />
 
-      {/* Content: copy on the left, the mascot stage on the right (phones: the big mascot backdrop instead) */}
       <section
         id="top"
         aria-labelledby="hero-title"
         className={cn(
-          "container-wide grid flex-1 content-center items-center gap-x-8 gap-y-3 tablet:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] desktop:pb-6",
+          "container-wide relative z-10 flex flex-1 flex-col justify-center",
           phase === "pre"
-            ? "pt-[calc(var(--header-h)+var(--tk-space-2))] pb-5 lowphone:pb-3 short:pb-2 tablet:pt-[calc(var(--header-h)+var(--tk-space-6))] tablet:pb-7 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
+            ? "pt-[calc(var(--header-h)+var(--tk-space-2))] pb-5 lowphone:pb-3 short:pb-2 tablet:pt-[calc(var(--header-h)+var(--tk-space-6))] tablet:pb-8 squat:pt-[calc(var(--header-h)+var(--tk-space-3))] squat:pb-5"
             : "pt-[calc(var(--header-h)+var(--tk-space-4))] pb-7 tablet:pt-[calc(var(--header-h)+var(--tk-space-8))]",
         )}
       >
-        <HeroStage
-          flags={countries.map((c) => ({ code: c.code, name: pick(c.name, locale), src: c.flag?.src }))}
-          className="mx-auto max-tablet:hidden tablet:order-2 tablet:w-[min(100%,60svh)]"
-        />
-        <div className="max-w-content tablet:order-1">
+        <div className="max-w-[38rem]">
           <p className="hero-rise m-0 mb-3 type-overline max-tablet:text-[min(0.75rem,2.6vw)] max-tablet:tracking-[0.03em] tablet:mb-5 squat:mb-3" style={i("--rise-i", -5)}>
             {phase === "post" ? h.postOverline : h.overline}
           </p>
@@ -112,7 +91,7 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
               <time dateTime="2027-03-25">{h.dates}</time>
             </p>
           )}
-          <div className="hero-cta mt-6 grid grid-cols-2 gap-3 short:mt-3 tablet:mt-7 tablet:flex tablet:flex-wrap tablet:*:whitespace-nowrap squat:mt-5">
+          <div className="hero-cta mt-6 flex flex-wrap gap-3 short:mt-3 tablet:mt-7 squat:mt-5 *:whitespace-nowrap">
             <Button href={cta[0].href} variant="secondary" icon="arrow-right">
               {cta[0].label}
             </Button>
@@ -120,34 +99,34 @@ export async function Hero({ dict, locale, phase = "pre", day = 1 }: { dict: Dic
               {cta[1].label}
             </Button>
           </div>
-
-          <dl className="hero-cta m-0 mt-5 hidden gap-5 tablet:mt-7 tablet:flex tablet:gap-7 squat:mt-5">
-            {h.stats.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse border-l-2 border-line-accent pl-3">
-                <dt className="type-caption text-fg-2 uppercase">{s.label}</dt>
-                <dd className="m-0 font-display text-[clamp(1.5rem,1.1rem+1.4vw,2.25rem)] leading-none font-extrabold text-accent tabular">{s.value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </section>
+      </div>
 
       {/* Countdown band - inside the first viewport on every screen size */}
       <section
         id="countdown"
         aria-labelledby="countdown-title"
-        className="hero-rise border-t border-line-accent/40 bg-surface/85"
+        className="hero-rise relative z-10 border-t border-line-accent"
         style={i("--rise-i", 2)}
       >
         {phase === "pre" && (
-          <div className="container-wide flex flex-col gap-3 py-4 short:gap-2 short:py-3 tablet:gap-4 tablet:py-5 desktop:flex-row desktop:items-end desktop:justify-end desktop:gap-9 desktop:py-4 squat:py-3">
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 tablet:flex-col tablet:items-start tablet:gap-2 desktop:items-end desktop:pb-5 desktop:text-right">
+          <div className="container-wide flex flex-col items-center gap-3 py-4 short:gap-2 short:py-3 tablet:flex-row tablet:items-end tablet:justify-center tablet:gap-10 tablet:py-4 squat:gap-6 squat:py-3">
+            <div className="flex flex-col items-center gap-1 text-center">
               <h2 id="countdown-title" className="m-0 type-overline">
                 {dict.countdown.title}
               </h2>
               <p className="m-0 type-body-s text-fg-muted max-tablet:hidden">
                 <RichContent text={dict.countdown.timeNote} />
               </p>
+              <MascotActor
+                {...mascotPoses.thumbsUp}
+                alt=""
+                sizes="96px"
+                enter={false}
+                className="mt-1 h-16 w-auto squat:h-14"
+                imgClassName="h-full w-auto"
+              />
             </div>
             <Countdown target={countdownTarget} end={gamesEnd} labels={dict.countdown} />
           </div>

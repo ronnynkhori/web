@@ -38,6 +38,7 @@ export async function requireUser(area: Area = "dashboard"): Promise<Session> {
   if (!session) redirect("/admin/login");
   if (!can(session.role, area)) {
     if (session.role === "delegation") redirect("/pt/delegation");
+    if (session.role !== "super" && session.role !== "registrar") redirect("/admin/login");
     redirect(`/admin?denied=${area}`);
   }
   return session;

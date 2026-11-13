@@ -14,7 +14,8 @@ Read this first. It explains what this repo is, who it is for, what is done and 
 ## Live
 
 - **Site:** https://jogoscpl2027.vercel.app (Portuguese at `/pt`, English at `/en`). `https://cplp-2027-proposta.vercel.app` redirects here.
-- **Control Room:** https://jogoscpl2027.vercel.app/admin/login. Sign in with `admin@cplp2027.demo` / `CPLP-Angola-2027`. It is read-only because no database is connected.
+- **Control Room:** https://jogoscpl2027.vercel.app/admin/login. Sign in with `admin@cplp2027.demo` / `CPLP-Angola-2027`. It is read-only because no database is connected. The menu is registration only: dashboard, registrations, quotas and documents, users (one officer per country) and the activity log.
+- **Briefing:** https://jogoscpl2027.vercel.app/briefing.html is a short HTML walkthrough of who registers whom and how a record moves from draft to the accreditation number.
 - **Repo:** https://github.com/ronnynkhori/web (branch `master`; every push redeploys production).
 
 ## Stack
@@ -119,7 +120,7 @@ npm run tokens       # rebuild src/styles/tokens.css from docs/design/design-tok
   - Production env vars set: `ADMIN_SESSION_SECRET`, `ADMIN_EMAIL=admin@cplp2027.demo`, `ADMIN_PASSWORD=CPLP-Angola-2027`.
   - No Supabase, so the Control Room is read-only on Vercel. That is fine for the demo; add Supabase from the Vercel Marketplace to make it editable.
   - Vercel CLI on the owner's PC needs `$env:NODE_OPTIONS='--use-system-ca'` because of a TLS proxy.
-- [x] Hero rebuilt as a split stage: nine-flag arch over one mascot. Desktop shows the karate pose; phones keep the karate photo. Countdown fits the first screen at 360x640 to 1920x1080 (`lowphone`/`short`/`squat`/`tall` variants in `globals.css`).
+- [x] Hero is photo-led and quiet: the karate photograph on the right, title on the left, one mascot in the countdown band. The flag-arch stage remains in `hero-stage.tsx` and is not mounted. Countdown fits the first screen at 360x640 to 1920x1080 (`lowphone`/`short`/`squat`/`tall` variants in `globals.css`).
 - [x] Visual pass (`src/styles/spice.css`):
   - swoosh edges on the navy bands (`components/ui/swoosh-edge.tsx`, `Section swoosh`);
   - nations map with arcs to Luanda (`components/countries/nations-map.tsx`);

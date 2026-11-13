@@ -1,6 +1,6 @@
 import type { SettingsDoc, UserDoc } from "@/lib/cms/types";
-import { roleLabels, roles } from "./roles";
-import { countryOptions, sportOptions, type FieldDef } from "./schemas";
+import { assignableRoles, roleLabels } from "./roles";
+import { countryOptions, type FieldDef } from "./schemas";
 
 export const settingsFields: FieldDef[] = [
   {
@@ -73,14 +73,7 @@ export function userFields(isNew: boolean): FieldDef[] {
       label: "Role",
       type: "select",
       required: true,
-      options: roles.map((r) => ({ value: r, label: roleLabels[r] })),
-    },
-    {
-      name: "sportId",
-      label: "Assigned sport (scorers)",
-      type: "select",
-      options: sportOptions,
-      help: "Venue scorers only see matches for this sport. Leave empty for all sports.",
+      options: assignableRoles.map((r) => ({ value: r, label: roleLabels[r] })),
     },
     {
       name: "countryCode",
@@ -102,5 +95,5 @@ export function userFields(isNew: boolean): FieldDef[] {
 }
 
 export function userValues(u: UserDoc | undefined): Record<string, unknown> {
-  return u ? { name: u.name, email: u.email, role: u.role, sportId: u.sportIds[0] ?? "", countryCode: u.countryCode ?? "" } : { role: "editor", sportId: "", countryCode: "" };
+  return u ? { name: u.name, email: u.email, role: assignableRoles.includes(u.role) ? u.role : "delegation", countryCode: u.countryCode ?? "" } : { role: "delegation", countryCode: "" };
 }

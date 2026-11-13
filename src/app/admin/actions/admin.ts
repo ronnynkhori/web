@@ -9,7 +9,7 @@ import { getT } from "@/lib/admin/i18n/server";
 import type { Translate } from "@/lib/admin/i18n/translate";
 import { audit, deleteDoc, ensureSeeded, loadItems, newId, saveDoc } from "@/lib/admin/mutate";
 import { parseFields } from "@/lib/admin/parse";
-import { roles } from "@/lib/admin/roles";
+import { assignableRoles } from "@/lib/admin/roles";
 import { hashPassword } from "@/lib/admin/session";
 import { settingsFields, userFields } from "@/lib/admin/settings-fields";
 import { defaultSettings, seedableCollections, seedFor } from "@/lib/cms/seed";
@@ -190,7 +190,7 @@ export async function saveUser(id: string | null, _prev: FormState, form: FormDa
   const role = values.role as Role;
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.email = t("Enter a valid email address.");
   if (password && password.length < 10) errors.password = t("Use at least 10 characters.");
-  if (!roles.includes(role)) errors.role = t("Choose a role.");
+  if (!assignableRoles.includes(role)) errors.role = t("Choose a role.");
   const countryCode = String(values.countryCode ?? "");
   if (role === "delegation" && !countryCode) errors.countryCode = t("Choose the officer's country.");
 

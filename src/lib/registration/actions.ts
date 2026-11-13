@@ -15,6 +15,7 @@ import { acceptUpload, writePrivateFile } from "./files";
 import { deliverNotice } from "./mail";
 import { emptyParticipant, fileKinds, officialFunctions, type DelegationDoc, type OfficialFunction, type ParticipantDoc, type ParticipantKind, type RegistrationStatus } from "./model";
 import { canDecide, canEdit, nextRegistrationNumber, normaliseSex, submitIssues, type Issue } from "./rules";
+import { loadRegistrationRules } from "./settings";
 
 export interface FormState {
   errors: string[];
@@ -101,6 +102,7 @@ function readParticipant(form: FormData, base: ParticipantDoc): ParticipantDoc {
     documentExpiry: str("documentExpiry"),
     sportId: str("sportId"),
     discipline: str("discipline"),
+    sportNotes: str("sportNotes"),
     ageCategory: str("ageCategory"),
     competitionCategory: str("competitionCategory"),
     federation: str("federation"),
@@ -176,8 +178,9 @@ export async function saveParticipantForm(_prev: FormState, form: FormData): Pro
   const intent = String(form.get("intent") ?? "save");
   const files = await loadFiles();
   const delegation = await loadDelegation(session.countryCode);
+  const rules = await loadRegistrationRules();
   if (intent === "submit") {
-    const issues = submitIssues(person, people, files, delegation);
+    const issues = submitIssues(person, people, files, delegation, rules);
     if (issues.length || uploadErrors.length) {
       person.status = existing?.status ?? "draft";
       await saveParticipant(person, session.email);
@@ -216,11 +219,12 @@ export async function importAthletes(_prev: FormState, form: FormData): Promise<
   const people = await loadParticipants();
   const delegation = await loadDelegation(session.countryCode);
   const files = await loadFiles();
+  const rules = await loadRegistrationRules();
   let imported = 0;
   const errors: string[] = [];
   for (const row of rows) {
     const person: ParticipantDoc = { ...emptyParticipant(session.countryCode, "athlete"), ...rowToAthlete(row, session.countryCode), id: freshId("person"), status: "draft" };
-    const issues = submitIssues(person, [...people], files, delegation).filter((issue) => issue.code !== "file" && issue.code !== "guardian-file");
+    const issues = submitIssues(person, [...people], files, delegation, rules).filter((issue) => issue.code !== "file" && issue.code !== "guardian-file");
     if (issues.length) {
       errors.push(`${person.fullName || "—"}: ${texts(issues, locale).join(" ")}`);
       continue;

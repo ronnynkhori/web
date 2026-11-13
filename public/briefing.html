@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delegation registration · XIII CPLP Games Angola 2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;800&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --navy: #0a2a66;
+        --ink: #1e1e1e;
+        --red: #e21b1b;
+        --blue: #1065e0;
+        --yellow: #efc100;
+        --paper: #f6f4ef;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; }
+      body {
+        font-family: Montserrat, sans-serif;
+        color: white;
+        background: var(--navy);
+      }
+      h1, h2, .kicker, .step strong { font-family: Kanit, sans-serif; font-weight: 800; letter-spacing: 0.01em; }
+      .deck { height: 100svh; overflow: hidden; }
+      .slide {
+        display: none;
+        min-height: 100svh;
+        padding: 7vh 8vw 12vh;
+      }
+      .slide.on { display: flex; flex-direction: column; justify-content: center; }
+      .kicker { margin: 0 0 0.6rem; color: var(--yellow); font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; }
+      h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 5rem); line-height: 0.95; text-transform: uppercase; }
+      h1 span { color: var(--yellow); }
+      h2 { margin: 0 0 1.2rem; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; text-transform: uppercase; }
+      p.lead { max-width: 38rem; font-size: 1.15rem; line-height: 1.5; color: rgb(255 255 255 / 0.86); }
+      table { width: min(100%, 56rem); border-collapse: collapse; }
+      th, td { padding: 0.75rem 0.9rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgb(255 255 255 / 0.16); }
+      th { color: var(--yellow); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .flow { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+      .chip {
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 999px;
+        padding: 0.45rem 0.85rem;
+        font-weight: 700;
+      }
+      .chip.go { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+      .arrow { color: var(--yellow); font-weight: 700; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.8rem; max-width: 58rem; }
+      .card { background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.12); padding: 1rem 1.1rem; }
+      .card strong { display: block; margin-bottom: 0.35rem; font-family: Kanit, sans-serif; font-size: 1.15rem; }
+      .card span { color: rgb(255 255 255 / 0.82); font-size: 0.92rem; line-height: 1.45; }
+      ol.steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.7rem; max-width: 40rem; }
+      ol.steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.7rem; align-items: start; }
+      ol.steps b {
+        display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
+        background: var(--yellow); color: var(--ink); font-family: Kanit, sans-serif;
+      }
+      a { color: var(--yellow); }
+      .bar {
+        position: fixed; left: 0; right: 0; bottom: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0.8rem 8vw 1rem; background: linear-gradient(transparent, rgb(0 0 0 / 0.35));
+      }
+      button {
+        font: inherit; font-weight: 700; cursor: pointer;
+        background: var(--yellow); color: var(--ink); border: 0; padding: 0.55rem 0.9rem;
+      }
+      button.ghost { background: transparent; color: white; border: 1px solid rgb(255 255 255 / 0.4); }
+      .dots { display: flex; gap: 0.4rem; }
+      .dots i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: rgb(255 255 255 / 0.3); }
+      .dots i.on { background: var(--yellow); }
+      @media print {
+        .deck { height: auto; overflow: visible; }
+        .slide { display: flex !important; min-height: 100vh; break-after: page; }
+        .bar { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" id="deck">
+      <section class="slide on">
+        <p class="kicker">XIII Jogos Desportivos da CPLP · Angola 2027</p>
+        <h1>Delegation<br />registration <span>module</span></h1>
+        <p class="lead">One secure account per country. The officer registers athletes and officials. The Organising Committee reviews everyone in one place. Portuguese and English.</p>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">Who does what</p>
+        <h2>Four people. Two accounts.</h2>
+        <table>
+          <thead>
+            <tr><th>Who</th><th>Where</th><th>What they do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Super admin</td><td>Control Room → Users</td><td>Creates one officer account per country</td></tr>
+            <tr><td>Delegation officer</td><td>/pt/delegation or /en/delegation</td><td>Registers that country’s athletes and officials</td></tr>
+            <tr><td>Super admin or Registration reviewer</td><td>Control Room → Registrations</td><td>Approves, rejects, or sends a record back</td></tr>
+            <tr><td>Athlete</td><td>Nowhere</td><td>Has no account</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">Status</p>
+        <h2>One path for every person</h2>
+        <div class="flow">
+          <span class="chip">Draft</span><span class="arrow">→</span>
+          <span class="chip">Submitted</span><span class="arrow">→</span>
+          <span class="chip">Under review</span><span class="arrow">→</span>
+          <span class="chip">Correction required</span><span class="arrow">→</span>
+          <span class="chip go">Approved</span>
+          <span class="arrow">or</span>
+          <span class="chip">Rejected</span>
+        </div>
+        <p class="lead">The officer can edit a draft and a record that was sent back. A submitted record stays locked until the Committee asks for a correction.</p>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">The officer</p>
+        <h2>What gets registered</h2>
+        <div class="grid">
+          <div class="card"><strong>The delegation</strong><span>Country, institution, head of delegation, officer, sports entered, and estimated numbers.</span></div>
+          <div class="card"><strong>Each athlete</strong><span>Passport identity, sport, discipline, categories, federation, club, jersey, emergency contact, accessibility, and any other sport note.</span></div>
+          <div class="card"><strong>Each official</strong><span>Head, coach, assistant, manager, medical, physio, admin, judge, or other. Photograph and contact.</span></div>
+          <div class="card"><strong>Documents</strong><span>Passport, photograph, guardian authorisation for minors, plus eligibility, medical, or other files when the Committee marks them required. PDF, JPG, or PNG. Not public links.</span></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">The Committee</p>
+        <h2>What the Control Room does</h2>
+        <ol class="steps">
+          <li><b>1</b><div><strong>Dashboard</strong> Athletes, officials, and how many are waiting, sent back, approved, rejected, or still drafts.</div></li>
+          <li><b>2</b><div><strong>Registrations</strong> Open a person, then approve, reject, or send the record back with a note.</div></li>
+          <li><b>3</b><div><strong>Quotas and documents</strong> Set how many men, women, officials and judges each sport accepts, and which extra documents are required.</div></li>
+          <li><b>4</b><div><strong>Users and activity</strong> One officer per country. Every save and every decision is in the activity log.</div></li>
+        </ol>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">Before a record can be submitted</p>
+        <h2>The checks</h2>
+        <div class="grid">
+          <div class="card"><strong>Required fields</strong><span>A blank mandatory field stops the submit.</span></div>
+          <div class="card"><strong>Age</strong><span>Under 18 on 25 March 2027 needs a parent or guardian and their authorisation. Age bands follow the programme.</span></div>
+          <div class="card"><strong>No duplicate</strong><span>The same passport or ID cannot be active twice in one country.</span></div>
+          <div class="card"><strong>Quota</strong><span>A country cannot go past the number set for that sport. The starting numbers are the provisional programme.</span></div>
+          <div class="card"><strong>Excel</strong><span>Download the template, fill athletes, import them as drafts, then add documents on each person.</span></div>
+          <div class="card"><strong>Export</strong><span>Excel download, and a print page the browser saves as PDF.</span></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">After approval</p>
+        <h2>One number. One record.</h2>
+        <p class="lead">Approval issues <strong>CPLP27-AGO-0001</strong>, built as CPLP27, the country code, and a sequence. The accreditation page shows that number, the photograph, and a QR code of the number. Nobody registers again to produce it.</p>
+      </section>
+
+      <section class="slide">
+        <p class="kicker">Where to open it</p>
+        <h2>The same website</h2>
+        <div class="grid">
+          <div class="card"><strong>Public site</strong><span><a href="/pt">/pt</a> and <a href="/en">/en</a>. The menu item is under More.</span></div>
+          <div class="card"><strong>Officer</strong><span><a href="/pt/delegation">/pt/delegation</a> · <a href="/en/delegation">/en/delegation</a></span></div>
+          <div class="card"><strong>Committee</strong><span><a href="/admin/login">/admin/login</a> then Dashboard, Registrations, Quotas and documents, Users, Activity.</span></div>
+          <div class="card"><strong>Notices</strong><span>The officer sees each decision on the dashboard. Email goes out when a mail service is connected.</span></div>
+        </div>
+        <p class="lead">On a computer without the database, records save locally. The live site stays read-only until that database is connected.</p>
+      </section>
+    </main>
+    <div class="bar">
+      <button class="ghost" type="button" id="prev">Back</button>
+      <div class="dots" id="dots"></div>
+      <button type="button" id="next">Next</button>
+    </div>
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      const dots = document.getElementById("dots");
+      let index = 0;
+      slides.forEach((_, i) => {
+        const mark = document.createElement("i");
+        mark.addEventListener("click", () => show(i));
+        dots.append(mark);
+      });
+      function show(next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle("on", i === index));
+        [...dots.children].forEach((dot, i) => dot.classList.toggle("on", i === index));
+      }
+      document.getElementById("next").addEventListener("click", () => show(index + 1));
+      document.getElementById("prev").addEventListener("click", () => show(index - 1));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") show(index + 1);
+        if (event.key === "ArrowLeft") show(index - 1);
+      });
+      show(0);
+    </script>
+  </body>
+</html>

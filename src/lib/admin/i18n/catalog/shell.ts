@@ -68,6 +68,47 @@ const part: CatalogPart = {
     "Reviews, approves and returns delegation registrations.": "Revê, aprova e devolve as inscrições das delegações.",
     Registrations: "Inscrições",
     Entries: "Inscrições",
+    Registration: "Inscrição",
+    Accounts: "Contas",
+    "Creates one officer account per country and can review every registration.":
+      "Cria uma conta de oficial por país e pode rever todas as inscrições.",
+    "Sign in to review delegation registrations.": "Entre para rever as inscrições das delegações.",
+    "One officer account per country, plus the people who review registrations. Officers sign in on the public site, not here.":
+      "Uma conta de oficial por país, mais quem revê as inscrições. Os oficiais entram no site público, não aqui.",
+    "Add one officer for each country.": "Adicione um oficial por país.",
+    "Review what each country has submitted.": "Reveja o que cada país submeteu.",
+    Athletes: "Atletas",
+    Officials: "Oficiais",
+    "Waiting for review": "À espera de revisão",
+    "Needs correction": "A corrigir",
+    Approved: "Aprovadas",
+    Rejected: "Recusadas",
+    Drafts: "Rascunhos",
+    "Across every country": "Em todos os países",
+    "Submitted or under review": "Submetidas ou em revisão",
+    "Sent back to the officer": "Devolvidas ao oficial",
+    "Registration number issued": "Número de inscrição emitido",
+    "Not accepted": "Não aceites",
+    "Not submitted yet": "Ainda não submetidos",
+    "Nothing is waiting for review.": "Nada está à espera de revisão.",
+    "Open the full list": "Abrir a lista completa",
+    "Quotas and documents": "Quotas e documentos",
+    Rules: "Regras",
+    "Passport, photograph and a guardian authorisation for minors are always required. Tick any further document, and set the quota each country may submit.":
+      "O passaporte, a fotografia e a autorização do tutor para menores são sempre obrigatórios. Marque qualquer outro documento e defina a quota que cada país pode submeter.",
+    "Also require these documents": "Exigir também estes documentos",
+    "Sports eligibility confirmation": "Confirmação de elegibilidade desportiva",
+    "Medical fitness certificate": "Atestado de aptidão médica",
+    "Other documents": "Outros documentos",
+    Sport: "Modalidade",
+    Men: "Homens",
+    Women: "Mulheres",
+    Judges: "Juízes",
+    "These numbers start from the provisional programme. Saving replaces them for every country.":
+      "Estes números começam no programa provisório. Ao guardar, passam a valer para todos os países.",
+    Save: "Guardar",
+    "This deployment cannot store registrations until a database is connected.":
+      "Esta instalação não guarda inscrições enquanto a base de dados não estiver ligada.",
     "Local mode: changes are saved to .data/store.json on this computer. Connect Supabase for the live site.":
       "Modo local: as alterações são guardadas em .data/store.json neste computador. Ligue o Supabase para o site em produção.",
     "Read-only: this deployment has no database. Add Supabase from the Vercel Marketplace to enable saving.":
@@ -136,6 +177,8 @@ const part: CatalogPart = {
     "XIII CPLP Games": "XIII Jogos Desportivos da CPLP",
     "Angola 2027": "Angola 2027",
     "13th edition · 25 Mar – 3 Apr 2027": "13.ª edição · 25 Mar – 3 Abr 2027",
+    "Nine nations, one community. The Committee reviews every registration from here.":
+      "Nove países, uma comunidade. O Comité revê todas as inscrições a partir daqui.",
     "Nine nations, one community. Every score, result and story on the official website is published from here.":
       "Nove nações, uma comunidade. Cada resultado, classificação e notícia do site oficial é publicado a partir daqui.",
     "The 9 nations": "As 9 nações",

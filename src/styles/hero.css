@@ -28,13 +28,30 @@
   mask-image: radial-gradient(60% 75% at 78% 45%, #000 15%, transparent 72%);
 }
 
-/* ---------- Phone backdrop: full-bleed photo that fades into navy behind the copy ---------- */
+/* Photo-led hero. Near-black matches the studio background, so the athlete
+   has no coloured edge. The scrim only protects the title. */
+[data-hero] {
+  background: #07080c;
+}
 .hero-backdrop-scrim {
   background:
-    linear-gradient(to bottom, rgb(10 42 102 / 0.6) 0%, transparent 20%),
-    linear-gradient(to top, rgb(10 42 102 / 0.98) 0%, rgb(10 42 102 / 0.6) 24%, transparent 48%),
-    linear-gradient(to right, rgb(10 42 102 / 0.9) 0%, rgb(10 42 102 / 0.55) 40%, rgb(10 42 102 / 0.1) 75%, transparent 100%),
-    linear-gradient(rgb(10 42 102 / 0.18), rgb(10 42 102 / 0.18));
+    linear-gradient(to top, #07080c 0%, rgb(7 8 12 / 0.72) 22%, transparent 46%),
+    linear-gradient(to right, #07080c 0%, rgb(7 8 12 / 0.88) 38%, rgb(7 8 12 / 0.45) 62%, rgb(7 8 12 / 0.15) 100%);
+}
+@media (width >= 64rem) {
+  .hero-photo-frame {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 16%, #000 100%),
+      linear-gradient(to top, transparent 0%, #000 12%, #000 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 16%, #000 100%),
+      linear-gradient(to top, transparent 0%, #000 12%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+  .hero-backdrop-scrim {
+    background: linear-gradient(to right, #07080c 0%, #07080c 28%, rgb(7 8 12 / 0.35) 46%, transparent 58%);
+  }
 }
 
 /* ---------- Stage ---------- */

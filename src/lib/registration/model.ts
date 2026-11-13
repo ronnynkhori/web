@@ -61,6 +61,8 @@ export interface ParticipantDoc extends StoredDoc {
   documentExpiry: string;
   sportId: string;
   discipline: string;
+  /** Free text until the Committee sends an event list. */
+  sportNotes: string;
   ageCategory: string;
   competitionCategory: string;
   federation: string;
@@ -115,6 +117,7 @@ export const emptyParticipant = (countryCode: string, kind: ParticipantKind): Pa
   documentExpiry: "",
   sportId: "",
   discipline: "",
+  sportNotes: "",
   ageCategory: "",
   competitionCategory: "",
   federation: "",

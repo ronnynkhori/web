@@ -12,8 +12,11 @@ export const roleLabels: Record<Role, string> = {
   registrar: "Registration reviewer",
 };
 
+/** Roles a Super admin can assign. The games-console roles stay in the type so older accounts still load. */
+export const assignableRoles: Role[] = ["super", "registrar", "delegation"];
+
 export const roleDescriptions: Record<Role, string> = {
-  super: "Everything, including users and site settings.",
+  super: "Creates one officer account per country and can review every registration.",
   editor: "Announcements, guide, FAQ, documents, venues, countries, schedule, sponsors and the alert banner.",
   media: "Gallery photos, photo download links and highlights.",
   results: "Approves and corrects results, manages fixtures, countries, the medal table and schedule.",
@@ -43,28 +46,28 @@ export type Area =
   | "activity"
   | "registrations";
 
-const staff = ["super", "editor", "media", "results", "scorer"] as const satisfies readonly Role[];
+const committee = ["super", "registrar"] as const satisfies readonly Role[];
 
 export const access: Record<Area, Role[]> = {
-  dashboard: [...staff, "registrar"],
-  announcements: ["super", "editor"],
-  documents: ["super", "editor"],
-  faq: ["super", "editor"],
-  guide: ["super", "editor"],
-  venues: ["super", "editor"],
-  countries: ["super", "editor", "results"],
-  sponsors: ["super", "editor"],
-  schedule: ["super", "editor", "results"],
-  settings: ["super", "editor"],
-  media: ["super", "media"],
-  photoLinks: ["super", "media"],
+  dashboard: [...committee],
+  announcements: [],
+  documents: [],
+  faq: [],
+  guide: [],
+  venues: [],
+  countries: [],
+  sponsors: [],
+  schedule: [],
+  settings: [],
+  media: [],
+  photoLinks: [],
   users: ["super"],
-  activity: ["super", "results"],
-  scores: ["super", "results", "scorer"],
-  results: ["super", "results", "scorer"],
-  approvals: ["super", "results"],
-  medals: ["super", "results"],
-  registrations: ["super", "registrar"],
+  activity: [...committee],
+  scores: [],
+  results: [],
+  approvals: [],
+  medals: [],
+  registrations: [...committee],
 };
 
 export function can(role: Role, area: Area): boolean {

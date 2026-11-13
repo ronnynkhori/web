@@ -112,12 +112,15 @@ export function fieldIssues(person: ParticipantDoc): Issue[] {
   return issues;
 }
 
-export function fileIssues(person: ParticipantDoc, files: ParticipantFileDoc[]): Issue[] {
+export function fileIssues(person: ParticipantDoc, files: ParticipantFileDoc[], extra: FileKind[] = []): Issue[] {
   const kinds = new Set(files.filter((file) => file.participantId === person.id).map((file) => file.kind));
   const issues: Issue[] = [];
   if (!kinds.has("passport")) issues.push({ code: "file", kind: "passport" });
   if (!kinds.has("photo")) issues.push({ code: "file", kind: "photo" });
   if (isMinor(person.dateOfBirth) && !kinds.has("guardian")) issues.push({ code: "guardian-file", kind: "guardian" });
+  for (const kind of extra) {
+    if (kind !== "guardian" && !kinds.has(kind)) issues.push({ code: "file", kind });
+  }
   return issues;
 }
 
@@ -137,10 +140,11 @@ export function sportIssue(person: ParticipantDoc, delegation: DelegationDoc | n
   return delegation.sports.includes(person.sportId) ? null : { code: "sport", field: "sportId" };
 }
 
-/** Counts this person against the provisional men / women / staff / judges quota. */
-export function quotaIssue(person: ParticipantDoc, people: ParticipantDoc[]): Issue | null {
+/** Counts this person against the men / women / staff / judges quota. An override replaces the provisional number. */
+export function quotaIssue(person: ParticipantDoc, people: ParticipantDoc[], overrides?: Record<string, { men: number; women: number; staff: number; judges: number }>): Issue | null {
   if (!person.sportId) return null;
-  const quota = getSport(person.sportId)?.programme?.quota;
+  const provisional = getSport(person.sportId)?.programme?.quota;
+  const quota = overrides?.[person.sportId] ?? provisional;
   if (!quota) return null;
   const group = person.kind === "athlete" ? (person.sex === "female" ? "women" : person.sex === "male" ? "men" : null) : person.function === "judge" ? "judges" : "staff";
   if (!group) return null;
@@ -170,12 +174,18 @@ export function duplicateIssue(person: ParticipantDoc, people: ParticipantDoc[])
 }
 
 /** Everything that must pass before a draft can be submitted. */
-export function submitIssues(person: ParticipantDoc, people: ParticipantDoc[], files: ParticipantFileDoc[], delegation: DelegationDoc | null): Issue[] {
+export function submitIssues(
+  person: ParticipantDoc,
+  people: ParticipantDoc[],
+  files: ParticipantFileDoc[],
+  delegation: DelegationDoc | null,
+  rules?: { extraRequired?: FileKind[]; quotas?: Record<string, { men: number; women: number; staff: number; judges: number }> },
+): Issue[] {
   const minorMarker = fieldIssues(person).filter((issue) => issue.code !== "minor");
   return [
     ...minorMarker,
-    ...fileIssues(person, files),
-    ...[ageIssue(person), sportIssue(person, delegation), quotaIssue(person, people), duplicateIssue(person, people)].filter((issue): issue is Issue => Boolean(issue)),
+    ...fileIssues(person, files, rules?.extraRequired),
+    ...[ageIssue(person), sportIssue(person, delegation), quotaIssue(person, people, rules?.quotas), duplicateIssue(person, people)].filter((issue): issue is Issue => Boolean(issue)),
   ];
 }
 

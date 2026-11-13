@@ -33,7 +33,7 @@ async function BootstrapHint() {
 
 export default function LoginPage({ searchParams }: PageProps<"/admin/login">) {
   return (
-    <AuthShell title="Games Control Room" description="Sign in to manage the CPLP 2027 website.">
+    <AuthShell title="Games Control Room" description="Sign in to review delegation registrations.">
       <Suspense>
         <ResetNotice searchParams={searchParams} />
       </Suspense>

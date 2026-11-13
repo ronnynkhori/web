@@ -138,7 +138,7 @@ function AppSidebar({ groups, user, pending }: Pick<FrameProps, "groups" | "user
                           <span>{t(item.label)}</span>
                         </Link>
                       </SidebarMenuButton>
-                      {item.href === "/admin/approvals" && pending > 0 && (
+                      {item.href === "/admin/registrations" && pending > 0 && (
                         <SidebarMenuBadge className="rounded-full bg-live text-live-foreground peer-data-[active=true]/menu-button:text-live-foreground">
                           {pending}
                         </SidebarMenuBadge>
@@ -222,7 +222,7 @@ function TabBar({ tabs, pending }: Pick<FrameProps, "tabs" | "pending">) {
             {active && <span aria-hidden="true" className="absolute inset-x-5 top-0 h-0.5 rounded-full bg-sidebar-primary" />}
             <span className="relative">
               <AdminIcon name={tab.icon} className="size-6" />
-              {tab.href === "/admin/approvals" && pending > 0 && (
+              {tab.href === "/admin/registrations" && pending > 0 && (
                 <span className="absolute -top-1.5 -right-2.5 grid h-4 min-w-4 place-items-center rounded-full bg-live px-1 text-[10px] text-live-foreground">{pending}</span>
               )}
             </span>

@@ -48,6 +48,16 @@ describe("registration rules", () => {
     expect(submitIssues(athlete(), [athlete()], [], null).some((issue) => issue.kind === "passport")).toBe(true);
   });
 
+  it("requires a document the Committee has marked mandatory", () => {
+    expect(submitIssues(athlete(), [athlete()], [], null, { extraRequired: ["medical"] }).some((issue) => issue.kind === "medical")).toBe(true);
+  });
+
+  it("uses a Committee quota in place of the provisional number", () => {
+    const base = athlete({ sportId: "tennis" });
+    const people = [base, { ...base, id: "2", documentNumber: "B" }];
+    expect(quotaIssue({ ...base, id: "3", documentNumber: "C" }, people, { tennis: { men: 2, women: 9, staff: 2, judges: 1 } })).toBeNull();
+  });
+
   it("issues the next registration number for that country", () => {
     expect(nextRegistrationNumber([athlete({ registrationNumber: "CPLP27-AGO-0002" })], "AGO")).toBe("CPLP27-AGO-0003");
   });

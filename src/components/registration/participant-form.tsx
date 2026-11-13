@@ -24,12 +24,14 @@ export function ParticipantForm({
   kind,
   sports,
   files,
+  countryName,
 }: {
   locale: Locale;
   person: ParticipantDoc;
   kind: ParticipantKind;
   sports: { id: string; name: string }[];
   files: ParticipantFileDoc[];
+  countryName: string;
 }) {
   const copy = regCopy(locale);
   const [state, action, pending] = useActionState(saveParticipantForm, { errors: [], message: "" } satisfies FormState);
@@ -51,6 +53,9 @@ export function ParticipantForm({
           </select>
         </label>
       )}
+      <p className="m-0 type-body-s text-fg-muted">
+        {copy.countryRepresented}: <strong className="text-fg">{countryName}</strong>. {copy.countryFixed}
+      </p>
       <Text label={copy.nationality} name="nationality" value={person.nationality} required />
       <Text label={copy.documentNumber} name="documentNumber" value={person.documentNumber} required />
       <Text label={copy.documentExpiry} name="documentExpiry" value={person.documentExpiry} type="date" required />
@@ -68,6 +73,7 @@ export function ParticipantForm({
       {kind === "athlete" ? (
         <>
           <Text label={copy.discipline} name="discipline" value={person.discipline} required />
+          <Text label={copy.sportNotes} name="sportNotes" value={person.sportNotes} />
           <Text label={copy.ageCategory} name="ageCategory" value={person.ageCategory} required />
           <Text label={copy.competitionCategory} name="competitionCategory" value={person.competitionCategory} required />
           <Text label={copy.federation} name="federation" value={person.federation} required />

@@ -25,7 +25,8 @@ export default async function ActivityPage() {
   const dayFormat = new Intl.DateTimeFormat(intlLocale(locale), { weekday: "long", day: "numeric", month: "long", timeZone: zone });
   const timeFormat = new Intl.DateTimeFormat(intlLocale(locale), { hour: "2-digit", minute: "2-digit", timeZone: zone });
   const stampFormat = stampFormatFor(locale);
-  const entries = await getStore().listAudit(300);
+  const registrationCollections = new Set(["participants", "delegations", "participantFiles", "registrationNotices", "registrationRules", "users"]);
+  const entries = (await getStore().listAudit(300)).filter((entry) => !entry.collection || registrationCollections.has(entry.collection));
 
   const days: Array<{ day: string; items: typeof entries }> = [];
   for (const e of entries) {

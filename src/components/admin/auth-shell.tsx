@@ -55,7 +55,7 @@ function BrandPanel({ t, locale }: { t: Translate; locale: Locale }) {
           <div className="flex flex-col gap-2">
             <p className="font-display text-base tracking-[0.18em] text-highlight sm:text-lg">{t("13th edition · 25 Mar – 3 Apr 2027")}</p>
             <p className="font-display text-5xl leading-[0.9] tracking-wide text-white drop-shadow-lg sm:text-6xl lg:text-8xl">CPLP 2027</p>
-            <p className="hidden max-w-md text-base text-white/85 sm:block">{t("Nine nations, one community. Every score, result and story on the official website is published from here.")}</p>
+            <p className="hidden max-w-md text-base text-white/85 sm:block">{t("Nine nations, one community. The Committee reviews every registration from here.")}</p>
           </div>
 
           <ul aria-label={t("The 9 nations")} className="flex flex-wrap gap-1.5">

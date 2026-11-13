@@ -4,17 +4,16 @@ import { Database } from "lucide-react";
 import { requireUser } from "@/lib/admin/auth";
 import { getAdminLocale } from "@/lib/admin/i18n/server";
 import { translator } from "@/lib/admin/i18n/translate";
-import { loadItems } from "@/lib/admin/mutate";
 import { can, roleLabels } from "@/lib/admin/roles";
-import type { EventResultDoc, MatchDoc } from "@/lib/cms/types";
+import { loadParticipants } from "@/lib/registration/data";
 import { getStore } from "@/lib/store";
 import { AdminFrame } from "./admin-frame";
 import { AdminI18nProvider } from "./i18n";
 import { adminNav, phoneTabsFor } from "./nav-items";
 
 async function pendingCount(): Promise<number> {
-  const [matches, results] = await Promise.all([loadItems<MatchDoc>("matches"), loadItems<EventResultDoc>("results")]);
-  return matches.filter((m) => m.approval === "pending").length + results.filter((r) => r.approval === "pending").length;
+  const people = await loadParticipants();
+  return people.filter((person) => person.status === "submitted" || person.status === "review").length;
 }
 
 /** Sidebar (desktop), tab bar (phones) and top bar around every signed-in Control Room page. */
@@ -26,7 +25,7 @@ export async function AdminShell({ children }: { children: ReactNode }) {
     .filter((g) => g.items.length);
   const [jar, pending, locale] = await Promise.all([
     cookies(),
-    can(session.role, "approvals") ? pendingCount() : Promise.resolve(0),
+    can(session.role, "registrations") ? pendingCount() : Promise.resolve(0),
     getAdminLocale(),
   ]);
   const t = translator(locale);

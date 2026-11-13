@@ -8,7 +8,7 @@ import { HeroStageScene } from "./hero-stage-scene";
 /**
  * Hero art from the brand book: the emblem's swooshes framing the bottom and
  * right edge, guinea-fowl spots as texture, and a mascot stage where the nine
- * member flags arch over the karate mascot.
+ * member flags arch over the mascot trio (as they ring the emblem).
  */
 export function HeroSwooshes({ className }: { className?: string }) {
   return (
@@ -61,23 +61,23 @@ export function HeroSpots({ className }: { className?: string }) {
 }
 
 /**
- * Phones: a full-bleed sports photo behind the copy, like a hero photo (the
- * flag-arch stage is too small to read there). A navy fade from the bottom
- * keeps the title legible.
+ * The karate photograph fills the right of the hero at its own aspect ratio,
+ * so an 864px-wide file is never stretched across the screen. The black
+ * studio background falls into the hero; a short mask hides the mat edge.
  */
-export function HeroPhotoBackdrop({ image, position = "50% 20%", className }: { image: ImageAsset; position?: string; className?: string }) {
+export function HeroPhotoBackdrop({ image, className }: { image: ImageAsset; className?: string }) {
   return (
-    <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className ?? ""}`}>
-      <div className="absolute inset-y-0 right-[-34%] left-[26%]">
+    <div aria-hidden="true" className={`hero-backdrop pointer-events-none absolute inset-0 overflow-hidden ${className ?? ""}`}>
+      <div className="hero-photo-frame absolute inset-y-0 right-0 w-[125%] desktop:w-[min(44vw,36rem)]">
         <Image
           src={image.src}
           alt=""
           fill
-          sizes="(min-width: 40rem) 1px, 110vw"
-          loading="eager"
+          quality={92}
+          sizes="(min-width: 64rem) 864px, 100vw"
+          preload
           fetchPriority="high"
-          className="object-cover"
-          style={{ objectPosition: position }}
+          className="object-cover object-[72%_18%] desktop:object-contain desktop:object-right-bottom"
         />
       </div>
       <span className="hero-backdrop-scrim absolute inset-0" />
@@ -91,7 +91,7 @@ export interface StageFlag {
   src?: string;
 }
 
-/** Nine flags on an arch over the mascot: 200deg to 340deg around the stage centre. */
+/** Nine flags on an arch over the trio: 200deg to 340deg around the stage centre. */
 function flagPosition(i: number, n: number): CSSProperties {
   const angle = ((200 + (140 * i) / Math.max(1, n - 1)) * Math.PI) / 180;
   return {
@@ -101,11 +101,13 @@ function flagPosition(i: number, n: number): CSSProperties {
   } as CSSProperties;
 }
 
-export function HeroStage({ flags, className }: { flags: StageFlag[]; className?: string }) {
+export function HeroStage({ flags, bubble, className }: { flags: StageFlag[]; bubble: string; className?: string }) {
   return (
     <HeroStageScene className={className}>
-      <span aria-hidden="true" className="hero-sun absolute inset-[18%] rounded-pill" />
-      <span aria-hidden="true" className="hero-ring absolute inset-[8%] rounded-pill" />
+      <span aria-hidden="true" className="hero-sun absolute inset-[14%] rounded-pill" />
+      <span aria-hidden="true" className="hero-ring absolute inset-[10%] rounded-pill" />
+      <span aria-hidden="true" className="hero-ring hero-ring--dashed absolute inset-[6%] rounded-pill" />
+      <span aria-hidden="true" className="hero-ring absolute inset-0 rounded-pill opacity-50" />
 
       <ul className="hero-flags m-0 list-none p-0">
         {flags.map((f, i) => (
@@ -121,17 +123,36 @@ export function HeroStage({ flags, className }: { flags: StageFlag[]; className?
         ))}
       </ul>
 
-      <div aria-hidden="true" className="hero-trio absolute inset-x-[8%] bottom-[4%] flex h-[78%] items-end justify-center">
+      <div aria-hidden="true" className="hero-trio absolute inset-x-[4%] bottom-[8%] flex h-[66%] items-end justify-center">
+        <span className="hero-ground absolute inset-x-[12%] -bottom-[3%] h-[8%] rounded-pill" />
         <MascotActor
-          {...mascotPoses.karate}
-          alt=""
-          sizes="(min-width: 64rem) 28vw, 50vw"
+          {...mascotPoses.football}
+          sizes="(min-width: 64rem) 16vw, 30vw"
+          enter={false}
+          depth={0.6}
+          className="hero-actor h-[70%] -mr-[9%]"
+          imgClassName="h-full w-auto"
+        />
+        <MascotActor
+          {...mascotPoses.athletics}
+          sizes="(min-width: 64rem) 24vw, 45vw"
           enter={false}
           depth={1}
           preload
-          className="hero-actor h-full"
+          className="hero-actor relative z-10 h-full"
           imgClassName="h-full w-auto"
         />
+        <MascotActor
+          {...mascotPoses.paraAthletics}
+          sizes="(min-width: 64rem) 16vw, 30vw"
+          enter={false}
+          depth={0.6}
+          className="hero-actor h-[64%] -ml-[12%]"
+          imgClassName="h-full w-auto"
+        />
+        <span className="hero-bubble absolute inset-x-0 top-[-13%] z-20 mx-auto w-fit rounded-md px-[0.9em] py-[0.45em] font-display text-[clamp(0.7rem,0.45rem+0.7vw,1.05rem)] font-extrabold whitespace-nowrap uppercase shadow-lg">
+          {bubble}
+        </span>
       </div>
     </HeroStageScene>
   );
