@@ -6,6 +6,9 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
+/** Signed-in, per-officer pages: they render on request, so they may block instead of prerendering a static shell. */
+export const instant = false;
+
 async function Bar({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) return null;
