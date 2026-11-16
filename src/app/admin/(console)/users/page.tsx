@@ -10,6 +10,8 @@ import { initials } from "@/components/admin/time";
 import { Alert, AlertDescription, AlertTitle } from "@/components/admin/ui/alert";
 import { Avatar, AvatarFallback } from "@/components/admin/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/admin/ui/card";
+import Link from "next/link";
+import { countries } from "@/data/countries";
 import { sports } from "@/data/sports";
 import { requireUser } from "@/lib/admin/auth";
 import { getAdminLocale } from "@/lib/admin/i18n/server";
@@ -34,6 +36,14 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
     return sport ? pick(sport.name, locale) : id;
   };
 
+  const countryLabel = (code: string) => {
+    const country = countries.find((c) => c.code === code);
+    return country ? pick(country.name, locale) : code;
+  };
+  const withoutOfficer = countries.filter((c) => !users.some((u) => u.active && u.role === "delegation" && u.countryCode === c.code));
+  const officerCountry = new Set<string>();
+  const sharedCountry = users.filter((u) => u.active && u.role === "delegation" && u.countryCode && (officerCountry.has(u.countryCode) || !officerCountry.add(u.countryCode)));
+
   const rows: ListRow[] = users.map((u) => ({
     id: u.id,
     href: `/admin/users/${u.id}`,
@@ -49,6 +59,7 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
     badges: [
       { label: t(roleLabels[u.role]), tone: u.role === "super" ? "brand" : "info" },
       ...(!u.active ? [{ label: t("Deactivated"), tone: "neutral" as const }] : []),
+      ...(u.role === "delegation" && u.countryCode ? [{ label: countryLabel(u.countryCode), tone: "neutral" as const }] : []),
       ...u.sportIds.map((id) => ({ label: sportName(id), tone: "neutral" as const })),
     ],
     actions: (
@@ -111,6 +122,30 @@ export default async function UsersPage({ searchParams }: PageProps<"/admin/user
                 "Only a Super admin can set passwords for other people. With just one, nobody can help if that person is locked out and the reset email does not reach them.",
               )}
             </AlertDescription>
+          </Alert>
+        )}
+
+        {hasSuper && withoutOfficer.length > 0 && (
+          <Alert>
+            <TriangleAlert />
+            <AlertTitle>{t("{n} countries have no officer yet", { n: withoutOfficer.length })}</AlertTitle>
+            <AlertDescription>
+              <p>{t("A country cannot register anyone until its officer account exists. Create one:")}</p>
+              <p className="mt-2 flex flex-wrap gap-1.5">
+                {withoutOfficer.map((c) => (
+                  <Link key={c.code} href={`/admin/users/new?country=${c.code}`} className="rounded-full border bg-card px-2.5 py-0.5 text-xs font-semibold text-foreground hover:border-primary hover:text-primary">
+                    + {pick(c.name, locale)}
+                  </Link>
+                ))}
+              </p>
+            </AlertDescription>
+          </Alert>
+        )}
+        {sharedCountry.length > 0 && (
+          <Alert variant="destructive">
+            <TriangleAlert />
+            <AlertTitle>{t("More than one active officer for a country")}</AlertTitle>
+            <AlertDescription>{t("Each country should have exactly one officer. Deactivate the extra account: {names}.", { names: sharedCountry.map((u) => u.name).join(", ") })}</AlertDescription>
           </Alert>
         )}
 

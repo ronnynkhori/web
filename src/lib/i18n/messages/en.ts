@@ -54,7 +54,7 @@ const en = {
     guide: "Games Guide",
     delegation: "Delegation registration",
     more: "More",
-    cta: "Key dates",
+    cta: "Registration",
   },
   hero: {
     overline: "Community of Portuguese-Speaking Countries",

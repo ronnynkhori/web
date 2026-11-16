@@ -17,6 +17,15 @@ function actionText(action: string, t: Translate) {
   return bulk ? t("deleted {n} items", { n: bulk[1] }) : t(action);
 }
 
+const collectionLabel: Record<string, string> = {
+  participants: "Registration",
+  delegations: "Delegation profile",
+  participantFiles: "Document",
+  registrationNotices: "Notice",
+  registrationRules: "Quotas and documents",
+  users: "User account",
+};
+
 export default async function ActivityPage() {
   await requireUser("activity");
   const locale = await getAdminLocale();
@@ -46,7 +55,7 @@ export default async function ActivityPage() {
     <>
       <PageHeader
         title={t("Activity log")}
-        description={t("Every change made in the Control Room: who, what and when (Luanda time). Kept for accountability on results.")}
+        description={t("Every registration change and decision: who, what and when (Luanda time). Kept as the audit record.")}
         icon="clock"
       />
       {entries.length === 0 ? (
@@ -72,7 +81,7 @@ export default async function ActivityPage() {
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {timeFormat.format(new Date(e.at))}
-                          {e.collection && ` · ${e.collection}`}
+                          {e.collection && ` · ${t(collectionLabel[e.collection] ?? e.collection)}`}
                         </p>
                       </div>
                     </li>
@@ -110,10 +119,18 @@ export default async function ActivityPage() {
                     <TableCell>
                       <span className="flex flex-col items-start gap-1">
                         <StatusBadge tone={toneFor(e.action)}>{actionText(e.action, t)}</StatusBadge>
-                        {e.collection && <span className="text-xs text-muted-foreground">{e.collection}</span>}
+                        {e.collection && <span className="text-xs text-muted-foreground">{t(collectionLabel[e.collection] ?? e.collection)}</span>}
                       </span>
                     </TableCell>
-                    <TableCell className="pr-5 whitespace-normal">{e.summary ?? e.itemId}</TableCell>
+                    <TableCell className="pr-5 whitespace-normal">
+                      {e.collection === "participants" && e.itemId ? (
+                        <a href={`/admin/registrations/${e.itemId}`} className="text-primary hover:underline">
+                          {e.summary ?? e.itemId}
+                        </a>
+                      ) : (
+                        (e.summary ?? e.itemId)
+                      )}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

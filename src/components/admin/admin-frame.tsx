@@ -8,7 +8,7 @@ import { ChevronsUpDown, ExternalLink, LogOut, Menu } from "lucide-react";
 import { logout } from "@/app/admin/actions/auth";
 import { cn } from "@/lib/utils";
 import { AdminIcon } from "./admin-icon";
-import { AdminLanguageSwitch, useT } from "./i18n";
+import { AdminLanguageSwitch, useAdminLocale, useT } from "./i18n";
 import { isActive, type AdminNavGroup, type AdminNavItem } from "./nav-items";
 import { initials } from "./time";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -59,6 +59,7 @@ interface FrameProps {
 
 function UserMenu({ user, side, children }: { user: FrameUser; side: "top" | "bottom"; children: ReactNode }) {
   const t = useT();
+  const locale = useAdminLocale();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
@@ -70,7 +71,7 @@ function UserMenu({ user, side, children }: { user: FrameUser; side: "top" | "bo
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/en" target="_blank">
+          <Link href={`/${locale}`} target="_blank">
             <ExternalLink /> {t("View public site")}
           </Link>
         </DropdownMenuItem>
@@ -178,8 +179,9 @@ function sectionLabel(groups: AdminNavGroup[], pathname: string) {
 function TopBar({ groups, user }: Pick<FrameProps, "groups" | "user">) {
   const pathname = usePathname();
   const t = useT();
+  const locale = useAdminLocale();
   return (
-    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-3 pt-[env(safe-area-inset-top)] md:h-16 md:px-6">
+    <header data-admin-chrome className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-3 pt-[env(safe-area-inset-top)] md:h-16 md:px-6">
       <SidebarTrigger className="hidden md:inline-flex" />
       <Separator orientation="vertical" className="mr-1 hidden data-[orientation=vertical]:h-5 md:block" />
       <Link href="/admin" className="grid size-9 shrink-0 place-items-center rounded-md border bg-white p-0.5 md:hidden" aria-label={t("Control Room home")}>
@@ -188,7 +190,7 @@ function TopBar({ groups, user }: Pick<FrameProps, "groups" | "user">) {
       <p className="min-w-0 flex-1 truncate text-sm font-semibold md:text-base">{t(sectionLabel(groups, pathname))}</p>
       <AdminLanguageSwitch />
       <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex">
-        <Link href="/en" target="_blank">
+        <Link href={`/${locale}`} target="_blank">
           <ExternalLink /> {t("View site")}
         </Link>
       </Button>
@@ -212,6 +214,7 @@ function TabBar({ tabs, pending }: Pick<FrameProps, "tabs" | "pending">) {
   const tabClass = "relative flex min-w-0 flex-col items-center justify-center gap-1 text-[11px] font-semibold";
   return (
     <nav
+      data-admin-chrome
       aria-label={t("Quick navigation")}
       className="fixed inset-x-0 bottom-0 z-40 grid h-[var(--tabbar-h)] grid-cols-4 border-t border-sidebar-border bg-sidebar pb-[env(safe-area-inset-bottom)] text-sidebar-foreground md:hidden"
     >
@@ -259,7 +262,7 @@ export function AdminFrame({ groups, tabs, user, pending, defaultOpen, notice, c
       <AppSidebar groups={groups} user={user} pending={pending} />
       <SidebarInset className="min-w-0 bg-background">
         <TopBar groups={groups} user={user} />
-        {notice}
+        {notice && <div data-admin-chrome>{notice}</div>}
         <main className="mx-auto w-full max-w-[90rem] px-4 pt-5 pb-[calc(var(--tabbar-h)+1.5rem)] md:px-6 md:pt-7 md:pb-12 lg:px-10">{children}</main>
       </SidebarInset>
       <TabBar tabs={tabs} pending={pending} />

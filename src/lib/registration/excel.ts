@@ -67,25 +67,39 @@ function cellText(value: unknown): string {
 export async function participantsWorkbook(people: ParticipantDoc[]): Promise<Buffer> {
   const ExcelJS = await import("exceljs");
   const book = new ExcelJS.Workbook();
-  const sheet = book.addWorksheet("Registration");
-  const head = ["registrationNumber", "status", "kind", "fullName", "dateOfBirth", "sex", "sportId", "discipline", "function", "documentNumber", "countryCode"];
-  sheet.addRow(head);
-  for (const person of people) {
-    sheet.addRow([
-      person.registrationNumber,
-      person.status,
-      person.kind,
-      person.fullName,
-      person.dateOfBirth,
-      person.sex,
-      person.sportId,
-      person.discipline,
-      person.function,
-      person.documentNumber,
-      person.countryCode,
-    ]);
-  }
-  sheet.getRow(1).font = { bold: true };
+  book.creator = "CPLP 2027 · Sala de Controlo";
+  const sheet = book.addWorksheet("Inscrições", { views: [{ state: "frozen", ySplit: 1 }] });
+  const columns: [string, number, (person: ParticipantDoc) => string][] = [
+    ["Nº de inscrição / Registration no.", 22, (p) => p.registrationNumber],
+    ["País / Country", 9, (p) => p.countryCode],
+    ["Estado / Status", 14, (p) => p.status],
+    ["Tipo / Role", 10, (p) => p.kind],
+    ["Nome completo / Full name", 32, (p) => p.fullName],
+    ["Nascimento / Date of birth", 14, (p) => p.dateOfBirth],
+    ["Sexo / Sex", 9, (p) => p.sex],
+    ["Nacionalidade / Nationality", 14, (p) => p.nationality],
+    ["Documento / Document no.", 18, (p) => p.documentNumber],
+    ["Validade / Expiry", 12, (p) => p.documentExpiry],
+    ["Modalidade / Sport", 16, (p) => p.sportId],
+    ["Prova / Event", 18, (p) => p.discipline],
+    ["Escalão / Age category", 14, (p) => p.ageCategory],
+    ["Categoria / Competition category", 16, (p) => p.competitionCategory],
+    ["Federação / Federation", 24, (p) => p.federation],
+    ["Clube / Club", 18, (p) => p.club],
+    ["Camisola / Jersey", 9, (p) => p.jerseyNumber],
+    ["Função / Function", 16, (p) => p.function],
+    ["Submetido / Submitted", 18, (p) => (p.submittedAt ?? "").slice(0, 16).replace("T", " ")],
+    ["Decidido / Decided", 18, (p) => (p.decidedAt ?? "").slice(0, 16).replace("T", " ")],
+    ["Nota / Review note", 40, (p) => p.reviewNote],
+  ];
+  sheet.columns = columns.map(([header, width]) => ({ header, width }));
+  for (const person of people) sheet.addRow(columns.map(([, , value]) => value(person)));
+  const head = sheet.getRow(1);
+  head.font = { bold: true, color: { argb: "FFFFFFFF" } };
+  head.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0A2A66" } };
+  head.alignment = { vertical: "middle", wrapText: true };
+  head.height = 30;
+  sheet.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: columns.length } };
   const buffer = await book.xlsx.writeBuffer();
   return Buffer.from(buffer);
 }

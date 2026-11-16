@@ -66,4 +66,11 @@ describe("registration rules", () => {
     expect(canDecide("submitted", "approved")).toBe(true);
     expect(canDecide("draft", "approved")).toBe(false);
   });
+
+  it("only lets a decided entry be reopened for review", () => {
+    expect(canDecide("approved", "review")).toBe(true);
+    expect(canDecide("rejected", "review")).toBe(true);
+    expect(canDecide("approved", "rejected")).toBe(false);
+    expect(canDecide("correction", "approved")).toBe(false);
+  });
 });

@@ -162,3 +162,23 @@
     cursor: pointer;
   }
 }
+/* Printing a Control Room page (registration lists): only the page content. */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+  [data-slot="sidebar"],
+  [data-slot="sidebar-gap"],
+  [data-slot="sidebar-container"],
+  [data-admin-chrome] {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}

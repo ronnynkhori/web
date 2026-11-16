@@ -93,7 +93,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <Header
             locale={locale}
             items={items}
-            ctaHref={`/${locale}#games`}
+            ctaHref={`/${locale}/delegation`}
             labels={{
               primaryNav: dict.a11y.primaryNav,
               mobileNav: dict.a11y.mobileNav,

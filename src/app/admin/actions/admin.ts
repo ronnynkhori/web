@@ -197,6 +197,8 @@ export async function saveUser(id: string | null, _prev: FormState, form: FormDa
   const users = await loadItems<UserDoc>("users");
   const existing = id ? users.find((u) => u.id === id) : undefined;
   if (!existing && users.some((u) => u.email === email)) errors.email = t("A user with this email already exists.");
+  const sameCountry = role === "delegation" && countryCode ? users.find((u) => u.active && u.role === "delegation" && u.countryCode === countryCode && u.id !== existing?.id) : undefined;
+  if (sameCountry) errors.countryCode = t("{name} is already the officer for this country. Deactivate that account first.", { name: sameCountry.name });
   if (Object.keys(errors).length) return { errors, message: t("Please fix the highlighted fields.") };
 
   try {

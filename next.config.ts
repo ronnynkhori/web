@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["motion", "gsap"],
+    agentUpgrade: "security",
   },
   turbopack: {
     rules: {

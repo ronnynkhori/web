@@ -10,9 +10,11 @@ import { roleLabels } from "@/lib/admin/roles";
 import { userFields, userValues } from "@/lib/admin/settings-fields";
 import type { UserDoc } from "@/lib/cms/types";
 
-export default async function EditUserPage({ params }: PageProps<"/admin/users/[id]">) {
+export default async function EditUserPage({ params, searchParams }: PageProps<"/admin/users/[id]">) {
   await requireUser("users");
   const { id } = await params;
+  const query = await searchParams;
+  const presetCountry = typeof query.country === "string" && /^[A-Z]{3}$/.test(query.country) ? query.country : "";
   const t = await getT();
   const isNew = id === "new";
   const user = isNew ? undefined : (await loadItems<UserDoc>("users")).find((u) => u.id === id);
@@ -35,7 +37,7 @@ export default async function EditUserPage({ params }: PageProps<"/admin/users/[
       />
       <DocForm
         fields={userFields(isNew)}
-        values={userValues(user)}
+        values={user ? userValues(user) : { ...userValues(undefined), countryCode: presetCountry }}
         action={saveUser.bind(null, isNew ? null : id)}
         submitLabel={isNew ? t("Create user") : t("Save user")}
         cancelHref="/admin/users"

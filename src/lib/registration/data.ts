@@ -1,14 +1,25 @@
 import "server-only";
 import { loadItems, newId } from "@/lib/admin/mutate";
 import { getStore } from "@/lib/store";
+import { demoDelegations, demoFiles, demoParticipants } from "./demo";
 import type { DelegationDoc, ParticipantDoc, ParticipantFileDoc, RegistrationNoticeDoc } from "./model";
 
 async function all<T extends DelegationDoc | ParticipantDoc | ParticipantFileDoc | RegistrationNoticeDoc>(collection: "delegations" | "participants" | "participantFiles" | "registrationNotices"): Promise<T[]> {
   return (await loadItems<T>(collection)) ?? [];
 }
 
+/**
+ * True on a read-only deployment (no database) that has no registrations yet.
+ * The Control Room then shows labelled sample records so the review flow can be demonstrated.
+ */
+export async function registrationDemoActive(): Promise<boolean> {
+  if (getStore().writable || process.env.DEMO_DATA === "0") return false;
+  return (await all<ParticipantDoc>("participants")).length === 0;
+}
+
 export async function loadDelegations(): Promise<DelegationDoc[]> {
-  return all<DelegationDoc>("delegations");
+  const real = await all<DelegationDoc>("delegations");
+  return real.length === 0 && (await registrationDemoActive()) ? demoDelegations : real;
 }
 
 export async function loadDelegation(countryCode: string): Promise<DelegationDoc | null> {
@@ -16,11 +27,13 @@ export async function loadDelegation(countryCode: string): Promise<DelegationDoc
 }
 
 export async function loadParticipants(): Promise<ParticipantDoc[]> {
-  return all<ParticipantDoc>("participants");
+  const real = await all<ParticipantDoc>("participants");
+  return real.length === 0 && (await registrationDemoActive()) ? demoParticipants : real;
 }
 
 export async function loadFiles(): Promise<ParticipantFileDoc[]> {
-  return all<ParticipantFileDoc>("participantFiles");
+  const real = await all<ParticipantFileDoc>("participantFiles");
+  return real.length === 0 && (await registrationDemoActive()) ? demoFiles : real;
 }
 
 export async function loadNotices(): Promise<RegistrationNoticeDoc[]> {

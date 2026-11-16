@@ -22,6 +22,7 @@ export const adminNav: AdminNavGroup[] = [
     items: [
       { href: "/admin", label: "Dashboard", short: "Home", icon: "grid", area: "dashboard" },
       { href: "/admin/registrations", label: "Registrations", short: "Entries", icon: "list", area: "registrations" },
+      { href: "/admin/delegations", label: "Delegations", short: "Countries", icon: "globe", area: "registrations" },
       { href: "/admin/registration-rules", label: "Quotas and documents", short: "Rules", icon: "check", area: "registrations" },
     ],
   },
@@ -36,8 +37,8 @@ export const adminNav: AdminNavGroup[] = [
 
 /** The screens each role uses. Games and content tools are not part of this menu. */
 const phoneTabs: Record<Role, string[]> = {
-  super: ["/admin", "/admin/registrations", "/admin/users"],
-  registrar: ["/admin", "/admin/registrations"],
+  super: ["/admin", "/admin/registrations", "/admin/delegations"],
+  registrar: ["/admin", "/admin/registrations", "/admin/delegations"],
   delegation: ["/admin"],
   results: ["/admin"],
   scorer: ["/admin"],

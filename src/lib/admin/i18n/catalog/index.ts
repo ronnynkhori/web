@@ -6,12 +6,13 @@
 import content from "./content";
 import live from "./live";
 import pages from "./pages";
+import registration from "./registration";
 import shell from "./shell";
 
 export type Catalog = Record<string, string>;
 export type CatalogPart = { pt: Catalog; fr?: Catalog };
 
-const parts: CatalogPart[] = [shell, content, live, pages];
+const parts: CatalogPart[] = [shell, content, live, pages, registration];
 
 export const catalog: { pt: Catalog } = {
   pt: Object.assign({}, ...parts.map((p) => p.pt)),

@@ -193,9 +193,23 @@ export function canEdit(status: RegistrationStatus): boolean {
   return status === "draft" || status === "correction";
 }
 
+/**
+ * Committee moves. A waiting record (submitted or under review) can go to any decision.
+ * A decided record (approved or rejected) can only be reopened for review, with a note,
+ * so a mistaken decision is never final and the registration number is kept.
+ */
 export function canDecide(from: RegistrationStatus, to: RegistrationStatus): boolean {
-  if (from !== "submitted" && from !== "review") return false;
-  return to === "review" || to === "correction" || to === "approved" || to === "rejected";
+  if (from === "submitted" || from === "review") return to === "review" || to === "correction" || to === "approved" || to === "rejected";
+  if (from === "approved" || from === "rejected") return to === "review";
+  return false;
+}
+
+/** The decisions offered for a record in this status, in the order the reviewer sees them. */
+export function decisionsFor(from: RegistrationStatus): RegistrationStatus[] {
+  if (from === "submitted") return ["approved", "correction", "rejected", "review"];
+  if (from === "review") return ["approved", "correction", "rejected"];
+  if (from === "approved" || from === "rejected") return ["review"];
+  return [];
 }
 
 export function nextRegistrationNumber(people: ParticipantDoc[], countryCode: string): string {

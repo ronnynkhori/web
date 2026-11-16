@@ -52,7 +52,7 @@ const pt: Dictionary = {
     guide: "Guia dos Jogos",
     delegation: "Inscrição de delegações",
     more: "Mais",
-    cta: "Datas-chave",
+    cta: "Inscrições",
   },
   hero: {
     overline: "Comunidade dos Países de Língua Portuguesa",

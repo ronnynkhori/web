@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSession, requireUser } from "@/lib/admin/auth";
+import { getT } from "@/lib/admin/i18n/server";
 import { audit } from "@/lib/admin/mutate";
 import { SESSION_COOKIE } from "@/lib/admin/session";
 import type { Locale } from "@/lib/i18n/config";
@@ -52,7 +53,13 @@ async function notify(
   },
   actor: string,
 ) {
-  const emailed = await deliverNotice({ ...input, subject: `CPLP 2027 registration: ${input.kind}` });
+  const subjects = {
+    submitted: "Inscrição submetida / Registration submitted",
+    approved: "Inscrição aprovada / Registration approved",
+    correction: "Correcção necessária / Correction required",
+    rejected: "Inscrição não aprovada / Registration not approved",
+  } as const;
+  const emailed = await deliverNotice({ ...input, subject: `CPLP 2027 · ${subjects[input.kind]}: ${input.participantName}` });
   await saveNotice(
     {
       id: freshId("notice"),
@@ -240,20 +247,26 @@ export async function importAthletes(_prev: FormState, form: FormData): Promise<
 
 export async function decideRegistration(_prev: FormState, form: FormData): Promise<FormState> {
   const session = await requireUser("registrations");
-  if (!getStore().writable) return { errors: [], message: "This deployment has no database, so the decision cannot be saved." };
+  const t = await getT();
+  if (!getStore().writable) return { errors: [], message: t("This deployment has no database, so the decision cannot be saved.") };
   const id = String(form.get("id") ?? "");
   const to = String(form.get("status") ?? "") as RegistrationStatus;
   const note = String(form.get("reviewNote") ?? "").trim();
+  const next = String(form.get("next") ?? "");
   const people = await loadParticipants();
   const person = people.find((item) => item.id === id);
-  if (!person || !canDecide(person.status, to)) return { errors: ["This registration cannot move to that status."], message: "" };
-  if ((to === "correction" || to === "rejected") && !note) return { errors: ["Write a note for the delegation."], message: "" };
+  if (!person) return { errors: [t("This registration no longer exists.")], message: "" };
+  if (!canDecide(person.status, to)) return { errors: [t("This registration cannot move to that status. Reload the page: someone may have decided it already.")], message: "" };
+  const reopening = person.status === "approved" || person.status === "rejected";
+  if ((to === "correction" || to === "rejected" || reopening) && !note) {
+    return { errors: [reopening ? t("Say why the decision is being reopened.") : t("Write a note for the delegation: it tells the officer what to fix or why.")], message: "" };
+  }
   person.status = to;
   person.reviewNote = note;
   person.decidedAt = new Date().toISOString();
   if (to === "approved" && !person.registrationNumber) person.registrationNumber = nextRegistrationNumber(people, person.countryCode);
   await saveParticipant(person, session.email);
-  await audit(session, `registration ${to}`, "participants", person.id, person.registrationNumber || person.fullName);
+  await audit(session, reopening ? "registration reopened" : `registration ${to}`, "participants", person.id, person.registrationNumber || person.fullName);
   if (to === "approved" || to === "correction" || to === "rejected") {
     const delegation = await loadDelegation(person.countryCode);
     await notify(
@@ -263,13 +276,14 @@ export async function decideRegistration(_prev: FormState, form: FormData): Prom
         participantName: person.fullName,
         emailTo: delegation?.email || person.contactEmail,
         kind: to,
-        message: regCopy("pt").noticeLine(person.fullName, to),
+        message: `${regCopy("pt").noticeLine(person.fullName, to)} / ${regCopy("en").noticeLine(person.fullName, to)}`,
         note: note || undefined,
       },
       session.email,
     );
   }
-  redirect("/admin/registrations?saved=1");
+  const goNext = next && next !== person.id && to !== "review" && people.some((item) => item.id === next && (item.status === "submitted" || item.status === "review"));
+  redirect(goNext ? `/admin/registrations/${next}?decided=${to}` : `/admin/registrations/${person.id}?decided=${to}`);
 }
 
 export async function signOutDelegation(form: FormData): Promise<void> {
