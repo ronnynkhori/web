@@ -40,6 +40,15 @@ const en = {
     logoHome: "XIII Jogos Desportivos da CPLP, Angola 2027: home",
     decorative: "",
   },
+  registrationCta: {
+    overline: "Delegations",
+    title: "Register your",
+    titleAccent: "delegation",
+    body: "Each CPLP country registers its athletes, coaches and officials online through one secure account. The Organising Committee reviews every record and issues the registration number used for accreditation.",
+    points: ["One authorised officer account per country", "Athletes, coaches and officials with their documents", "Approval and accreditation number from the Committee"],
+    cta: "Open the delegation portal",
+    note: "For authorised delegation officers. Accounts are issued by the Organising Committee.",
+  },
   nav: {
     // [CLIENT TO CONFIRM] navigation labels (component-specifications §2)
     games: "The Games",

@@ -39,6 +39,15 @@ const pt: Dictionary = {
     logoHome: "XIII Jogos Desportivos da CPLP, Angola 2027: página inicial",
     decorative: "",
   },
+  registrationCta: {
+    overline: "Delegações",
+    title: "Inscreva a sua",
+    titleAccent: "delegação",
+    body: "Cada país da CPLP inscreve os seus atletas, treinadores e oficiais online, com uma conta segura. A Comissão Organizadora revê cada registo e emite o número de inscrição usado na acreditação.",
+    points: ["Uma conta de oficial autorizado por país", "Atletas, treinadores e oficiais com os documentos", "Aprovação e número de acreditação pela Comissão"],
+    cta: "Abrir o portal da delegação",
+    note: "Para oficiais de delegação autorizados. As contas são emitidas pela Comissão Organizadora.",
+  },
   nav: {
     games: "Os Jogos",
     mascot: "Mascote",

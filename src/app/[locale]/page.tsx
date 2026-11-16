@@ -15,6 +15,7 @@ import { getSettings } from "@/lib/cms/read";
 import { MediaSection } from "@/components/media/media-section";
 import { NewsSection } from "@/components/news/news-section";
 import { PromoFilmSection } from "@/components/promo/promo-film-section";
+import { RegistrationCta } from "@/components/registration-cta/registration-cta";
 import { PartnersStrip } from "@/components/sponsors/partners-strip";
 import { SponsorsSection } from "@/components/sponsors/sponsors-section";
 import { SportsSection } from "@/components/sports/sports-section";
@@ -23,13 +24,13 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
 import { DEMO_GAME_DAY, DEMO_PHASE, gameDay, getPhase, isPhase, type Phase } from "@/lib/phase";
 
-type SectionId = "film" | "partnersStrip" | "hub" | "media" | "sports" | "news" | "games" | "mascot" | "countries" | "venues" | "guide" | "sponsors";
+type SectionId = "film" | "partnersStrip" | "hub" | "media" | "sports" | "news" | "games" | "mascot" | "countries" | "venues" | "guide" | "sponsors" | "registration";
 
 /** Phones read top to bottom: what visitors want first comes first in the DOM.
  * Before the Games the order also alternates the navy bands (mascot, countries,
  * live teaser) with light ones. */
 const ORDER: Record<Phase, SectionId[]> = {
-  pre: ["film", "partnersStrip", "games", "mascot", "sports", "countries", "venues", "hub", "news", "media", "guide", "sponsors"],
+  pre: ["film", "partnersStrip", "games", "mascot", "sports", "countries", "registration", "venues", "hub", "news", "media", "guide", "sponsors"],
   live: ["hub", "media", "film", "partnersStrip", "sports", "news", "mascot", "games", "countries", "venues", "guide", "sponsors"],
   post: ["hub", "media", "film", "partnersStrip", "news", "games", "mascot", "sports", "countries", "venues", "guide", "sponsors"],
 };
@@ -104,6 +105,7 @@ function PhasedHome({
     venues: <VenuesSection key="venues" dict={dict} locale={locale} />,
     guide: <GuideSection key="guide" dict={dict} locale={locale} />,
     sponsors: <SponsorsSection key="sponsors" dict={dict} locale={locale} />,
+    registration: <RegistrationCta key="registration" dict={dict} locale={locale} />,
   };
 
   return (
