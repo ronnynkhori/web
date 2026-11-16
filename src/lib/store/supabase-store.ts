@@ -55,14 +55,14 @@ export class SupabaseStore implements Store {
   }
 
   async get<T extends StoredDoc>(collection: Collection, id: string): Promise<T | null> {
-    const row = check(
-      await this.client
-        .from("content_items")
-        .select("id, data, updated_at, updated_by")
-        .eq("collection", collection)
-        .eq("id", id)
-        .maybeSingle(),
-    ) as Row | null;
+    const result = await this.client
+      .from("content_items")
+      .select("id, data, updated_at, updated_by")
+      .eq("collection", collection)
+      .eq("id", id)
+      .maybeSingle();
+    if (isMissingRelation(result.error)) return null;
+    const row = check(result) as Row | null;
     return row ? fromRow<T>(row) : null;
   }
 
@@ -101,26 +101,35 @@ export class SupabaseStore implements Store {
   }
 
   async audit(entry: Omit<AuditEntry, "at">): Promise<void> {
-    check(
-      await this.client.from("audit_log").insert({
-        actor: entry.actor,
-        role: entry.role,
-        action: entry.action,
-        collection: entry.collection ?? null,
-        item_id: entry.itemId ?? null,
-        summary: entry.summary ?? null,
-      }),
-    );
+    const result = await this.client.from("audit_log").insert({
+      actor: entry.actor,
+      role: entry.role,
+      action: entry.action,
+      collection: entry.collection ?? null,
+      item_id: entry.itemId ?? null,
+      summary: entry.summary ?? null,
+    });
+    // Marketplace Supabase may be linked before migrations run; skip the write.
+    if (isMissingRelation(result.error)) return;
+    check(result);
   }
 
   async listAudit(limit: number): Promise<AuditEntry[]> {
-    const rows = check(
-      await this.client
-        .from("audit_log")
-        .select("at, actor, role, action, collection, item_id, summary")
-        .order("at", { ascending: false })
-        .limit(limit),
-    ) as Array<{ at: string; actor: string; role: string; action: string; collection: string | null; item_id: string | null; summary: string | null }>;
+    const result = await this.client
+      .from("audit_log")
+      .select("at, actor, role, action, collection, item_id, summary")
+      .order("at", { ascending: false })
+      .limit(limit);
+    if (isMissingRelation(result.error)) return [];
+    const rows = check(result) as Array<{
+      at: string;
+      actor: string;
+      role: string;
+      action: string;
+      collection: string | null;
+      item_id: string | null;
+      summary: string | null;
+    }>;
     return rows.map((r) => ({
       at: r.at,
       actor: r.actor,

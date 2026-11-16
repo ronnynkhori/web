@@ -68,7 +68,12 @@ export default async function Dashboard({ searchParams }: PageProps<"/admin">) {
   const store = getStore();
   const [people, activity] = await Promise.all([
     loadParticipants(),
-    can(session.role, "activity") ? store.listAudit(12) : Promise.resolve([]),
+    can(session.role, "activity")
+      ? store.listAudit(12).catch((error) => {
+          console.error("[admin] activity feed unavailable", error);
+          return [];
+        })
+      : Promise.resolve([]),
   ]);
   const now = new Date();
   const dayFormat = new Intl.DateTimeFormat(intlLocale(locale), { weekday: "long", day: "numeric", month: "long", timeZone: zone });

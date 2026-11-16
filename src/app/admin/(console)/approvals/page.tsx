@@ -86,7 +86,12 @@ export default async function ApprovalsPage() {
   const [matches, results, audit] = await Promise.all([
     loadItems<MatchDoc>("matches"),
     loadItems<EventResultDoc>("results"),
-    getStore().listAudit(300),
+    getStore()
+      .listAudit(300)
+      .catch((error) => {
+        console.error("[admin] approvals activity unavailable", error);
+        return [];
+      }),
   ]);
   const pendingMatches = matches.filter((m) => m.approval === "pending");
   const pendingResults = results.filter((r) => r.approval === "pending");

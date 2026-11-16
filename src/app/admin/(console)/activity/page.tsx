@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { requireUser } from "@/lib/admin/auth";
 import { getAdminLocale } from "@/lib/admin/i18n/server";
 import { intlLocale, translator, type Translate } from "@/lib/admin/i18n/translate";
-import { getStore } from "@/lib/store";
+import { getStore, type AuditEntry } from "@/lib/store";
 
 const toneFor = (action: string): Tone => (/delete|reject|deactiv/.test(action) ? "error" : /approv|publish/.test(action) ? "success" : "neutral");
 
@@ -26,7 +26,13 @@ export default async function ActivityPage() {
   const timeFormat = new Intl.DateTimeFormat(intlLocale(locale), { hour: "2-digit", minute: "2-digit", timeZone: zone });
   const stampFormat = stampFormatFor(locale);
   const registrationCollections = new Set(["participants", "delegations", "participantFiles", "registrationNotices", "registrationRules", "users"]);
-  const entries = (await getStore().listAudit(300)).filter((entry) => !entry.collection || registrationCollections.has(entry.collection));
+  let audit: AuditEntry[] = [];
+  try {
+    audit = await getStore().listAudit(300);
+  } catch (error) {
+    console.error("[admin] activity log unavailable", error);
+  }
+  const entries = audit.filter((entry) => !entry.collection || registrationCollections.has(entry.collection));
 
   const days: Array<{ day: string; items: typeof entries }> = [];
   for (const e of entries) {
