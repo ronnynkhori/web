@@ -19,6 +19,13 @@ function check<T>(result: { data: T; error: { message: string } | null }): T {
   return result.data;
 }
 
+/** Marketplace Supabase can be linked before the content tables exist. */
+function isMissingRelation(error: { message: string; code?: string } | null): boolean {
+  if (!error) return false;
+  if (error.code === "PGRST205" || error.code === "42P01") return true;
+  return /Could not find the table|schema cache|does not exist/i.test(error.message);
+}
+
 /** Production store. Uses the service-role key, so it must only run on the server. */
 export class SupabaseStore implements Store {
   readonly kind = "supabase" as const;
@@ -30,13 +37,20 @@ export class SupabaseStore implements Store {
   }
 
   async list<T extends StoredDoc>(collection: Collection): Promise<T[] | null> {
-    const known = check(
-      await this.client.from("content_collections").select("collection").eq("collection", collection).maybeSingle(),
-    );
+    const knownResult = await this.client
+      .from("content_collections")
+      .select("collection")
+      .eq("collection", collection)
+      .maybeSingle();
+    if (isMissingRelation(knownResult.error)) return null;
+    const known = check(knownResult);
     if (!known) return null;
-    const rows = check(
-      await this.client.from("content_items").select("id, data, updated_at, updated_by").eq("collection", collection),
-    ) as Row[];
+    const rowsResult = await this.client
+      .from("content_items")
+      .select("id, data, updated_at, updated_by")
+      .eq("collection", collection);
+    if (isMissingRelation(rowsResult.error)) return null;
+    const rows = check(rowsResult) as Row[];
     return rows.map((r) => fromRow<T>(r)).sort((a, b) => (a._order ?? 0) - (b._order ?? 0));
   }
 

@@ -54,26 +54,33 @@ export async function getStoreSnapshot(): Promise<LiveSnapshot | null> {
   cacheLife({ stale: 10, revalidate: 15, expire: 300 });
   cacheTag("live", "countries");
 
-  const store = getStore();
-  const [matches, results, adjustments, countryDocs] = await Promise.all([
-    store.list<MatchDoc>("matches"),
-    store.list<EventResultDoc>("results"),
-    store.list<MedalAdjustmentDoc>("medalAdjustments"),
-    store.list<CountryDoc>("countries"),
-  ]);
-  if (!matches && !results) return null;
-  const events = results ?? seedFor<EventResultDoc>("results");
-  const matchDocs = matches ?? seedFor<MatchDoc>("matches");
-  const adjustmentDocs = adjustments ?? seedFor<MedalAdjustmentDoc>("medalAdjustments");
-  const names = new Map(countries.map((c) => [c.code, c.name]));
-  for (const c of countryDocs ?? []) names.set(c.code.toUpperCase(), c.name);
+  // Catch inside this "use cache" boundary: a throw here still fails prerender
+  // even when callers wrap the call in try/catch (Cache Components).
+  try {
+    const store = getStore();
+    const [matches, results, adjustments, countryDocs] = await Promise.all([
+      store.list<MatchDoc>("matches"),
+      store.list<EventResultDoc>("results"),
+      store.list<MedalAdjustmentDoc>("medalAdjustments"),
+      store.list<CountryDoc>("countries"),
+    ]);
+    if (!matches && !results) return null;
+    const events = results ?? seedFor<EventResultDoc>("results");
+    const matchDocs = matches ?? seedFor<MatchDoc>("matches");
+    const adjustmentDocs = adjustments ?? seedFor<MedalAdjustmentDoc>("medalAdjustments");
+    const names = new Map(countries.map((c) => [c.code, c.name]));
+    for (const c of countryDocs ?? []) names.set(c.code.toUpperCase(), c.name);
 
-  return {
-    updatedAt: new Date().toISOString(),
-    status: "ok",
-    isDemo: [...matchDocs, ...events, ...adjustmentDocs].some(isDemoDoc),
-    matches: publicMatches(matchDocs),
-    medals: computeMedals(events, adjustmentDocs, names),
-    results: publicResults(events, names),
-  };
+    return {
+      updatedAt: new Date().toISOString(),
+      status: "ok",
+      isDemo: [...matchDocs, ...events, ...adjustmentDocs].some(isDemoDoc),
+      matches: publicMatches(matchDocs),
+      medals: computeMedals(events, adjustmentDocs, names),
+      results: publicResults(events, names),
+    };
+  } catch (error) {
+    console.error("[live] store snapshot unavailable, using demo/empty feed", error);
+    return null;
+  }
 }
