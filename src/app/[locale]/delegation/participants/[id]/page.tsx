@@ -121,7 +121,7 @@ export default async function EditParticipantPage({ params, searchParams }: { pa
         />
       ) : (
         <div className="grid gap-5 desktop:grid-cols-[minmax(0,1fr)_20rem]">
-          <section className="rounded-md border border-line bg-surface-raised p-5 shadow-sm tablet:p-6">
+          <section className="rounded-md border border-line bg-surface-raised p-5 tablet:p-6">
             <h2 className="m-0 mb-5 type-heading-s">{p.summary}</h2>
             <dl className="m-0 grid gap-x-6 gap-y-4 tablet:grid-cols-2">
               {summary
@@ -134,7 +134,7 @@ export default async function EditParticipantPage({ params, searchParams }: { pa
                 ))}
             </dl>
           </section>
-          <section className="rounded-md border border-line bg-surface-raised p-5 shadow-sm">
+          <section className="rounded-md border border-line bg-surface-raised p-5">
             <h2 className="m-0 mb-4 type-heading-s">{copy.documents}</h2>
             <ul className="m-0 flex list-none flex-col gap-2 p-0">
               {mine.map((file) => (

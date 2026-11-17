@@ -17,6 +17,7 @@ import { loadItems } from "@/lib/admin/mutate";
 import { can, roleLabels } from "@/lib/admin/roles";
 import type { UserDoc } from "@/lib/cms/types";
 import { loadDelegations, loadParticipants, registrationDemoActive } from "@/lib/registration/data";
+import { demoUsers } from "@/lib/registration/demo";
 import { countryProgress, statusCounts } from "@/lib/registration/review";
 import { loadRegistrationRules } from "@/lib/registration/settings";
 import { getStore } from "@/lib/store";
@@ -91,7 +92,7 @@ export default async function Dashboard({ searchParams }: PageProps<"/admin">) {
   const dayFormat = new Intl.DateTimeFormat(intlLocale(locale), { weekday: "long", day: "numeric", month: "long", timeZone: zone });
   const counts = statusCounts(people);
   const waiting = people.filter((person) => person.status === "submitted" || person.status === "review").sort(byQueue);
-  const active = users.filter((user) => user.active);
+  const active = [...users.filter((user) => user.active), ...(demo ? demoUsers : [])];
   const progress = countryProgress(people, delegations, active);
   const officers = progress.filter((row) => row.officer).length;
   const profiles = progress.filter((row) => row.delegation).length;

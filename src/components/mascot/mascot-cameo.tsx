@@ -18,7 +18,7 @@ export function MascotCameo({ pose, className }: { pose: MascotPose; className?:
         delay={150}
         depth={0.5}
         className="pointer-events-auto absolute top-[6%] left-0 h-[170%]"
-        imgClassName="h-full w-auto drop-shadow-[0_10px_16px_rgb(0_0_0/0.25)]"
+        imgClassName="h-full w-auto drop-shadow-[0_6px_12px_rgb(0_0_0/0.16)]"
       />
     </div>
   );

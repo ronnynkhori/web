@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import type { Role, UserDoc } from "@/lib/cms/types";
+import { demoOfficerEnabled, demoOfficerMatches, demoOfficerSession, isDemoOfficerEmail } from "@/lib/registration/demo-account";
 import { getStore, supabaseConfig } from "@/lib/store";
 import { translator, type Translate } from "./i18n/translate";
 import { can, type Area } from "./roles";
@@ -19,7 +20,8 @@ export async function getSession(): Promise<Session | null> {
     users = (await getStore().list<UserDoc>("users")) ?? [];
   } catch {
     // Fail closed: without the user list a deactivated account or a demoted role cannot be checked.
-    return null;
+    // The fixed demo officer is the exception: it never lives in Users.
+    return isDemoOfficerEmail(session.email) ? { ...session, ...demoOfficerSession(), exp: session.exp } : null;
   }
   // Re-check the account on every request so deactivation and role changes apply immediately.
   const user = users.find((u) => u.email === session.email);
@@ -28,6 +30,7 @@ export async function getSession(): Promise<Session | null> {
       ? { ...session, name: user.name, role: user.role, sportIds: user.sportIds, countryCode: user.countryCode ?? "" }
       : null;
   }
+  if (isDemoOfficerEmail(session.email)) return { ...session, ...demoOfficerSession(), exp: session.exp };
   const bootstrapStillAllowed = !users.some((u) => u.role === "super" && u.active);
   return bootstrapStillAllowed && session.email === bootstrapCredentials()?.email ? session : null;
 }
@@ -95,6 +98,11 @@ export async function authenticate(rawEmail: string, password: string): Promise<
   if (!hasSuper && boot && email === boot.email && password === boot.password) {
     const role: Role = "super";
     return { ok: true, session: { email, name: "Control Room admin", role, sportIds: [], countryCode: "" } };
+  }
+
+  // Proposal walkthrough: Angola officer without a Users row.
+  if (demoOfficerEnabled() && demoOfficerMatches(email, password)) {
+    return { ok: true, session: demoOfficerSession() };
   }
   return { ok: false, error: "Email or password is incorrect." };
 }

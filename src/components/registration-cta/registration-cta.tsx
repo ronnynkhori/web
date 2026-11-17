@@ -14,7 +14,7 @@ export function RegistrationCta({ dict, locale }: { dict: Dictionary; locale: Lo
   return (
     <section id="registration" aria-labelledby="registration-title" className="section-anchor relative bg-surface-2 text-fg">
       <div className="container-page section-y">
-        <div className="grid overflow-hidden rounded-md border border-line bg-surface-raised shadow-md desktop:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+        <div className="grid overflow-hidden rounded-md border border-line bg-surface-raised desktop:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
           <div className="flex flex-col gap-6 p-6 desktop:p-7">
             <SectionHeader id="registration-title" overline={r.overline} title={r.title} titleAccent={r.titleAccent} intro={r.body} className="mb-0! desktop:mb-0!" />
             <ul className="m-0 flex list-none flex-col gap-3 p-0">
@@ -46,12 +46,12 @@ export function RegistrationCta({ dict, locale }: { dict: Dictionary; locale: Lo
               {countries.map((country) =>
                 country.flag ? (
                   <li key={country.code}>
-                    <Image src={country.flag.src} alt="" width={48} height={32} className="h-[1.5rem] w-[2.25rem] rounded-xs object-cover shadow-sm ring-1 ring-line" title={pick(country.name, locale)} />
+                    <Image src={country.flag.src} alt="" width={48} height={32} className="h-[1.5rem] w-[2.25rem] rounded-xs object-cover ring-1 ring-line" title={pick(country.name, locale)} />
                   </li>
                 ) : null,
               )}
             </ul>
-            <Image src={mascot.src} alt="" width={mascot.width} height={mascot.height} sizes="(min-width: 64rem) 22rem, 16rem" className="relative mt-16 h-auto w-64 drop-shadow-xl desktop:w-[22rem]" {...reveal("fade-up", 1)} />
+            <Image src={mascot.src} alt="" width={mascot.width} height={mascot.height} sizes="(min-width: 64rem) 22rem, 16rem" className="relative mt-16 h-auto w-64 drop-shadow-[0_8px_16px_rgb(0_0_0/0.18)] desktop:w-[22rem]" {...reveal("fade-up", 1)} />
           </div>
         </div>
       </div>

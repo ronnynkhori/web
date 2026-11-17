@@ -19,7 +19,7 @@ export function PortalHeader({ locale, countryCode, officerName, institution }: 
       <div className="container-wide flex flex-col gap-4 pt-5 tablet:pt-6">
         <div className="flex flex-wrap items-center gap-4">
           {country?.flag && (
-            <Image src={country.flag.src} alt="" width={96} height={64} className="h-12 w-[4.5rem] shrink-0 rounded-xs object-cover shadow-md ring-1 ring-line tablet:h-14 tablet:w-[5.25rem]" />
+            <Image src={country.flag.src} alt="" width={96} height={64} className="h-12 w-[4.5rem] shrink-0 rounded-xs object-cover ring-1 ring-line tablet:h-14 tablet:w-[5.25rem]" />
           )}
           <div className="flex min-w-0 flex-1 flex-col gap-0.5">
             <p className="m-0 type-overline text-accent">{p.portal}</p>

@@ -78,7 +78,7 @@ export function SportCard({
             delay={(index % 4) * 90}
             depth={0}
             className="pointer-events-none absolute right-1 bottom-2 h-[165%] max-w-[48%]"
-            imgClassName="h-full w-auto object-contain object-bottom drop-shadow-[0_10px_14px_rgb(0_0_0/0.35)]"
+            imgClassName="h-full w-auto object-contain object-bottom drop-shadow-[0_6px_12px_rgb(0_0_0/0.16)]"
           />
         )}
       </div>

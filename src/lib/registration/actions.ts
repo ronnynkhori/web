@@ -10,7 +10,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { isLocale } from "@/lib/i18n/config";
 import { getStore } from "@/lib/store";
 import { regCopy } from "./copy";
-import { freshId, loadDelegation, loadFiles, loadNotices, loadParticipants, saveDelegation, saveFile, saveNotice, saveParticipant } from "./data";
+import { freshId, loadDelegation, loadFiles, loadNotices, loadParticipants, registrationDemoActive, saveDelegation, saveFile, saveNotice, saveParticipant } from "./data";
 import { readAthleteRows, rowToAthlete } from "./excel";
 import { acceptUpload, writePrivateFile } from "./files";
 import { deliverNotice } from "./mail";
@@ -34,6 +34,11 @@ async function officer(locale: Locale) {
   const session = await getSession();
   if (!session || session.role !== "delegation" || !session.countryCode) redirect(`/${locale}/delegation/login`);
   return session;
+}
+
+/** False while sample records are filling an empty store (even if Supabase is linked). */
+async function canPersist(): Promise<boolean> {
+  return getStore().writable && !(await registrationDemoActive());
 }
 
 function texts(issues: Issue[], locale: Locale): string[] {
@@ -159,7 +164,7 @@ async function storeUploads(form: FormData, person: ParticipantDoc, actor: strin
 export async function saveDelegationProfile(_prev: FormState, form: FormData): Promise<FormState> {
   const locale = localeOf(form);
   const session = await officer(locale);
-  if (!getStore().writable) return { errors: [], message: regCopy(locale).readOnly };
+  if (!(await canPersist())) return { errors: [], message: regCopy(locale).readOnly };
   const doc = readDelegation(form, session.countryCode, await loadDelegation(session.countryCode));
   const missing = (["institution", "headName", "email", "telephone", "officerName"] as const).filter((field) => !doc[field]);
   if (missing.length || doc.sports.length === 0) {
@@ -173,7 +178,7 @@ export async function saveDelegationProfile(_prev: FormState, form: FormData): P
 export async function saveParticipantForm(_prev: FormState, form: FormData): Promise<FormState> {
   const locale = localeOf(form);
   const session = await officer(locale);
-  if (!getStore().writable) return { errors: [], message: regCopy(locale).readOnly };
+  if (!(await canPersist())) return { errors: [], message: regCopy(locale).readOnly };
   const people = await loadParticipants();
   const id = String(form.get("id") ?? "");
   const existing = people.find((person) => person.id === id && person.countryCode === session.countryCode);
@@ -219,7 +224,7 @@ export async function importAthletes(_prev: FormState, form: FormData): Promise<
   const locale = localeOf(form);
   const session = await officer(locale);
   const copy = regCopy(locale);
-  if (!getStore().writable) return { errors: [], message: copy.readOnly };
+  if (!(await canPersist())) return { errors: [], message: copy.readOnly };
   const file = form.get("workbook");
   if (!(file instanceof File) || file.size === 0) return { errors: [copy.importFailed], message: "" };
   const rows = await readAthleteRows(new Uint8Array(await file.arrayBuffer()));
@@ -248,7 +253,7 @@ export async function importAthletes(_prev: FormState, form: FormData): Promise<
 export async function decideRegistration(_prev: FormState, form: FormData): Promise<FormState> {
   const session = await requireUser("registrations");
   const t = await getT();
-  if (!getStore().writable) return { errors: [], message: t("This deployment has no database, so the decision cannot be saved.") };
+  if (!(await canPersist())) return { errors: [], message: t("This deployment has no database, so the decision cannot be saved.") };
   const id = String(form.get("id") ?? "");
   const to = String(form.get("status") ?? "") as RegistrationStatus;
   const note = String(form.get("reviewNote") ?? "").trim();
@@ -314,6 +319,6 @@ export async function delegationContext(locale: Locale) {
     people: people.filter((person) => person.countryCode === session.countryCode),
     files: files.filter((file) => file.countryCode === session.countryCode),
     notices: notices.filter((notice) => notice.countryCode === session.countryCode),
-    writable: getStore().writable,
+    writable: await canPersist(),
   };
 }

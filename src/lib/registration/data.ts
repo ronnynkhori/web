@@ -9,12 +9,14 @@ async function all<T extends DelegationDoc | ParticipantDoc | ParticipantFileDoc
 }
 
 /**
- * True on a read-only deployment (no database) that has no registrations yet.
- * The Control Room then shows labelled sample records so the review flow can be demonstrated.
+ * True when nothing real is stored yet. The Control Room and the Angola demo
+ * officer then see labelled sample records. A writable but empty Supabase
+ * project still qualifies — saves stay blocked while samples are showing.
  */
 export async function registrationDemoActive(): Promise<boolean> {
-  if (getStore().writable || process.env.DEMO_DATA === "0") return false;
-  return (await all<ParticipantDoc>("participants")).length === 0;
+  if (process.env.DEMO_DATA === "0") return false;
+  const [people, delegations] = await Promise.all([all<ParticipantDoc>("participants"), all<DelegationDoc>("delegations")]);
+  return people.length === 0 && delegations.length === 0;
 }
 
 export async function loadDelegations(): Promise<DelegationDoc[]> {

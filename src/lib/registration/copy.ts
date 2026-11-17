@@ -164,7 +164,7 @@ const en = {
   official: "Official",
   allCountries: "All countries",
   reviewTitle: "Registration review",
-  noAccount: "This sign-in is not a delegation account.",
+  noAccount: "You are signed in as Control Room admin. Sign out first, then use a country officer account (or the Angola demo below).",
   locked: "Submitted records stay locked until the Organising Committee asks for a correction.",
 };
 
@@ -331,7 +331,7 @@ const pt: typeof en = {
   official: "Oficial",
   allCountries: "Todos os países",
   reviewTitle: "Revisão das inscrições",
-  noAccount: "Esta conta não é de uma delegação.",
+  noAccount: "Tem sessão na Sala de Controlo. Saia primeiro e entre com a conta do oficial do país (ou a demonstração de Angola abaixo).",
   locked: "Os registos submetidos ficam bloqueados até o Comité Organizador pedir uma correção.",
 };
 

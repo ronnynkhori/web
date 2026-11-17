@@ -209,7 +209,7 @@ export function ParticipantForm({
         </ul>
       </FormSection>
 
-      <div className="sticky bottom-0 z-10 -mx-4 flex flex-col gap-3 border-t border-line bg-surface-raised/95 px-4 py-3 backdrop-blur tablet:mx-0 tablet:rounded-md tablet:border tablet:px-5 tablet:shadow-md desktop:flex-row desktop:items-center">
+      <div className="sticky bottom-0 z-10 -mx-4 flex flex-col gap-3 border-t border-line bg-surface-raised/95 px-4 py-3 backdrop-blur tablet:mx-0 tablet:rounded-md tablet:border tablet:px-5 desktop:flex-row desktop:items-center">
         <p className="m-0 flex-1 type-caption text-fg-muted">{p.submitHint}</p>
         <div className="grid grid-cols-2 gap-2 tablet:flex">
           <button type="submit" name="intent" value="save" formNoValidate disabled={pending} className="inline-flex min-h-touch items-center justify-center gap-2 rounded-xs border-2 border-action-ghost-border px-5 type-label text-fg hover:bg-surface-2 disabled:opacity-50">

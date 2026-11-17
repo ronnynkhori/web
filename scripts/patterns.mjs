@@ -10,6 +10,7 @@ const r2 = (n) => Math.round(n * 100) / 100;
 // Lusona (Chokwe sand drawing): one continuous line that runs diagonally
 // between an m x n grid of dots and loops around the edge dots where it
 // meets the frame. gcd(m, n) = 1 gives a single closed line.
+// Edge loops stay tight so the motif reads as a clean grid, not a blob.
 function lusona(m, n, u) {
   const W = 2 * m;
   const H = 2 * n;
@@ -26,12 +27,12 @@ function lusona(m, n, u) {
       turns.push({ p: [...p], din, dout: [...d] });
     }
   }
-  const pad = 1.6;
+  const pad = 1.15;
   const X = (v) => r2((v + pad) * u);
   const pt = (q) => `${X(q[0])} ${X(q[1])}`;
-  // Each turn is a round loop around the edge dot: A -> apex just outside the frame -> B.
-  const reach = 0.55;
-  const pull = 0.38;
+  // Tight round loop around each edge dot: A -> apex just outside the frame -> B.
+  const reach = 0.28;
+  const pull = 0.2;
   const half = 0.5;
   let dpath = "";
   turns.forEach((t, i) => {
@@ -49,9 +50,10 @@ function lusona(m, n, u) {
   });
   dpath += "Z";
   let dots = "";
-  for (let i = 0; i < m; i++) for (let j = 0; j < n; j++) dots += `<circle cx="${X(2 * i + 1)}" cy="${X(2 * j + 1)}" r="${r2(u * 0.16)}"/>`;
+  for (let i = 0; i < m; i++) for (let j = 0; j < n; j++) dots += `<circle cx="${X(2 * i + 1)}" cy="${X(2 * j + 1)}" r="${r2(u * 0.12)}"/>`;
   const size = [X(W + pad), X(H + pad)];
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size[0]}" height="${size[1]}" viewBox="0 0 ${size[0]} ${size[1]}"><path d="${dpath}" fill="none" stroke="#fff" stroke-opacity=".11" stroke-width="${r2(u * 0.09)}" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff" fill-opacity=".2">${dots}</g></svg>`;
+  // Full-white strokes; CSS fades the layer with --tk-opacity-pattern.
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size[0]}" height="${size[1]}" viewBox="0 0 ${size[0]} ${size[1]}"><path d="${dpath}" fill="none" stroke="#fff" stroke-width="${r2(u * 0.07)}" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff">${dots}</g></svg>`;
 }
 await writeFile(path.join(out, "lusona.svg"), lusona(7, 5, 40));
 console.log("patterns: lusona");

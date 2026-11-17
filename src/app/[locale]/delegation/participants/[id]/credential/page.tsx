@@ -29,7 +29,7 @@ export default async function CredentialPage({ params }: { params: Promise<{ loc
         <PageTitle back={{ href: `/${locale}/delegation/participants/${person.id}`, label: person.fullName }} title={copy.credential} actions={<PrintButton label={copy.exportPdf} />} />
         <p className="m-0 mt-3 max-w-prose type-body-s text-fg-muted">{copy.credentialHelp}</p>
       </div>
-      <article className="mx-auto w-full max-w-sm overflow-hidden rounded-md border border-line bg-surface-raised shadow-lg print:shadow-none">
+      <article className="mx-auto w-full max-w-sm overflow-hidden rounded-md border border-line bg-surface-raised">
         <header data-theme="dark" className="relative flex items-center gap-3 bg-surface px-5 pt-5 pb-4 text-fg">
           <Image src="/images/brand/cplp-emblem.png" alt="" width={512} height={512} className="size-[2.75rem] rounded-xs bg-white p-0.5" />
           <div className="flex flex-col">

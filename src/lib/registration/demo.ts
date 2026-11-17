@@ -1,3 +1,5 @@
+import type { UserDoc } from "@/lib/cms/types";
+import { DEMO_OFFICER } from "./demo-account";
 import type { DelegationDoc, OfficialFunction, ParticipantDoc, ParticipantFileDoc, RegistrationStatus, Sex } from "./model";
 import { emptyParticipant } from "./model";
 
@@ -6,6 +8,21 @@ import { emptyParticipant } from "./model";
  * They are shown only when nothing real is stored and the deployment cannot save,
  * and every screen labels them as demo data. They never reach a database.
  */
+
+/** Angola officer shown in the Control Room country table during the demo. */
+export const demoUsers: UserDoc[] = [
+  {
+    id: "demo-user-ago",
+    email: DEMO_OFFICER.email,
+    name: DEMO_OFFICER.name,
+    role: DEMO_OFFICER.role,
+    sportIds: [],
+    countryCode: DEMO_OFFICER.countryCode,
+    active: true,
+    _updatedAt: new Date(Date.UTC(2026, 10, 16, 9, 0)).toISOString(),
+    _updatedBy: "demo",
+  },
+];
 
 const day = (offset: number) => new Date(Date.UTC(2026, 10, 16, 9, 0) + offset * 3_600_000).toISOString();
 

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export const inputClass =
-  "min-h-touch w-full rounded-sm border border-line-strong bg-surface px-3 type-body-m text-fg shadow-sm outline-none transition-colors duration-ui " +
+  "min-h-touch w-full rounded-sm border border-line-strong bg-surface px-3 type-body-m text-fg outline-none transition-colors duration-ui " +
   "placeholder:text-fg-muted hover:border-fg-muted focus-visible:border-focus focus-visible:shadow-focus disabled:opacity-60";
 
 /** Label above, optional hint below, "Required" or "Optional" marker on the right. */
@@ -25,7 +25,7 @@ export function Field({ label, hint, required, mark, children, className, wide }
 /** A numbered form block: title and help on the left (desktop), fields on the right. */
 export function FormSection({ n, title, help, children, tone, id }: { n: number; title: string; help?: ReactNode; children: ReactNode; tone?: "attention"; id?: string }) {
   return (
-    <section id={id} className={cn("grid gap-5 rounded-md border bg-surface-raised p-5 shadow-sm tablet:p-6 desktop:grid-cols-[15rem_1fr] desktop:gap-7", tone === "attention" ? "border-line-accent" : "border-line")}>
+    <section id={id} className={cn("grid gap-5 rounded-md border bg-surface-raised p-5 tablet:p-6 desktop:grid-cols-[15rem_1fr] desktop:gap-7", tone === "attention" ? "border-line-accent" : "border-line")}>
       <header className="flex flex-col gap-2">
         <span aria-hidden="true" className="grid size-[2.25rem] place-items-center rounded-pill bg-surface-inverse font-display text-lg text-fg-on-inverse">{n}</span>
         <h2 className="m-0 type-heading-s">{title}</h2>

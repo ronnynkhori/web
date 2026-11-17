@@ -58,7 +58,7 @@ export default async function ParticipantsPage({ params, searchParams }: { param
       </header>
 
       <nav aria-label={copy.statusLabel} className="-mx-4 overflow-x-auto px-4 tablet:mx-0 tablet:px-0">
-        <ul className="m-0 flex w-max list-none gap-1 rounded-md border border-line bg-surface-raised p-1 shadow-sm">
+        <ul className="m-0 flex w-max list-none gap-1 rounded-md border border-line bg-surface-raised p-1">
           {tabs.map((tab) => {
             const count = scoped.filter((person) => matchesStatus(person, tab.value)).length;
             const active = filter.status === tab.value;

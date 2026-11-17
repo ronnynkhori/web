@@ -37,7 +37,7 @@ export default async function PrintListPage({ params }: { params: Promise<{ loca
           }
         />
       </div>
-      <article className="rounded-md border border-line bg-surface-raised p-5 shadow-sm tablet:p-6 print:border-0 print:p-0 print:shadow-none">
+      <article className="rounded-md border border-line bg-surface-raised p-5 tablet:p-6 print:border-0 print:p-0">
         <header className="mb-6 flex items-center justify-between gap-6 border-b-4 border-line-accent pb-4">
           <div className="flex flex-col gap-1">
             <p className="m-0 type-overline text-fg-muted">XIII Jogos Desportivos da CPLP · Angola 2027</p>

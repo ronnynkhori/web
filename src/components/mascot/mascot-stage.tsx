@@ -40,7 +40,7 @@ export function MascotStage({ poses, label }: { poses: MascotPoseView[]; label: 
     <div className="flex flex-col items-center gap-8">
       <div ref={ref} data-mascot-track="" suppressHydrationWarning className="relative grid aspect-square w-full max-w-[30rem] place-items-center">
         <span aria-hidden="true" className="mascot-halo absolute inset-[8%] rounded-pill" />
-        <span aria-hidden="true" className="absolute inset-x-[22%] bottom-[3%] h-[5%] rounded-pill bg-[radial-gradient(closest-side,rgb(0_0_0/0.45),transparent)]" />
+        <span aria-hidden="true" className="absolute inset-x-[26%] bottom-[4%] h-[3%] rounded-pill bg-[radial-gradient(closest-side,rgb(0_0_0/0.18),transparent)]" />
         <div data-parallax="" className="absolute inset-0">
           {poses.map((p, i) => (
             <div
@@ -61,7 +61,7 @@ export function MascotStage({ poses, label }: { poses: MascotPoseView[]; label: 
                 enter={i === 0}
                 tap={i === active}
                 className="h-[90%] max-w-full"
-                imgClassName="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_18px_30px_rgb(0_0_0/0.35)]"
+                imgClassName="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_8px_16px_rgb(0_0_0/0.18)]"
               />
             </div>
           ))}

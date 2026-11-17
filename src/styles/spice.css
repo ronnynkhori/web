@@ -27,7 +27,7 @@ html[data-motion="reduce"] .swoosh-line {
 }
 
 /* ---------- Brand patterns on navy bands (scripts/patterns.mjs) ----------
-   One motif per band, faded out towards the copy so the text side stays calm. */
+   One motif per band, quiet and faded so copy and the nations map stay clear. */
 .brand-pattern {
   isolation: isolate;
 }
@@ -38,25 +38,30 @@ html[data-motion="reduce"] .swoosh-line {
   z-index: -1;
   pointer-events: none;
   background-repeat: no-repeat;
+  opacity: var(--tk-opacity-pattern, 0.08);
 }
 /* Lusona (Chokwe sand drawing): one continuous line around a grid of dots. */
 .pattern-lusona::before {
   background-image: url("/images/patterns/lusona.svg");
-  background-size: min(64rem, 135%) auto;
-  background-position: right -8rem center;
-  mask-image: linear-gradient(100deg, transparent 22%, #000 62%);
+  background-size: min(48rem, 100%) auto;
+  background-position: right -2rem center;
+  -webkit-mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
+  mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
 }
 /* Corner variant: beside the section heading, clear of content below (e.g. the nations map). */
 .pattern-lusona.pattern-corner::before {
-  background-size: min(40rem, 80%) auto;
-  background-position: right -6rem top -5rem;
-  mask-image: radial-gradient(ellipse 55% 45% at 100% 0%, #000 35%, transparent 100%);
+  background-size: min(32rem, 70%) auto;
+  background-position: right -2rem top -2rem;
+  -webkit-mask-image: radial-gradient(ellipse 50% 42% at 100% 0%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 42% at 100% 0%, #000 30%, transparent 100%);
 }
 @media (max-width: 63.99rem) {
-  .pattern-lusona::before {
-    background-size: 46rem auto;
-    background-position: center bottom -4rem;
-    mask-image: linear-gradient(to bottom, transparent 30%, #000 75%);
+  .pattern-lusona::before,
+  .pattern-lusona.pattern-corner::before {
+    background-size: min(34rem, 120%) auto;
+    background-position: center bottom -1.5rem;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 40%, #000 85%);
+    mask-image: linear-gradient(to bottom, transparent 40%, #000 85%);
   }
 }
 

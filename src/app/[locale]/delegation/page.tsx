@@ -19,7 +19,7 @@ function Tile({ label, value, href, icon, tone }: { label: string; value: number
       href={href}
       data-theme={tone === "dark" ? "dark" : undefined}
       className={cn(
-        "group flex flex-col justify-between gap-6 rounded-md border p-4 shadow-sm transition-shadow duration-ui hover:shadow-md tablet:p-5",
+        "group flex flex-col justify-between gap-6 rounded-md border p-4 tablet:p-5",
         tone === "dark" && "border-transparent bg-surface text-fg",
         tone === "yellow" && "border-transparent bg-success text-on-success",
         tone === "plain" && "border-line bg-surface-raised text-fg",
@@ -118,7 +118,7 @@ export default async function DelegationHome({ params, searchParams }: { params:
                 return (
                   <li key={step.title}>
                     {step.href ? (
-                      <a href={step.href} className="flex items-center gap-4 rounded-md border border-line bg-surface-raised p-4 shadow-sm transition-shadow duration-ui hover:shadow-md">
+                      <a href={step.href} className="flex items-center gap-4 rounded-md border border-line bg-surface-raised p-4">
                         {body}
                       </a>
                     ) : (
@@ -175,7 +175,7 @@ export default async function DelegationHome({ params, searchParams }: { params:
                     </span>
                   );
                   return (
-                    <li key={row.sportId} className="flex flex-col gap-3 rounded-md border border-line bg-surface-raised p-4 shadow-sm">
+                    <li key={row.sportId} className="flex flex-col gap-3 rounded-md border border-line bg-surface-raised p-4">
                       <span className="flex items-baseline justify-between gap-2">
                         <span className="type-body-m font-semibold">{sportName(row.sportId)}</span>
                         <span className="type-caption text-fg-muted">{p.quota}</span>
@@ -197,7 +197,7 @@ export default async function DelegationHome({ params, searchParams }: { params:
         </div>
 
         <aside className="flex flex-col gap-6">
-          <section className="flex flex-col gap-4 rounded-md border border-line bg-surface-raised p-5 shadow-sm">
+          <section className="flex flex-col gap-4 rounded-md border border-line bg-surface-raised p-5">
             <span className="flex items-center gap-3">
               <span className="grid size-[2.5rem] place-items-center rounded-sm bg-success text-on-success">
                 <Icon name="download" size={20} />
@@ -207,7 +207,7 @@ export default async function DelegationHome({ params, searchParams }: { params:
             <ImportForm locale={locale} />
           </section>
 
-          <section className="flex flex-col gap-3 rounded-md border border-line bg-surface-raised p-5 shadow-sm">
+          <section className="flex flex-col gap-3 rounded-md border border-line bg-surface-raised p-5">
             <h2 className="m-0 flex items-center gap-2 type-heading-s">
               <Icon name="mail" size={20} /> {copy.notices}
             </h2>

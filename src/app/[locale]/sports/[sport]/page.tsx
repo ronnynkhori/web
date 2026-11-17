@@ -84,7 +84,7 @@ export default async function SportPage({ params, searchParams }: Props) {
               sizes="(min-width: 64rem) 16rem, 40vw"
               delay={250}
               className="absolute -right-2 -bottom-4 h-[85%]"
-              imgClassName="h-full w-auto drop-shadow-[0_16px_28px_rgb(0_0_0/0.5)]"
+              imgClassName="h-full w-auto drop-shadow-[0_6px_12px_rgb(0_0_0/0.16)]"
             />
           )}
         </div>

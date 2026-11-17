@@ -77,7 +77,7 @@ export function ProfileForm({
         {text("estimatedOfficials", copy.estimatedOfficials, false, "number")}
       </FormSection>
 
-      <div className="sticky bottom-0 z-10 -mx-4 flex justify-end border-t border-line bg-surface-raised/95 px-4 py-3 backdrop-blur tablet:mx-0 tablet:rounded-md tablet:border tablet:px-5 tablet:shadow-md">
+      <div className="sticky bottom-0 z-10 -mx-4 flex justify-end border-t border-line bg-surface-raised/95 px-4 py-3 backdrop-blur tablet:mx-0 tablet:rounded-md tablet:border tablet:px-5">
         <button type="submit" disabled={pending} className="hover-overlay press inline-flex min-h-touch w-full items-center justify-center gap-2 rounded-xs bg-action-primary px-6 type-label text-on-action-primary inset-ring-2 inset-ring-action-primary-edge disabled:opacity-50 tablet:w-auto">
           <Icon name="check" size={16} /> {p.saveProfile}
         </button>

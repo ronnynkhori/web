@@ -78,6 +78,7 @@ const en = {
   noticesEmpty: "Messages from the Committee appear here.",
   importDrop: "Excel file (.xlsx)",
   demo: "Demonstration data: no database is connected, so the records shown are samples and changes are not saved.",
+  demoLogin: "Angola demo: ago@cplp2027.demo / CPLP-Demo-AGO",
   back: "Back to the dashboard",
 };
 
@@ -158,6 +159,7 @@ const pt: typeof en = {
   noticesEmpty: "As mensagens da Comissão aparecem aqui.",
   importDrop: "Ficheiro Excel (.xlsx)",
   demo: "Dados de demonstração: não há base de dados ligada, por isso os registos são exemplos e as alterações não são guardadas.",
+  demoLogin: "Demonstração Angola: ago@cplp2027.demo / CPLP-Demo-AGO",
   back: "Voltar ao painel",
 };
 

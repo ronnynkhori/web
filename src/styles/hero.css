@@ -35,8 +35,8 @@
 }
 .hero-backdrop-scrim {
   background:
-    linear-gradient(to top, #07080c 0%, rgb(7 8 12 / 0.72) 22%, transparent 46%),
-    linear-gradient(to right, #07080c 0%, rgb(7 8 12 / 0.88) 38%, rgb(7 8 12 / 0.45) 62%, rgb(7 8 12 / 0.15) 100%);
+    linear-gradient(to top, #07080c 0%, rgb(7 8 12 / 0.55) 18%, transparent 42%),
+    linear-gradient(to right, #07080c 0%, rgb(7 8 12 / 0.7) 28%, rgb(7 8 12 / 0.28) 55%, transparent 78%);
 }
 @media (width >= 64rem) {
   .hero-photo-frame {
@@ -50,7 +50,7 @@
     mask-composite: intersect;
   }
   .hero-backdrop-scrim {
-    background: linear-gradient(to right, #07080c 0%, #07080c 28%, rgb(7 8 12 / 0.35) 46%, transparent 58%);
+    background: linear-gradient(to right, #07080c 0%, #07080c 24%, rgb(7 8 12 / 0.28) 44%, transparent 58%);
   }
 }
 

@@ -196,9 +196,9 @@
   --tk-border-regular: 2px;
   --tk-border-accent: 4px;
   --tk-shadow-none: none;
-  --tk-shadow-sm: 0 1px 0 rgba(255,255,255,0.06);
-  --tk-shadow-md: 0 8px 24px rgba(0,0,0,0.45);
-  --tk-shadow-lg: 0 24px 64px rgba(0,0,0,0.6);
+  --tk-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --tk-shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+  --tk-shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
   --tk-shadow-focus: 0 0 0 3px #EFC100;
   --tk-opacity-disabled: 0.4;
   --tk-opacity-muted: 0.64;

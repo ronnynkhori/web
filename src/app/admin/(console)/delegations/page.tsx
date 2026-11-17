@@ -6,7 +6,8 @@ import { translator } from "@/lib/admin/i18n/translate";
 import { loadItems } from "@/lib/admin/mutate";
 import type { UserDoc } from "@/lib/cms/types";
 import { can } from "@/lib/admin/roles";
-import { loadDelegations, loadParticipants } from "@/lib/registration/data";
+import { loadDelegations, loadParticipants, registrationDemoActive } from "@/lib/registration/data";
+import { demoUsers } from "@/lib/registration/demo";
 import { countryProgress } from "@/lib/registration/review";
 
 export const metadata = { title: "Delegações" };
@@ -15,8 +16,14 @@ export default async function DelegationsPage() {
   const session = await requireUser("registrations");
   const locale = await getAdminLocale();
   const t = translator(locale);
-  const [people, delegations, users] = await Promise.all([loadParticipants(), loadDelegations(), loadItems<UserDoc>("users").catch(() => [])]);
-  const rows = countryProgress(people, delegations, users.filter((user) => user.active));
+  const [people, delegations, users, demo] = await Promise.all([
+    loadParticipants(),
+    loadDelegations(),
+    loadItems<UserDoc>("users").catch(() => []),
+    registrationDemoActive(),
+  ]);
+  const officers = [...users.filter((user) => user.active), ...(demo ? demoUsers : [])];
+  const rows = countryProgress(people, delegations, officers);
   const ready = rows.filter((row) => row.officer && row.delegation).length;
   return (
     <>

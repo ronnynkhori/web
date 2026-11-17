@@ -19,7 +19,7 @@ export function PeopleList({ people, locale, sportName }: { people: ParticipantD
   const copy = regCopy(locale);
   const p = portalCopy(locale);
   return (
-    <ul className="m-0 flex list-none flex-col divide-y divide-line overflow-hidden rounded-md border border-line bg-surface-raised p-0 shadow-sm">
+    <ul className="m-0 flex list-none flex-col divide-y divide-line overflow-hidden rounded-md border border-line bg-surface-raised p-0">
       {people.map((person) => {
         const detail =
           person.kind === "athlete"
