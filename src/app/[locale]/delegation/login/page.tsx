@@ -40,7 +40,7 @@ export default async function DelegationLoginPage({ params }: { params: Promise<
               <form action={signOutDelegation}>
                 <input type="hidden" name="locale" value={locale} />
                 <button type="submit" className="press inline-flex min-h-touch items-center gap-2 rounded-xs border border-current/30 bg-transparent px-3 type-label">
-                  {copy.signOut} <Icon name="arrow-right" size={14} />
+                  {copy.signOut} <Icon name="arrow-right" size={16} />
                 </button>
               </form>
             </div>
